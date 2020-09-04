@@ -26,28 +26,24 @@
                 include 'work.html';
             ?>
             <td id="add">
-                <h1 class="title">Add Sevice</h1>
+                <h1 class="title">Add FAQs</h1>
                 <form id="form">
-                <input type="text" name="name" placeholder="Service Name">
-                <textarea type="text" name="details" value="" placeholder="Details"></textarea>
-                <input type="text" name="price" placeholder="Price">
-                <select name="catagory">
-                    <option value="0">Select</option>
-                    <option value="1">Home</option>
-                    <option value="2">Hotel</option>
-                    <option value="3">Office</option>
-                </select>
+                <input type="text" name="name" placeholder="FAQs Name">
+                <textarea type="text" name="ans" value="" placeholder="Details"></textarea>
+                <input type="date" name="date">
                 <input id="Submit" type="button" name="submit" value="Create" onclick="create()">
                 </form>
                 <?php include 'manage.html' ?>
             </td>
             <td id="view">
-                <h1 class="title">Service list</h1>
+                <h1 class="title">FAQs list</h1>
                 <table>
                     <tr>
                         <td>ID</td>
                         <td>Name</td>
                         <td>Answer</td>
+                        <td>Date</td>
+                        <td>Flag</td>
                         <td>Select Coupon</td>
                     </tr>
                     <?php 
@@ -58,19 +54,17 @@
                         $sql = "select * from faq";
                         if (($result = $conn->query($sql)) !== FALSE){
                             while($row = $result->fetch_assoc()){
-                                $id = $row['s_id'];
+                                $id = $row['f_id'];
                                 $name =  $row['name'];
-                                $details = $row['details'];
-                                $price = $row['price'];
+                                $ans = $row['ans'];
+                                $date = $row['date'];
                                 $flag = $row['flag'];
-                                $c_id = $row['c_id'];
                                 echo "<tr>
                                         <td>{$id}</td>
                                         <td>{$name}</td>
-                                        <td>{$details}</td>
-                                        <td>{$price}</td>
+                                        <td>{$ans}</td>
+                                        <td>{$date}</td>
                                         <td>{$flag}</td>
-                                        <td>{$c_id}</td>
                                         <td><input type='checkbox' name='selector' value = '{$id}'></td>
                                     </tr>";
                             }
@@ -81,23 +75,17 @@
                 <?php include 'manage.html' ?>
             </td>
             <td id="edit">
-                <h1 class="title">Edit Sevice</h1>
+                <h1 class="title">Edit FAQs</h1>
                 <form >
                     <input type="text" name="name" placeholder="Service Name">
-                    <textarea type="text" name="details" value="" placeholder="Details"></textarea>
-                    <input type="text" name="price" placeholder="Price">
-                    <select name="catagory">
-                        <option value="0">Select</option>
-                        <option value="1">Home</option>
-                        <option value="2">Hotel</option>
-                        <option value="3">Office</option>
-                    </select>
+                    <textarea type="text" name="ans" value="" placeholder="Details"></textarea>
+                    <input type="Date" name="date">
                     <input id="Submit" type="button" name="submit" value="Confirm" onclick="update()">
                 </form>
                 <?php include 'manage.html' ?>
             </td>
             <td id="flag">
-                <h1 class="title">Flag Sevice</h1>
+                <h1 class="title">Flag FAQs</h1>
                 <form>
                     <input type="text" name="flag" placeholder="Flag Value">
                     <input id="Submit" type="button" name="submit" value="Confirm" onclick="flaged()">
@@ -105,7 +93,7 @@
                 <?php include 'manage.html' ?>
             </td>
             <td id="delete">
-                <h1 class="title">Delete Sevice</h1>
+                <h1 class="title">Delete FAQs</h1>
                 <input id="Submit" type="button" name="submit" value="Confirm" onclick="Delete()">
                 <?php include 'manage.html' ?>
             </td>
@@ -128,9 +116,9 @@
             }
             if(checkedValue != null){
                 var xhttp = new XMLHttpRequest();
-                xhttp.open('POST', '../services/getEditService.php', true);
+                xhttp.open('POST', '../services/getEditFaq.php', true);
                 xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                xhttp.send('s_id='+checkedValue);
+                xhttp.send('f_id='+checkedValue);
 
                 xhttp.onreadystatechange = function (){
                     if(this.readyState == 4 && this.status == 200){
@@ -138,9 +126,8 @@
                             var val = this.responseText.split("|");
                             serviceId = val[0];
                             document.querySelector('#edit>form [name="name"]').value = val[1];
-                            document.querySelector('#edit>form [name="details"]').value = val[2];
-                            document.querySelector('#edit>form [name="price"]').value = val[3];
-                            document.querySelector('#edit>form [name="catagory"]').selectedIndex = val[4]+1;
+                            document.querySelector('#edit>form [name="ans"]').value = val[2];
+                            document.querySelector('#edit>form [name="date"]').value = val[3];
                             document.querySelector('table[changeValue]').setAttribute("changeValue", "2");
                         } else {
                             location.reload();
@@ -186,14 +173,13 @@
 
         function create(){
             var name = document.querySelector('#add [name="name"]').value;
-            var details = document.querySelector('#add [name="details"]').value;
-            var price = document.querySelector('#add [name="price"]').value;
-            var c_id = document.querySelector('#add [name="catagory"]').value;
-            if((name != '') && (details != '') && (price != '') && (c_id != '')){
+            var ans = document.querySelector('#add [name="ans"]').value;
+            var date = document.querySelector('#add [name="date"]').value;
+            if((name != '') && (ans != '') && (date != '')){
                 var xhttp = new XMLHttpRequest();
-                xhttp.open('POST', '../services/insertService.php', true);
+                xhttp.open('POST', '../services/insertFaq.php', true);
                 xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                xhttp.send('name='+name+'&details='+details+'&price='+price+'&catagory='+c_id);
+                xhttp.send('name='+name+'&ans='+ans+'&date='+date);
                 xhttp.onreadystatechange = function (){
                     if(this.readyState == 4 && this.status == 200){
                         var res = this.responseText;
@@ -210,9 +196,9 @@
             if(flagCheckedValue != null){
                 for(var i = 0; i < flagCheckedValue.length; i++){
                     var xhttp = new XMLHttpRequest();
-                    xhttp.open('POST', '../services/deleteService.php', true);
+                    xhttp.open('POST', '../services/deleteFaq.php', true);
                     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                    xhttp.send('s_id='+flagCheckedValue[i]);
+                    xhttp.send('f_id='+flagCheckedValue[i]);
 
                     xhttp.onreadystatechange = function (){
                         if(this.readyState == 4 && this.status == 200){
@@ -228,17 +214,16 @@
         }
 
         function update(){
-            var s_id = serviceId;
+            var f_id = serviceId;
             var name = document.querySelector('#edit>form [name="name"]').value;
-            var details = document.querySelector('#edit>form [name="details"]').value;
-            var price = document.querySelector('#edit>form [name="price"]').value;
-            var c_id = document.querySelector('#edit>form [name="catagory"]').value;
+            var ans = document.querySelector('#edit>form [name="ans"]').value;
+            var date = document.querySelector('#edit>form [name="date"]').value;
 
-            if((name != '') && (details != '') && (price != '') && (c_id != '') && (c_id != '')){
+            if((name != '') && (ans != '') && (date != '') && (f_id != '')){
                 var xhttp = new XMLHttpRequest();
-                xhttp.open('POST', '../services/updateService.php', true);
+                xhttp.open('POST', '../services/updateFaq.php', true);
                 xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                xhttp.send('s_id='+s_id+'&name='+name+'&details='+details+'&price='+price+'&catagory='+c_id);
+                xhttp.send('f_id='+f_id+'&name='+name+'&ans='+ans+'&date='+date);
                 xhttp.onreadystatechange = function (){
                     if(this.readyState == 4 && this.status == 200){
                         var res = this.responseText;
@@ -254,15 +239,13 @@
 
         function flaged(){
             var flag = document.querySelector('#flag>form [name="flag"]').value;
-            console.log(flag);
             for(var i = 0; i < flagCheckedValue.length; i++){
-                var s_id = flagCheckedValue[i];
-                console.log(s_id);
-                if((flag != '') && (s_id != '')){
+                var f_id = flagCheckedValue[i];
+                if((flag != '') && (f_id != '')){
                     var xhttp = new XMLHttpRequest();
-                    xhttp.open('POST', '../services/flagService.php', true);
+                    xhttp.open('POST', '../services/flagFaq.php', true);
                     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                    xhttp.send('s_id='+s_id+'&flag='+flag);
+                    xhttp.send('f_id='+f_id+'&flag='+flag);
                     xhttp.onreadystatechange = function (){
                         if(this.readyState == 4 && this.status == 200){
                             var res = this.responseText;
