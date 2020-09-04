@@ -40,7 +40,7 @@
 }
 
 .option {
-	width: 508px;
+	width: 635px;
 	display: flex;
 	flex-wrap: wrap;
 	margin: 0 auto;
@@ -122,8 +122,4 @@ table[changeValue="5"] #edit,
 table[changeValue="5"] #flag,
 table[changeValue="5"] #delete {
 	display: none !important;
-}
-
-.option li:nth-child(4) {
-	display: none;
 }

@@ -236,6 +236,8 @@
                         }   
                     }
                 } location.reload();
+            } else {
+                location.reload();
             }
         }
 

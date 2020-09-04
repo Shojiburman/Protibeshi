@@ -4,15 +4,15 @@
 	if(!$conn){
 		echo "DB connection error";
 	}
-
+	$coupon_id = $_POST['coupon_id'];
 	$name = $_POST['name'];
 	$percentage = $_POST['percentage'];
 	$expiredate = $_POST['expiredate'];
-	$sql = "INSERT INTO coupon (name, percentage, expiredate) VALUES ('". $name ."', '". $percentage ."', '". $expiredate ."');";
-
+	$sql = "UPDATE coupon SET name = '$name', percentage = '$percentage', expiredate = '$expiredate' WHERE coupon_id = '$coupon_id';";
 	if ($conn->query($sql) === TRUE) {
-		echo "insert";
+		echo "update";
 	} else {
 		echo "not ok";
 	}
+
 ?>
