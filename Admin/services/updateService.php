@@ -1,0 +1,19 @@
+<?php
+	require_once('../db/db.php');
+	$conn = dbConnection();
+	if(!$conn){
+		echo "DB connection error";
+	}
+
+	$name = $_POST['name'];
+	$details = $_POST['details'];
+	$price = $_POST['price'];
+	$c_id = $_POST['catagory'];
+	$sql = "UPDATE services SET name = '".  ."', details = '".  ."', price= '".  ."', c_id =[value-6] WHERE s_id = '".  ."';";
+	if ($conn->query($sql) === TRUE) {
+		echo "ok";
+	} else {
+		echo "not ok";
+	}
+
+?>

@@ -1,0 +1,29 @@
+#content form input {
+	display: block;
+	width: 400px;
+	font-size: 16px;
+	padding: 10px;
+	border-radius: 5px;
+	margin: 25px auto;
+}
+
+#Submit {
+	display: block; 
+	width: 150px;
+	cursor: pointer;
+	background-color: white; 
+	border: 1.5px solid #0aab8e; 
+	border-radius: 5px; 
+	padding: 10px 30px; 
+	margin: 20px auto; 
+}
+
+#Submit:hover {
+	width: 153px;
+	background-color: #0aab8e; 
+}
+
+#content tr td:nth-child(2) {
+	width: 800px;
+	height: 600px;
+}

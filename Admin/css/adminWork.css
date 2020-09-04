@@ -1,0 +1,84 @@
+#content form input, #content form textarea, #content select {
+	display: block;
+	width: 400px;
+	font-size: 16px;
+	padding: 10px;
+	border-radius: 5px;
+	margin: 25px auto;
+}
+
+#content form textarea {
+	max-width: 400px;
+	max-height: 400px;
+	min-width: 400px;
+	min-height: 100px;
+	height: 100px;	
+}
+
+#content select {
+	width: 420px;
+}
+
+#Submit {
+	display: block; 
+	width: 150px !important;
+	cursor: pointer;
+	background-color: white; 
+	border: 1.5px solid #0aab8e; 
+	border-radius: 5px; 
+	padding: 10px 30px; 
+	margin: 20px auto; 
+}
+
+#Submit:hover {
+	width: 150px !important;
+	background-color: #0aab8e; 
+}
+
+.option {
+	width: 508px;
+	display: flex;
+	flex-wrap: wrap;
+	margin: 0 auto;
+}
+
+.option li {
+	width: 87px;
+	text-align: center;
+	margin: 10px 20px;
+}
+
+.option li button {
+	width: 100px;
+	color: white;
+	text-align: center;
+	padding: 10px 15px;
+	border: 1.5px solid #0aab8e; 
+	border-radius: 5px; 
+	background-color: #0aab8e;
+}
+
+.option li button:hover {
+	color: #0aab8e;
+	background-color: white;
+}
+
+#add, #edit, #flag, #delete {
+	width: 800px;
+	height: 600px;
+}
+
+table[changeValue="1"] #edit,
+table[changeValue="1"] #flag,
+table[changeValue="1"] #delete,
+table[changeValue="2"] #add,
+table[changeValue="2"] #flag,
+table[changeValue="2"] #delete,
+table[changeValue="3"] #add,
+table[changeValue="3"] #edit,
+table[changeValue="3"] #delete,
+table[changeValue="4"] #add,
+table[changeValue="4"] #edit,
+table[changeValue="4"] #flag {
+	display: none !important;
+}
