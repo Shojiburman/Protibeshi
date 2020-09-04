@@ -20,7 +20,7 @@
         include 'adminNav.html';
     ?>
 
-    <table id="content" changeValue="1">
+    <table id="content" changeValue="5">
         <tr>
             <?php
                 include 'work.html';
@@ -158,17 +158,18 @@
             document.getElementById('deleted').classList.remove("deleteActive");
             document.getElementById('deleted').classList.add("deleteDeactive");
             var inputElements = document.querySelectorAll('[name="selector"]');
-                for(var i=0; inputElements[i]; ++i){
-                  if(inputElements[i].checked){
-                       var valu = inputElements[i].value;
-                       flagCheckedValue.push(valu);
-                  }
-                } if(flagCheckedValue != ""){
-                    document.querySelector('table[changeValue]').setAttribute("changeValue", "3");
-                } else {
-                    location.reload();
-                }
+            for(var i=0; inputElements[i]; ++i){
+              if(inputElements[i].checked){
+                   var valu = inputElements[i].value;
+                   flagCheckedValue.push(valu);
+              }
+            } 
+            if(flagCheckedValue != ""){
+                document.querySelector('table[changeValue]').setAttribute("changeValue", "3");
+            } else {
+                location.reload();
             }
+        }
         function fun4(){
             document.getElementById('deleted').classList.remove("deleteActive");
             document.getElementById('deleted').classList.add("deleteDeactive");
@@ -179,25 +180,14 @@
                        flagCheckedValue.push(valu);
                   }
             }
-            if(checkedValue != null){
-                var xhttp = new XMLHttpRequest();
-                xhttp.open('POST', '../services/getService.php', true);
-                xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                xhttp.send('s_id='+checkedValue);
-
-                xhttp.onreadystatechange = function (){
-                    if(this.readyState == 4 && this.status == 200){
-                        if(this.responseText){
-                            document.getElementById('getservice').innerHTML  = this.responseText;
-                        } else {
-                            location.reload();
-                        }
-                    }   
-                }
+            if(flagCheckedValue != ""){
+                document.querySelector('table[changeValue]').setAttribute("changeValue", "4");
+            } else {
+                location.reload();
             }
-            document.querySelector('table[changeValue]').setAttribute("changeValue", "4");
         }
         function fun5(){
+            location.reload();
             document.getElementById('deleted').classList.remove("deleteActive");
             document.getElementById('deleted').classList.remove("deleteDeactive");
             document.querySelector('table[changeValue]').setAttribute("changeValue", "5");
@@ -208,7 +198,7 @@
             var details = document.querySelector('#add [name="details"]').value;
             var price = document.querySelector('#add [name="price"]').value;
             var c_id = document.querySelector('#add [name="catagory"]').value;
-            if((name != '') || (details != '') || (price != '') || (c_id != '')){
+            if((name != '') && (details != '') && (price != '') && (c_id != '')){
                 var xhttp = new XMLHttpRequest();
                 xhttp.open('POST', '../services/insertService.php', true);
                 xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
