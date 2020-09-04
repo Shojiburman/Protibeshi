@@ -11,8 +11,9 @@
 	$c_id = $_POST['catagory'];
 	$sql = "INSERT INTO services (name, details, price, c_id) VALUES ('". $name ."', '". $details ."', '". $price ."', '". $c_id ."');";
 	if ($conn->query($sql) === TRUE) {
-		echo "ok";
+		$data = "insert";
 	} else {
-		echo "not ok";
+		$data = "not ok";
 	}
+	echo $data;
 ?>

@@ -8,7 +8,7 @@
 	$s_id = $_POST['s_id'];
 	$sql = "DELETE FROM services WHERE s_id = '". $s_id ."';";
 	if ($conn->query($sql) === TRUE) {
-		echo "ok";
+		echo "delete";
 	} else {
 		echo "not ok";
 	}

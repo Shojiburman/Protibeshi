@@ -1,4 +1,6 @@
-#content form input, #content form textarea, #content select {
+#add>form input, #add>form textarea, #add>form select,
+#edit>form input, #edit>form textarea, #edit>form select,
+#flag form input {
 	display: block;
 	width: 400px;
 	font-size: 16px;
@@ -7,7 +9,7 @@
 	margin: 25px auto;
 }
 
-#content form textarea {
+#add>form textarea, #edit>form textarea {
 	max-width: 400px;
 	max-height: 400px;
 	min-width: 400px;
@@ -15,7 +17,7 @@
 	height: 100px;	
 }
 
-#content select {
+#add>form select, #edit>form select {
 	width: 420px;
 }
 
@@ -27,7 +29,8 @@
 	border: 1.5px solid #0aab8e; 
 	border-radius: 5px; 
 	padding: 10px 30px; 
-	margin: 20px auto; 
+	margin: 20px auto;
+	cursor: pointer;
 }
 
 #Submit:hover {
@@ -36,7 +39,7 @@
 }
 
 .option {
-	width: 508px;
+	width: 635px;
 	display: flex;
 	flex-wrap: wrap;
 	margin: 0 auto;
@@ -49,6 +52,7 @@
 }
 
 .option li button {
+	cursor: pointer;
 	width: 100px;
 	color: white;
 	text-align: center;
@@ -63,22 +67,66 @@
 	background-color: white;
 }
 
-#add, #edit, #flag, #delete {
+#add, #view, #edit, #flag, #delete {
 	width: 800px;
 	height: 600px;
+}
+
+#add h1, #view h1, #edit h1, #flag h1, #delete h1 {
+    width: max-content;
+    margin: 30px auto;
+}
+
+#view>table, #delete>table {
+	margin: 0px auto 30px auto;
+}
+
+#view>table tr:nth-child(1), #delete>table tr:nth-child(1) {
+	font-weight: bold;
+}
+
+#view>table tr td, #delete>table tr td {
+	border: 1px solid #0aab8e;
+	border-radius: 5px;
+	padding: 5px;
+	text-align: center;
+}
+
+#delete p {
+	background-color: #ff8080;
+    width: max-content;
+    padding: 5px 5px;
+    border-radius: 5px;
+    margin: 0 auto 20px auto;
+}
+
+.deleteDeactive {
+	display: none;
+}
+
+.deleteActive {
+	display: block !important;
 }
 
 table[changeValue="1"] #edit,
 table[changeValue="1"] #flag,
 table[changeValue="1"] #delete,
+table[changeValue="1"] #view,
 table[changeValue="2"] #add,
+table[changeValue="2"] #view,
 table[changeValue="2"] #flag,
 table[changeValue="2"] #delete,
 table[changeValue="3"] #add,
+table[changeValue="3"] #view,
 table[changeValue="3"] #edit,
 table[changeValue="3"] #delete,
 table[changeValue="4"] #add,
+table[changeValue="4"] #view,
 table[changeValue="4"] #edit,
-table[changeValue="4"] #flag {
+table[changeValue="4"] #flag,
+table[changeValue="5"] #add,
+table[changeValue="5"] #edit,
+table[changeValue="5"] #flag,
+table[changeValue="5"] #delete {
 	display: none !important;
 }
