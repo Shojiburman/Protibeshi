@@ -1,0 +1,24 @@
+#view {
+	width: 1000px;
+	height: 600px;
+}
+
+.title {
+    width: max-content;
+    margin: 30px auto;
+}
+
+#view>table {
+	margin: 0px auto 30px auto;
+}
+
+#view>table tr:nth-child(1) {
+	font-weight: bold;
+}
+
+#view>table tr td {
+	border: 1px solid #0aab8e;
+	border-radius: 5px;
+	padding: 5px;
+	text-align: center;
+}
