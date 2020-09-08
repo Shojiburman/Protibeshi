@@ -1,33 +1,45 @@
-#login {
-	width: 30%;
-	margin: 20px auto;
+#log {
+	border: 0;
+	margin: 60px auto;
 }
 
-#login h1 {
+#log h1 {
 	display: block;
-	width: 500px;
-	margin: 30px auto;
-	color: #0aab8e
-}
-
-#login form input {
-	display: block;
+	width: max-content;
+	color: #0aab8e;
 	padding: 10px;
-	margin: 25px auto;
-	width: 300px
+	margin: 10px auto 40px auto !important;
 }
 
-#Submit {
-	width: 50px!important; 
-	margin: 20px auto !important; 
-	padding: 10px 30px !important; 
-	border: 1.5px solid #0aab8e !important; 
-	border-radius: 5px !important; 
-	background-color: white !important; 
-	cursor: pointer !important;
+#log input {
+	display: block;
+	background-color: white;
+	width: 600px;
+	padding: 15px;
+	border: 1px solid #0aab8e;
+	border-radius: 5px;
+	margin: 7px auto;
+
+}
+
+
+#login {
+	border: 2px solid #0aab8e !important;
+}
+
+#emailformmsg, #passformmsg, #submitformmsg {
+	display: none;
+	font-size: 12px;
 }
 
 #remember {
-	display: inline !important;
+	display: block;
+	width: max-content;
+	margin: 0 auto
+}
+
+#remember>input, #remember label {
+	display: inline-block !important;
+	width: max-content;
 }
 

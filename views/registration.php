@@ -18,7 +18,7 @@
     <table id="reg">
         <tr>
             <td>
-                <h1>Create Account</h1>
+                <h1>Sign up to protibeshi</h1>
                 <form>
                     <table>
                     	<tr>
@@ -29,7 +29,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <input type="text" name="email" value="" placeholder="Email" oninput="Email()">
+                                <input type="text" name="email" value="" placeholder="Email" oninput="Email()" onfocusout="validateEmail()">
                                 <p id="emailformmsg"></p>
                             </td>
                         </tr>
@@ -40,7 +40,7 @@
                             </td>
                         </tr>
                     </table>
-                    <input class="btn" name="submit" type="submit" value="SIGN UP" oninput="Submit()">
+                    <input class="btn" name="submit" type="button" value="SIGN UP" onclick="Submit()">
                     <p id="submitformmsg"></p>
                 </form>
             </td>
@@ -75,13 +75,11 @@
             if(msg != 'Success!') {
                 document.getElementById('nameformmsg').innerHTML = msg;
                 document.querySelector('[name="name"]').style.cssText = "border: 1px solid red;";
-                document.getElementById('nameformmsg').style.cssText = "display: inline-block; color: red";
+                document.getElementById('nameformmsg').style.cssText = "display: block; color: red";
             } else {
                 document.getElementById('nameformmsg').innerHTML = '';
-                document.getElementById('nameformmsg').style.cssText = "display: block;";
+                document.getElementById('nameformmsg').style.cssText = "display: none;";
                 document.querySelector('[name="name"]').style.cssText = "border: 1px solid #0aab8e;";
-            }
-            if (msg == 'Success!') {
             } 
         }
 
@@ -101,7 +99,6 @@
                                 var domainExt = email.split("@")[1];
                                 var domain = domainExt.split(".")[0];
                                 var ext = domainExt.replace(domain, '');
-                                console.log(ext);
                                 if(domain.length != 0 && validateDomainName(domain)){
                                     msg = 'Success!';
                                     if(ext.length > 1 && validateDomainExt(ext)){
@@ -136,8 +133,6 @@
                 document.getElementById('emailformmsg').style.cssText = "display: block;";
                 document.querySelector('[name="email"]').style.cssText = "border: 1px solid #0aab8e;";
             }
-            if (msg == 'Success!') {
-            }
         }
 
         function Password(){
@@ -171,6 +166,30 @@
                 document.getElementById('passformmsg').innerHTML = 'password is too strong';
                 document.getElementById('passformmsg').style.cssText = "display: block;";
                 document.getElementById('passformmsg').style.color = "green";
+            }
+        }
+
+        function Submit(){
+            var name = document.querySelector('[name="name"]').value;
+            var email = document.querySelector('[name="email"]').value;
+            var pass = document.querySelector('[name="pass"]').value;
+            if((name != '') && (email != '') && (pass != '')){
+                var xhttp = new XMLHttpRequest();
+                xhttp.open('POST', '../services/registration.php', true);
+                xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhttp.send('name='+name+'&email='+email+'&pass='+pass);
+                xhttp.onreadystatechange = function (){
+                    if(this.readyState == 4 && this.status == 200){
+                        var res = this.responseText;
+                        if(res == 'insert'){
+                            document.querySelector('#reg form').reset();
+                            location.assign('login.php');
+                        } else {
+                            document.getElementById('submitformmsg').innerHTML = 'Try again';
+                            document.getElementById('submitformmsg').style.cssText = "display: inline-block; color: red";
+                        }
+                    }   
+                }
             }
         }
 
@@ -210,21 +229,52 @@
 
         function validateDomainExt(string) {
             var array = string.replace('.','');
-            console.log(array);
             array = array.split('');
-            console.log(array);
             var flag = true;
             array.forEach(function(value) {
                 if (value == ' ') {
                     flag = false;
                 } else {
                     if ((value.toLowerCase() != value.toUpperCase())) {flag = true;} else {
-                        console.log(value);
                         flag = false;
                     }
                 }
             });
             return flag;
+        }
+        function validateEmail() {
+            var email = document.querySelector('[name="email"]').value.trim();
+            console.log(email);
+            if((email != '')){
+                var xhttp = new XMLHttpRequest();
+                xhttp.open('POST', '../services/email.php', true);
+                xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhttp.send('email='+email);
+                xhttp.onreadystatechange = function (){
+                    if(this.readyState == 4 && this.status == 200){
+                        var res = this.responseText;
+                        console.log(res);
+                        if(res == 'found'){
+                            document.getElementById('emailformmsg').innerHTML = "*Email is taken.";
+                            document.querySelector('[name="email"]').style.cssText = "border: 1px solid red;";
+                            document.getElementById('emailformmsg').style.cssText = "display: inline-block; color: red";
+                        } else if(res == 'not found') {
+                            document.getElementById('emailformmsg').innerHTML = '';
+                            document.getElementById('nameformmsg').style.cssText = "display: none;";
+                            document.querySelector('[name="name"]').style.cssText = "border: 1px solid #0aab8e;";
+
+                        } else if(res == 'not ok') {
+                            document.getElementById('emailformmsg').innerHTML = '*Email can not be Empty';
+                            document.getElementById('emailformmsg').style.cssText = "display: block; color: red;";
+                            document.querySelector('[name="email"]').style.cssText = "border: 1px solid red;";
+                        } else {
+                            document.getElementById('emailformmsg').innerHTML = '';
+                            document.getElementById('nameformmsg').style.cssText = "display: none;";
+                        }
+                    }   
+                }
+            }
+            return false;
         }
     </script>
 </body>
