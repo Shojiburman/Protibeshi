@@ -1,3 +1,37 @@
+#reg {
+	border: 0;
+	margin: 60px auto;
+}
+
+#reg>tr>td {
+	padding: 40px 100px 40px 100px;
+}
+
+#reg tr td h1 {
+	display: block;
+	width: max-content;
+	color: #0aab8e;
+	padding: 10px;
+	margin: 10px auto;
+}
+
+#reg input {
+	display: block;
+	background-color: white;
+	width: 600px;
+	padding: 10px;
+	border: 1px solid #0aab8e;
+	border-radius: 5px;
+	margin: 7px auto;
+
+}
+
+
 #registration {
 	border: 2px solid #0aab8e !important;
+}
+
+#nameformmsg, #emailformmsg, #passformmsg, #submitformmsg {
+	display: none;
+	font-size: 12px;
 }

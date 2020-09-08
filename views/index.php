@@ -4,12 +4,12 @@
 	<title>Protibeshi</title>
     <link rel="stylesheet" type="text/css" href="../css/protibeshi.css">
     <link rel="stylesheet" type="text/css" href="../css/body.css">
-    <link rel="stylesheet" type="text/css" href="../../Nav//nav.css">
+    <link rel="stylesheet" type="text/css" href="../css/nav.css">
     <script type="text/javascript" src="../js/adminNav.js"></script>
 </head>
 <body>
 	<?php
-    include '../../Nav/nav.html';
+    include '../views/nav.html';
     ?>
     <div id="hero_section">
         <h1>Most Powerful Directory<span></span>Available for Service Providers</h1>
