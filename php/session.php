@@ -7,7 +7,7 @@
 		    if ($conn->connect_error) {
 		      die("Connection failed: " . $conn->connect_error);
 		    }
-	        $sql = "select * from users where u_id = '".$current_user."'";
+	        $sql = "SELECT * from users where u_id = '".$current_user."'";
             if (($result = $conn->query($sql)) !== FALSE){
                 while($row = $result->fetch_assoc()){
 			        $c_name =  $row['name'];
@@ -47,7 +47,7 @@
 	    if ($current_user == '') {
 			session_destroy();
 			setcookie('remember', "");
-	        header("location:login.php");
+	        //header("location:login.php");
 	        die();
 	    }
 	} else {

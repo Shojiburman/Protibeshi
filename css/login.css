@@ -34,12 +34,19 @@
 
 #remember {
 	display: block;
-	width: max-content;
+	width: 600px;
 	margin: 0 auto
 }
 
 #remember>input, #remember label {
 	display: inline-block !important;
 	width: max-content;
+}
+
+#emailformmsg, #passformmsg {
+	display: none;
+	width: 600px;
+	margin: 0 auto;
+	font-size: 12px;
 }
 

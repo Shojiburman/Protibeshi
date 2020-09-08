@@ -14,44 +14,27 @@
 <body>
     <?php
     include 'nav.html';
-    ?>   
-    <table id="reg">
-        <tr>
-            <td>
-                <h1>Sign up to protibeshi</h1>
-                <form>
-                    <table>
-                    	<tr>
-                            <td>
-                                <input type="text" name="name" placeholder="Name" oninput="Name()">
-                                <p id="nameformmsg"></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="text" name="email" value="" placeholder="Email" oninput="Email()" onfocusout="validateEmail()">
-                                <p id="emailformmsg"></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input name="pass" type="password" placeholder="Password" oninput="Password()">
-                                <p id="passformmsg"></p>
-                            </td>
-                        </tr>
-                    </table>
-                    <input class="btn" name="submit" type="button" value="SIGN UP" onclick="Submit()">
-                    <p id="submitformmsg"></p>
-                </form>
-            </td>
-        </tr>
-    </table>
+    ?>  
+
+    <div id="reg">
+        <h1>Sign up to protibeshi</h1>
+        <form>
+            <input type="text" name="name" placeholder="Name" oninput="Name()">
+            <p id="nameformmsg"></p>
+            <input type="text" name="email" value="" placeholder="Email" oninput="Email()" onfocusout="validateEmail()">
+            <p id="emailformmsg"></p>
+            <input name="pass" type="password" placeholder="Password" oninput="Password()">
+            <p id="passformmsg"></p>
+            <input class="btn" name="submit" type="button" value="SIGN UP" onclick="Submit()">
+            <p id="submitformmsg"></p>
+        </form>
+    </div>
 
     <script type="text/javascript">
+        var msg = '';
         function Name(){
             console.log('hi');
             var name = document.querySelector('[name="name"]').value.trim();
-            var msg = '';
             if (name != '') {
                 msg = 'Success!';
                 if (name.split(' ').length > 1) {
@@ -85,7 +68,6 @@
 
         function Email(){
             var email = document.querySelector('[name="email"]').value.trim();
-            var msg = '';
             if (email != ''){
                 msg = "Success!";
                 if (email.indexOf(" ") == -1) {
@@ -127,7 +109,7 @@
             if(msg != 'Success!') {
                 document.getElementById('emailformmsg').innerHTML = msg;
                 document.querySelector('[name="email"]').style.cssText = "border: 1px solid red;";
-                document.getElementById('emailformmsg').style.cssText = "display: inline-block; color: red";
+                document.getElementById('emailformmsg').style.cssText = "display: block; color: red";
             } else {
                 document.getElementById('emailformmsg').innerHTML = '';
                 document.getElementById('emailformmsg').style.cssText = "display: block;";
@@ -138,30 +120,35 @@
         function Password(){
             var pass = document.querySelector('[name="pass"]').value.trim();
             if(pass == ""){
+                msg = '*password cant empty';
                 document.querySelector('[name="pass"]').style.cssText = "border: 1px solid red;";
                 document.getElementById('passformmsg').innerHTML = '*password cant empty';
                 document.getElementById('passformmsg').style.cssText = "display: block;";
                 document.getElementById('passformmsg').style.color = "red";
             }
             else if(pass.length < 6){
+                msg = 'password is too weak';
                 document.querySelector('[name="pass"]').style.cssText = "border: 1px solid 0aab8e;";
                 document.getElementById('passformmsg').innerHTML = 'password is too weak';
                 document.getElementById('passformmsg').style.cssText = "display: block;";
                 document.getElementById('passformmsg').style.color = "#FF9800";
             }
             else if(pass.length >= 6 && pass.length < 7){
+                msg = 'Success!';
                 document.querySelector('[name="pass"]').style.cssText = "border: 1px solid 0aab8e;";
                 document.getElementById('passformmsg').innerHTML = 'password is weak';
                 document.getElementById('passformmsg').style.cssText = "display: block;";
                 document.getElementById('passformmsg').style.color = "#3d791f";
             }
             else if(pass.length >= 8 && pass.length < 9){
+                msg = 'Success!';
                 document.querySelector('[name="pass"]').style.cssText = "border: 1px solid 0aab8e;";
                 document.getElementById('passformmsg').innerHTML = 'password is strong';
                 document.getElementById('passformmsg').style.cssText = "display: block;";
                 document.getElementById('passformmsg').style.color = "#4CAF50";
             }
             else if(pass.length >= 12){
+                msg = 'Success!';
                 document.querySelector('[name="pass"]').style.cssText = "border: 1px solid 0aab8e;";
                 document.getElementById('passformmsg').innerHTML = 'password is too strong';
                 document.getElementById('passformmsg').style.cssText = "display: block;";
@@ -170,10 +157,10 @@
         }
 
         function Submit(){
-            var name = document.querySelector('[name="name"]').value;
-            var email = document.querySelector('[name="email"]').value;
-            var pass = document.querySelector('[name="pass"]').value;
-            if((name != '') && (email != '') && (pass != '')){
+            var name = document.querySelector('[name="name"]').value.trim();
+            var email = document.querySelector('[name="email"]').value.trim();
+            var pass = document.querySelector('[name="pass"]').value.trim();
+            if((name != '') && (email != '') && (pass != '') && (msg == 'Success!')){
                 var xhttp = new XMLHttpRequest();
                 xhttp.open('POST', '../services/registration.php', true);
                 xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -186,7 +173,7 @@
                             location.assign('login.php');
                         } else {
                             document.getElementById('submitformmsg').innerHTML = 'Try again';
-                            document.getElementById('submitformmsg').style.cssText = "display: inline-block; color: red";
+                            document.getElementById('submitformmsg').style.cssText = "display: block; color: red";
                         }
                     }   
                 }
@@ -257,7 +244,7 @@
                         if(res == 'found'){
                             document.getElementById('emailformmsg').innerHTML = "*Email is taken.";
                             document.querySelector('[name="email"]').style.cssText = "border: 1px solid red;";
-                            document.getElementById('emailformmsg').style.cssText = "display: inline-block; color: red";
+                            document.getElementById('emailformmsg').style.cssText = "display: block; color: red";
                         } else if(res == 'not found') {
                             document.getElementById('emailformmsg').innerHTML = '';
                             document.getElementById('nameformmsg').style.cssText = "display: none;";
