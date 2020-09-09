@@ -1,12 +1,12 @@
-#adminNav {
+#adminNav, #buyerWork, #dealerNav, #sellerNav {
 	margin: 30px auto;
 }
 
-#adminNav tr {
+#adminNav tr, #buyerWork tr, #dealerNav tr, #sellerNav tr{
 	height: 50px;
 }
 
-#adminNav tr td a {
+#adminNav tr td a, #buyerWork tr td a,#dealerNav tr td a, #sellerNav tr td a {
 	border: 2px solid black;
 	border-radius: 7%;
 	padding: 10px 15px;
@@ -15,14 +15,14 @@
 	color: black;
 }
 
-#adminNav tr td a:hover {
+#adminNav tr td a:hover, #buyerWork tr td a:hover, #dealerNav tr td a:hover, #sellerNav tr td a:hover {
 	transition: .3s;
 	border: 2px solid #0aab8e;
 	background-color: #0aab8e;
 	color: white;
 }
 
-#adminNav tr td a:last-child:hover {
+#adminNav tr td a:last-child:hover, #buyerWork tr td a:last-child:hover, #dealerNav tr td a:last-child:hover, #sellerNav tr td a:last-child:hover {
 	border: 0;
 	background-color: white;
 	border-radius: 0;
@@ -31,7 +31,7 @@
 	text-decoration: none;
 }
 
-#adminNav tr td a:last-child {
+#adminNav tr td a:last-child, #buyerWork tr td a:last-child, #dealerNav tr td a:last-child, #sellerNav tr td a:last-child {
 	border: 0;
 	border-radius: 0;
 	padding: 10px 0px;
@@ -39,7 +39,7 @@
 	text-decoration: none;
 }
 
-#adminNav tr td a img {
+#adminNav tr td a img, #buyerWork tr td a img, #dealerNav tr td a img, #sellerNav tr td a img {
 	width: auto; 
 	height: 30px; 
 	vertical-align: middle; 

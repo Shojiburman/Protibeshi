@@ -1,5 +1,6 @@
 <?php
 	session_start();
+	include '../php/session.php';
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +15,16 @@
 <body>
 	<?php
 		if(isset($_SESSION['id']) || isset($_COOKIE['remember'])){
-			include '../views/adminNav.html';
+			if($c_type == '0'){
+				include '../views/sellerNav.html';
+			} else if($c_type == '1'){
+				include '../views/buyerNav.html';
+			} else if($c_type == '2'){
+				include '../views/dealerNav.html';
+			} else if($c_type == '3'){
+				include '../views/adminNav.html';
+			}
+			
 		} else {
 			include '../views/nav.html';
 		}

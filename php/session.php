@@ -17,7 +17,8 @@
 			        $c_address = $row['address'];
 			        $c_dob = $row['dob'];
 			        $c_bio = $row['bio'];
-			        $c_pic = "picture/".$row['picture'];
+			        $c_type = $row['admin'];
+			        $c_pic = "../picture/".$row['picture'];
 			    }
 			}
 			$conn->close();
@@ -39,6 +40,7 @@
 			        $c_address = $row['address'];
 			        $c_dob = $row['dob'];
 			        $c_bio = $row['bio'];
+			        $c_type = $row['admin'];
 			        $c_pic = "picture/".$row['picture'];
 			    }
 			}

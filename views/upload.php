@@ -2,7 +2,7 @@
 
 if(isset($_POST["submit"])) {
   $uploadMsg = '';
-  $target_dir = "picture/";
+  $target_dir = "../picture/";
   $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
   $uploadOk = 1;
   $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));

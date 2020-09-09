@@ -2,7 +2,7 @@
     session_start();
     $conn = mysqli_connect('127.0.0.1', 'root', '', 'protibeshi');
 
-    include 'php/session.php';
+    include '../php/session.php';
 
     if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
@@ -65,6 +65,8 @@
 
 <head>
     <title>Change Password</title>
+    <link rel="stylesheet" type="text/css" href="../css/body.css">
+    <link rel="stylesheet" type="text/css" href="../css/adminNav.css">
     <style>
         input, textarea {
             margin: 10px;
@@ -75,7 +77,20 @@
 
 <body>
     <?php
-        include 'adminNav.html';
+        if(isset($_SESSION['id']) || isset($_COOKIE['remember'])){
+            if($c_type == '0'){
+                include '../views/sellerNav.html';
+            } else if($c_type == '1'){
+                include '../views/buyerNav.html';
+            } else if($c_type == '2'){
+                include '../views/dealerNav.html';
+            } else if($c_type == '3'){
+                include '../views/adminNav.html';
+            }
+            
+        } else {
+            include '../views/nav.html';
+        }
     ?>
 
     <table align="center">

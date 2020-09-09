@@ -21,6 +21,7 @@
             <p id="emailformmsg"></p>
     		<input type="password" name="pass" value="" placeholder="Password" oninput="Password()">
             <p id="passformmsg"></p>
+            <p id="submitformmsg"></p>
             <div id="remember">
                 <input type="checkbox" name="remember[]" <?php if (isset($remember) && in_array('yes', $remember)) echo "checked"; ?> >
                 <label for="remember">Remember me</label>
@@ -84,19 +85,20 @@
                             location.assign('dashboard.php');
                         } else if(res == '2'){
                             //document.querySelector('#log form').reset();
-                            location.assign('dashbordDealer.php');
+                            location.assign('dashbord.php');
                         } else if(res == '3'){
                             //document.querySelector('#log form').reset();
                             location.assign('dashboard.php');
                         }
                         else {
-                            document.getElementById('submitformmsg').innerHTML = 'Try again';
                             document.getElementById('submitformmsg').style.cssText = "display: block; color: red";
+                            document.getElementById('submitformmsg').innerHTML = "Invalid Credential";
                         }
                     }   
                 }
             } else {
                 document.getElementById('passformmsg').innerHTML = 'Fillup all field';
+                document.querySelector('[name="email"]').style.cssText = "border: 1px solid red;";
                 document.querySelector('[name="pass"]').style.cssText = "border: 1px solid red;";
                 document.getElementById('passformmsg').style.cssText = "display: block; color: red";
             }

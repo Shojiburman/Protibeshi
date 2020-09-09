@@ -43,7 +43,7 @@
 	width: max-content;
 }
 
-#emailformmsg, #passformmsg {
+#emailformmsg, #passformmsg, #submitformmsg {
 	display: none;
 	width: 600px;
 	margin: 0 auto;
