@@ -19,13 +19,12 @@ ul,ol {
 }
 
 a {
-	color: black;
   text-decoration: none;
 }
 
 .btn {
   display: block;
-  color: white;
+  color: white !important;
   font-size: 1.09em;
   font-weight: bolder;
   width: 200px !important;
@@ -39,6 +38,6 @@ a {
 }
 
 .btn:hover {
-  color: #333;
+  color: #333 !important;
   background-color: white!important; 
 }

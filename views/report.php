@@ -1,12 +1,14 @@
 <?php
     session_start();
-    include 'php/session.php';
+    include '../php/session.php';
 ?>
 <!DOCTYPE html>
 <html>
 
 <head>
     <title>Work</title>
+    <link rel="stylesheet" type="text/css" href="../css/body.css">
+    <link rel="stylesheet" type="text/css" href="../css/adminNav.css">
     <style>
         ul {
             list-style: none;

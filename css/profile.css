@@ -4,28 +4,101 @@ input, textarea {
 }
 
 #hero_section {
-	width: 900px;
+	width: 982px;
 	margin: 0 auto;
 }
 
-#hero_section div {
+#hero_section div.section {
 	float: left;
+	padding: 20px;
+	background-color: #f0f3f7;
+	
 }
 
-#hero_section div:first-child {
+#hero_section div.section:first-child {
 	width: 300px; 
-	height:600px;
-	background-color: #f3f5f7;
+	height:700px;
+	margin-right: 2px;
 }
 
-#hero_section div:last-child {
+#hero_section div.section:first-child p {
+	text-align: center;
+	border-bottom: 1px solid #0aab8e; 
+	padding-bottom: 10px; 
+	padding-top: 10px;
+	margin: 0px auto;
+}
+
+#name {
+	border-top: 1px solid #0aab8e !important;
+	margin-top: 20px !important;
+}
+
+#hero_section div.section:last-child {
 	width: 600px;
-	height: 600px;
-	background-color: #f3f5f7;
+	height: 700px;
 }
 
+#profilePic {
+	display: block;
+	width: 200px; 
+	height: 200px;
+	margin: 60px auto 0 auto;
+}
 
+#profilePic img {
+	width: 100%;
+	height: 100%; 
+	object-fit: cover; 
+	border-radius: 50%;
+	padding: 7px;
+}
 
+#editBtn  {
+	display: block;
+	width: max-content;
+	padding: 4px 4px 2px 4px;
+	border: 1px solid #0aab8e;
+	border-radius: 5px;
+	margin: 20px auto;
+
+}
+
+#editBtn img {
+	width: 15px;
+	height: 15px;
+}
+
+#hero_section div.section:last-child h3 {
+	display: block;
+	width: max-content;
+	margin: 20px auto 10px auto; 
+	color: #0aab8e;
+}
+
+#hero_section div.section:last-child input, #hero_section div.section:last-child textarea {
+	display: block;
+	margin: 20px auto;
+	padding: 20px; 
+	width: 400px;
+}
+
+#hero_section div.section:last-child textarea {
+	max-width: 400px;
+	max-height: 70px;
+}
+
+#msg {
+	text-align: center;
+}
+
+.g {
+	color: green;
+}
+
+.r {
+	color: red;
+}
 
 #profile {
     border: 2px solid #0aab8e !important;
