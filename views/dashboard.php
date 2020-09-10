@@ -45,9 +45,7 @@
                         <option value="Seller">Seller</option>
                         <option value="Buyer">Buyer</option>
                     </select>
-                <button>
-                    <a href="#">search</a>
-                </button>
+                <button onclick="Search()">search</button>
             </form>
         </div>
     <?php }?>
