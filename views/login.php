@@ -85,7 +85,7 @@
                             location.assign('dashboard.php');
                         } else if(res == '2'){
                             //document.querySelector('#log form').reset();
-                            location.assign('dashbord.php');
+                            location.assign('dashboard.php');
                         } else if(res == '3'){
                             //document.querySelector('#log form').reset();
                             location.assign('dashboard.php');
