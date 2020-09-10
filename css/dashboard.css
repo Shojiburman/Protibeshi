@@ -28,7 +28,7 @@
 	padding: 10px;
 	border-radius: 7px;
 	margin: 0 auto;
-
+	box-shadow: 4px 4px 7px 1px #bfbebe;
 }
 
 #hero_section form input {

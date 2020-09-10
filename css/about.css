@@ -7,8 +7,20 @@ p {
 	bacol
 }
 
+p::after {
+    text-indent: -9999px;
+    content: 'hghh';
+    display: block;
+    width: 200px;
+    height: 0;
+    border-bottom: 2px solid #0aab8e;
+    padding-top: 20px;
+    margin: 0 auto;
+}
+
 
 
 #about {
 	border: 2px solid #0aab8e !important;
 }
+
