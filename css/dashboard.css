@@ -1,3 +1,8 @@
+.active {
+	display: block !important;
+}
+
+
 #dashboard {
 	border: 2px solid #0aab8e !important;
 }
@@ -5,7 +10,7 @@
 #hero_section {
 	display: block;
 	width: 1000px;
-	height: 600px;
+	
 	margin: 50px auto;
 }
 
@@ -47,6 +52,8 @@
 }
 
 #hero_section form button {
+	cursor: pointer;
+	color: #fff;
 	background-color: #d01f1f00;
 	width: 140px;
 	height: 60px;
@@ -54,12 +61,31 @@
 	text-align: center center;
 	margin: auto 0;
 	padding: 20px;
+	transition: .5s;
 }
 
-#hero_section form button:hover a {
-	color: #000;
+#hero_section form button:hover {
+	color: #222;
 }
 
-#hero_section form button a {
-	color: #fff;
+#searchResult {
+	display: none;
+	width: max-content;
+	margin: 0px auto 30px auto;
+}
+
+#searchResult thead tr th, #searchResult tbody tr td {
+	border: 1px solid #0aab8e;
+	border-radius: 5px;
+	padding: 5px;
+	text-align: center;
+	box-shadow: -1px 2px 0px 0px #bfbebe;
+}
+
+#searchResult tbody tr{
+	cursor: pointer;
+}
+
+#searchResult tbody tr:hover {
+		background-color: #0aab8e;
 }

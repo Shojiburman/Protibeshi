@@ -101,25 +101,29 @@
     margin: 0 auto 20px auto;
 }
 
-table[changeValue="1"] #edit,
-table[changeValue="1"] #flag,
-table[changeValue="1"] #delete,
-table[changeValue="1"] #view,
-table[changeValue="2"] #add,
-table[changeValue="2"] #view,
-table[changeValue="2"] #flag,
-table[changeValue="2"] #delete,
-table[changeValue="3"] #add,
-table[changeValue="3"] #view,
-table[changeValue="3"] #edit,
-table[changeValue="3"] #delete,
-table[changeValue="4"] #add,
-table[changeValue="4"] #view,
-table[changeValue="4"] #edit,
-table[changeValue="4"] #flag,
-table[changeValue="5"] #add,
-table[changeValue="5"] #edit,
-table[changeValue="5"] #flag,
-table[changeValue="5"] #delete {
+table#content[changeValue="1"] #edit,
+table#content[changeValue="1"] #flag,
+table#content[changeValue="1"] #delete,
+table#content[changeValue="1"] #view,
+
+table#content[changeValue="2"] #add,
+table#content[changeValue="2"] #view,
+table#content[changeValue="2"] #flag,
+table#content[changeValue="2"] #delete,
+
+table#content[changeValue="3"] #add,
+table#content[changeValue="3"] #view,
+table#content[changeValue="3"] #edit,
+table#content[changeValue="3"] #delete,
+
+table#content[changeValue="4"] #add,
+table#content[changeValue="4"] #view,
+table#content[changeValue="4"] #edit,
+table#content[changeValue="4"] #flag,
+
+table#content[changeValue="5"] #add,
+table#content[changeValue="5"] #edit,
+table#content[changeValue="5"] #flag,
+table#content[changeValue="5"] #delete {
 	display: none !important;
 }

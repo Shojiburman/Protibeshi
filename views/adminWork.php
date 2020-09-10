@@ -43,12 +43,11 @@
             </td>
             <td id="view">
                 <h1 class="title">Service list</h1>
-                <table border="0" align="center" cellspacing="0" cellpadding="0">
+                <table >
                     <tr>
                         <td>ID</td>
                         <td>Name</td>
                         <td>Details</td>
-                        <td>Price</td>
                         <td>Flag</td>
                         <td>Catagory TYPE</td>
                         <td>Select Service</td>
@@ -64,14 +63,12 @@
                                 $id = $row['s_id'];
                                 $name =  $row['name'];
                                 $details = $row['details'];
-                                $price = $row['price'];
                                 $flag = $row['flag'];
                                 $c_id = $row['c_id'];
                                 echo "<tr>
                                         <td>{$id}</td>
                                         <td>{$name}</td>
                                         <td>{$details}</td>
-                                        <td>{$price}</td>
                                         <td>{$flag}</td>
                                         <td>{$c_id}</td>
                                         <td><input type='checkbox' name='selector' value = '{$id}'></td>
@@ -101,7 +98,7 @@
             </td>
             <td id="flag">
                 <h1 class="title">Flag Sevice</h1>
-                <form>
+                <form onsubmit="return validateMyForm()">
                     <input type="text" name="flag" placeholder="Flag Value">
                     <input id="Submit" type="button" name="submit" value="Confirm" onclick="flaged()">
                 </form>

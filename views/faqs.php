@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../css/body.css">
     <link rel="stylesheet" type="text/css" href="../css/adminNav.css">
     <link rel="stylesheet" type="text/css" href="../css/faqs.css">
-    <script type="text/javascript" src="../js/adminWork.js"></script>
+    <script type="text/javascript" src="../js/script.js"></script>
 </head>
 
 <body>
@@ -86,7 +86,7 @@
             </td>
             <td id="flag">
                 <h1 class="title">Flag FAQs</h1>
-                <form>
+                <form onsubmit="return validateMyForm()">
                     <input type="text" name="flag" placeholder="Flag Value">
                     <input id="Submit" type="button" name="submit" value="Confirm" onclick="flaged()">
                 </form>

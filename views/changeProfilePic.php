@@ -17,6 +17,7 @@
 <head>
     <title>Change Password</title>
     <link rel="stylesheet" type="text/css" href="../css/adminNav.css">
+    <script type="text/javascript" src="../js/script.js"></script>
 </head>
 
 <body>

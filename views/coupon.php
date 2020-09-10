@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../css/body.css">
     <link rel="stylesheet" type="text/css" href="../css/adminNav.css">
     <link rel="stylesheet" type="text/css" href="../css/coupon.css">
-    <script type="text/javascript" src="../js/adminWork.js"></script>
+    <script type="text/javascript" src="../js/script.js"></script>
 </head>
 
 <body>
@@ -37,7 +37,7 @@
             </td>
             <td id="view">
                 <h1 class="title">Coupon list</h1>
-                <table border="0" align="center" cellspacing="0" cellpadding="0">
+                <table >
                     <tr>
                         <td>ID</td>
                         <td>Name</td>

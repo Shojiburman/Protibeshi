@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../css/body.css">
     <link rel="stylesheet" type="text/css" href="../css/adminNav.css">
     <link rel="stylesheet" type="text/css" href="../css/adminWork.css">
-    <script type="text/javascript" src="../js/adminWork.js"></script>
+    <script type="text/javascript" src="../js/script.js"></script>
 </head>
 
 <body>
@@ -43,7 +43,7 @@
             </td>
             <td id="view">
                 <h1 class="title">Service list</h1>
-                <table border="0" align="center" cellspacing="0" cellpadding="0">
+                <table >
                     <tr>
                         <td>ID</td>
                         <td>Name</td>
@@ -101,7 +101,7 @@
             </td>
             <td id="flag">
                 <h1 class="title">Flag Sevice</h1>
-                <form>
+                <form onsubmit="return validateMyForm()">
                     <input type="text" name="flag" placeholder="Flag Value">
                     <input id="Submit" type="button" name="submit" value="Confirm" onclick="flaged()">
                 </form>

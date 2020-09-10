@@ -11,6 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../css/body.css">
     <link rel="stylesheet" type="text/css" href="../css/adminNav.css">
     <link rel="stylesheet" type="text/css" href="../css/profile.css">
+    <script type="text/javascript" src="../js/script.js"></script>
     <style>
         input, textarea {
             margin: 10px;
@@ -53,7 +54,7 @@
         <div class="section">
             <div>
                 <h3>Change Password</h3>
-                <form>
+                <form onsubmit="return validateMyForm()">
                     <input type="hidden" name="u_id" value="<?php echo $_SESSION['id']; ?>">
                     <input type="password" name="pass" value="" placeholder="Password" oninput="Pass()">
                     <p id="passMsg"></p>

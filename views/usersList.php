@@ -10,35 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../css/work.css">
     <link rel="stylesheet" type="text/css" href="../css/body.css">
     <link rel="stylesheet" type="text/css" href="../css/adminNav.css">
-    <style>
-        ul {
-            list-style: none;
-            padding-left: 0;
-        }
-        ul li {
-            display: block;
-            width: 70%;
-            padding: 10px;
-            margin: 0px auto;
-        }
-        ul li a {
-            display: block;
-            text-align: center;
-        }
-        a {
-            color: black;
-            text-decoration: none;
-        }
-        img {
-            width: 150px;
-            height: auto;
-        }
-        table tr td:last-child table tr td {
-            text-align: center;
-            background-color: white;
-            padding: 10px;
-        }
-    </style>
+    <script type="text/javascript" src="../js/script.js"></script>
 </head>
 
 <body>
@@ -53,7 +25,7 @@
             ?>
             <td width="1200px" height="600px" style="background-color: #f3f5f7">
                 <h3 style="font-family: Roboto; margin: 20px 10px 50px 10px; color: #0aab8e" align="center">USERS LIST</h3>
-                <table border="0" align="center" cellspacing="0" cellpadding="0">
+                <table >
                     <tr>
                         <td align="center">ID</td>
                         <td align="center">NAME</td>

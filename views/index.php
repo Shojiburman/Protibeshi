@@ -5,7 +5,7 @@
     <link rel="stylesheet" type="text/css" href="../css/protibeshi.css">
     <link rel="stylesheet" type="text/css" href="../css/body.css">
     <link rel="stylesheet" type="text/css" href="../css/nav.css">
-    <script type="text/javascript" src="../js/adminNav.js"></script>
+    <script type="text/javascript" src="../js/script.js"></script>
 </head>
 <body>
 	<?php

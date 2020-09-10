@@ -12,13 +12,6 @@
     <link rel="stylesheet" type="text/css" href="../css/body.css">
     <link rel="stylesheet" type="text/css" href="../css/adminNav.css">
     <link rel="stylesheet" type="text/css" href="../css/users.css">
-    <style>
-        table tr td:last-child table tr td {
-            text-align: center;
-            background-color: white;
-            padding: 10px;
-        }
-    </style>
 </head>
 
 <body>
@@ -33,7 +26,7 @@
             ?>
             <td id="add">
                 <h1 class="title">Add users</h1>
-                <form id="form">
+                <form id="form" onsubmit="return validateMyForm()">
                 <input type="text" name="name" placeholder="User Name">
                 <input type="text" name="email" placeholder="User email">
                 <input type="password" name="password" placeholder="User password">
@@ -50,7 +43,7 @@
             </td>
             <td id="view">
                 <h1 class="title">Users list</h1>
-                <table border="0" align="center" cellspacing="0" cellpadding="0">
+                <table >
                     <tr>
                         <td>ID</td>
                         <td>Name</td>
@@ -95,7 +88,7 @@
             </td>
             <td id="edit">
                 <h1 class="title">Edit users</h1>
-                <form >
+                <form onsubmit="return validateMyForm()">
                     <input type="text" name="name" placeholder="User Name">
                 <input type="text" name="email" placeholder="User email">
                 <input type="password" name="password" placeholder="User password">
@@ -112,7 +105,7 @@
             </td>
             <td id="flag">
                 <h1 class="title">Flag users</h1>
-                <form>
+                <form onsubmit="return validateMyForm()">
                     <input type="text" name="flag" placeholder="Flag Value">
                     <input id="Submit" type="button" name="submit" value="Confirm" onclick="flaged()">
                 </form>
@@ -157,7 +150,7 @@
                             document.querySelector('#edit>form [name="utype"]').selectedIndex = val[4]+1;
                             document.querySelector('table[changeValue]').setAttribute("changeValue", "2");
                         } else {
-                            location.reload();
+                            
                         }
                     }   
                 }
@@ -176,7 +169,7 @@
             if(flagCheckedValue != ""){
                 document.querySelector('table[changeValue]').setAttribute("changeValue", "3");
             } else {
-                location.reload();
+                
             }
         }
         function fun4(){
@@ -190,11 +183,11 @@
             if(flagCheckedValue != ""){
                 document.querySelector('table[changeValue]').setAttribute("changeValue", "4");
             } else {
-                location.reload();
+                
             }
         }
         function fun5(){
-            location.reload();
+            
             document.querySelector('table[changeValue]').setAttribute("changeValue", "5");
         }
 
@@ -232,12 +225,14 @@
                         if(this.readyState == 4 && this.status == 200){
 
                             if(this.responseText == "delete"){
+                                document.querySelector('table[changeValue]').setAttribute("changeValue", "5");
+                                location.reload();
                             }
                         }   
                     }
-                } location.reload();
+                } 
             } else {
-                location.reload();
+                
             }
         }
 
@@ -258,6 +253,7 @@
                         var res = this.responseText;
                         if(res == 'update'){
                             document.querySelector('#edit>form').reset();
+                            document.querySelector('table[changeValue]').setAttribute("changeValue", "5");
                             location.reload();
                         } else {
                         }
@@ -281,14 +277,17 @@
                             var res = this.responseText;
                             if(res == 'flaged'){
                                 document.querySelector('#flag>form').reset();
+                                document.querySelector('table[changeValue]').setAttribute("changeValue", "5");
+                                location.reload();
                             } else {
                             }
                         }   
                     }
                 }
-            } location.reload();
+            } 
         }
     </script>
+    <script type="text/javascript" src="../js/script.js"></script>
 </body>
 
 </html>

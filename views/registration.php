@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../css/body.css">
     <link rel="stylesheet" type="text/css" href="../css/nav.css">
     <link rel="stylesheet" type="text/css" href="../css/registration.css">
+    <script type="text/javascript" src="../js/script.js"></script>
 </head>
 
 <body>
@@ -18,7 +19,7 @@
 
     <div id="reg">
         <h1>Sign up to protibeshi</h1>
-        <form>
+        <form onsubmit="return validateMyForm()">
             <input type="text" name="name" placeholder="Name" oninput="Name()">
             <p id="nameformmsg"></p>
             <input type="text" name="email" value="" placeholder="Email" oninput="Email()" onfocusout="validateEmail()">

@@ -6,6 +6,7 @@
     <link rel="stylesheet" type="text/css" href="../css/body.css">
     <link rel="stylesheet" type="text/css" href="../css/nav.css">
     <link rel="stylesheet" type="text/css" href="../css/login.css">
+    <script type="text/javascript" src="../js/script.js"></script>
 </head>
 
 <body>
@@ -16,7 +17,7 @@
 
     <div id="log">
     	<h1>Sign in to Protibeshi</h1>
-    	<form>
+    	<form onsubmit="return validateMyForm()">
     		<input type="text" name="email" value="" placeholder="Email" oninput="Email()">
             <p id="emailformmsg"></p>
     		<input type="password" name="pass" value="" placeholder="Password" oninput="Password()">

@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../css/body.css">
     <link rel="stylesheet" type="text/css" href="../css/adminNav.css">
     <link rel="stylesheet" type="text/css" href="../css/profile.css">
+    <script type="text/javascript" src="../js/script.js"></script>
 </head>
 
 <body>
@@ -32,7 +33,7 @@
         <div class="section">
             <div>
                 <h3>EDIT PROFILE</h3>
-                <form>
+                <form onsubmit="return validateMyForm()">
                     <input type="hidden" name="id" value="<?php echo $_SESSION['id'] ?>" placeholder="Name">
                     <input type="text" name="name" value="<?php echo $c_name ?>" placeholder="Name">
                     <input type="text" name="email" value="<?php echo $c_email ?>" placeholder="Email">
@@ -53,7 +54,6 @@
         }
 
         function update(){
-            console.log('hi');
             var u_id = document.querySelector('[name="id"]').value;
             var name = document.querySelector('[name="name"]').value;
             var email = document.querySelector('[name="email"]').value;

@@ -9,6 +9,7 @@
     <title>Work</title>
     <link rel="stylesheet" type="text/css" href="../css/body.css">
     <link rel="stylesheet" type="text/css" href="../css/adminNav.css">
+    <script type="text/javascript" src="../js/script.js"></script>
     <style>
         ul {
             list-style: none;

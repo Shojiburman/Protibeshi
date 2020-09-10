@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="../css/body.css">
     <link rel="stylesheet" type="text/css" href="../css/adminNav.css">
     <link rel="stylesheet" type="text/css" href="../css/work.css">
+    <script type="text/javascript" src="../js/script.js"></script>
     <style>
         ul {
             list-style: none;
