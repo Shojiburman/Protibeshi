@@ -113,7 +113,6 @@
                 <th>Service Provider</th>
                 <th>Service Name</th>
                 <th>Price</th>
-                <th>Details</th>
                 <th>Catagory</th>
             </tr>
         </thead>
@@ -183,7 +182,7 @@
 
         function view(clicked){
             var id = clicked.getAttribute('data-id');
-            location.assign('viewProfile.php?uid=' + encodeURIComponent(id));
+            location.assign('viewServices.php?uid=' + encodeURIComponent(id));
         }
     </script>
 </body>

@@ -17,7 +17,20 @@
 
 <body>
     <?php
-        include 'adminNav.html';
+        if(isset($_SESSION['id']) || isset($_COOKIE['remember'])){
+            if($_SESSION['uType'] == '0'){
+                include '../views/sellerNav.html';
+            } else if($_SESSION['uType'] == '1'){
+                include '../views/buyerNav.html';
+            } else if($_SESSION['uType'] == '2'){
+                include '../views/dealerNav.html';
+            } else if($_SESSION['uType'] == '3'){
+                include '../views/adminNav.html';
+            }
+            
+        } else {
+            include '../views/nav.html';
+        }
     ?>
 
     <table id="content" changeValue="5">

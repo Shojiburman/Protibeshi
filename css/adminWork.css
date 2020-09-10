@@ -26,7 +26,7 @@
 	width: 420px;
 }
 
-#Submit {
+.Submit {
 	display: block; 
 	width: 150px !important;
 	cursor: pointer;
@@ -38,7 +38,7 @@
 	cursor: pointer;
 }
 
-#Submit:hover {
+.Submit:hover {
 	width: 150px !important;
 	color: white;
 	background-color: #0aab8e; 

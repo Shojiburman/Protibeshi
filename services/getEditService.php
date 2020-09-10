@@ -12,10 +12,9 @@
             $id = $row['s_id'];
             $name =  $row['name'];
             $details = $row['details'];
-            $price = $row['price'];
             $flag = $row['flag'];
             $c_id = $row['c_id'];
-            echo "$id|$name|$details|$price|$flag|$c_id";
+            echo "$id|$name|$details|$flag|$c_id";
         }
     }
     $conn->close();

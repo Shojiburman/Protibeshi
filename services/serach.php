@@ -8,7 +8,7 @@
 	$search = $_POST['search'];
 
 	if(($type == 'Services') && ($search != '')){
-		$sql = "SELECT s.name AS sname, c.name AS cname, us.name AS uname, u.details, u.price, us.u_id from services s, us_services u, users us, catagory c where s.s_id = u.s_id AND us.u_id = u.u_id AND s.c_id = c.c_id AND s.name like '%$search%'";
+		$sql = "SELECT s.name AS sname, c.name AS cname, us.name AS uname, u.details, u.price, u.us_id from services s, us_services u, users us, catagory c where s.s_id = u.s_id AND us.u_id = u.u_id AND s.c_id = c.c_id AND s.name like '%$search%'";
 		if (($result = $conn->query($sql)) !== FALSE){
 			$data = array();
 	        while($row = $result->fetch_assoc()){
@@ -16,9 +16,8 @@
 					"name" => $row['uname'],
 					"sname" => $row['sname'],
 					"price" => $row['price'],
-					"details" => $row['details'],
 					"catagory" => $row['cname'],
-					"u_id" => $row['u_id'],
+					"u_id" => $row['us_id'],
 				];
 				array_push($data, $test);
 			}

@@ -7,9 +7,8 @@
 
 	$name = $_POST['name'];
 	$details = $_POST['details'];
-	$price = $_POST['price'];
 	$c_id = $_POST['catagory'];
-	$sql = "INSERT INTO services (name, details, price, c_id) VALUES ('". $name ."', '". $details ."', '". $price ."', '". $c_id ."');";
+	$sql = "INSERT INTO services (name, details, c_id) VALUES ('". $name ."', '". $details ."', '". $c_id ."');";
 	if ($conn->query($sql) === TRUE) {
 		$data = "insert";
 	} else {
