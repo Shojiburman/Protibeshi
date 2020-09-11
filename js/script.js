@@ -851,3 +851,168 @@ function COUupdate() {
         }
     }
 }
+
+function CATfun1() {
+    document.querySelector('table[changeValue]').setAttribute("changeValue", "1");
+}
+
+function CATfun2() {
+    checkedValue = '';
+    var inputElements = document.querySelectorAll('[name="selector"]');
+    for (var i = 0; inputElements[i]; ++i) {
+        if (inputElements[i].checked) {
+            checkedValue = inputElements[i].value;
+            break;
+        }
+    }
+    if (checkedValue != null) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/getEditCatagory.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('c_id=' + checkedValue);
+
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.responseText != "") {
+                    var val = this.responseText.split("|");
+                    serviceId = val[0];
+                    document.querySelector('#edit>form [name="name"]').value = val[1];
+                    document.querySelector('#edit>form [name="details"]').value = val[2];
+                    document.querySelector('table[changeValue]').setAttribute("changeValue", "2");
+                } else {
+                    location.reload();
+                }
+            }
+        }
+    } else {
+        document.querySelector('table[changeValue]').setAttribute("changeValue", "5");
+    }
+}
+
+function CATfun3() {
+    var inputElements = document.querySelectorAll('[name="selector"]');
+    for (var i = 0; inputElements[i]; ++i) {
+        if (inputElements[i].checked) {
+            var valu = inputElements[i].value;
+            flagCheckedValue.push(valu);
+        }
+    }
+    if (flagCheckedValue != "") {
+        document.querySelector('table[changeValue]').setAttribute("changeValue", "3");
+    } else {
+        location.reload();
+    }
+}
+
+function CATfun4() {
+    var inputElements = document.querySelectorAll('[name="selector"]');
+    for (var i = 0; inputElements[i]; ++i) {
+        if (inputElements[i].checked) {
+            var valu = inputElements[i].value;
+            flagCheckedValue.push(valu);
+        }
+    }
+    if (flagCheckedValue != "") {
+        document.querySelector('table[changeValue]').setAttribute("changeValue", "4");
+    } else {
+        location.reload();
+    }
+}
+
+function CATfun5() {
+    location.reload();
+    document.querySelector('table[changeValue]').setAttribute("changeValue", "5");
+}
+
+function createCatagory() {
+    var name = document.querySelector('#add [name="name"]').value;
+    var details = document.querySelector('#add [name="details"]').value;
+    if ((name != '') && (details != '')) {
+        console.log("12");
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/insertCatagory.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('name=' + name + '&details=' + details);
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var res = this.responseText;
+                console.log(res);
+                if (res == 'insert') {
+                    document.querySelector('#add>form').reset();
+                } else {}
+            }
+        }
+    }
+}
+
+function deleteCatagory() {
+    if (flagCheckedValue != null) {
+        for (var i = 0; i < flagCheckedValue.length; i++) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open('POST', '../services/deleteCatagory.php', true);
+            xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhttp.send('c_id=' + flagCheckedValue[i]);
+
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+
+                    if (this.responseText == "delete") {
+                        location.reload();
+                    }
+                }
+            }
+        }
+        location.reload();
+    } else {
+        location.reload();
+    }
+}
+
+function updateCatagory() {
+    var c_id = serviceId;
+    var name = document.querySelector('#edit>form [name="name"]').value.trim();
+    var details = document.querySelector('#edit>form [name="details"]').value.trim();
+
+    if ((name != '') && (details != '') && (c_id != '')) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/updateCatagory.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('c_id=' + c_id + '&name=' + name + '&details=' + details);
+        console.log(c_id);
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var res = this.responseText;
+                console.log(res);
+                if (res == 'update') {
+                    location.reload();
+                } else {}
+            }
+        }
+    } else {
+        console.log('emty data');
+    }
+}
+
+function flagedCatagory() {
+    var flag = document.querySelector('#flag>form [name="flag"]').value;
+    console.log(flag);
+    for (var i = 0; i < flagCheckedValue.length; i++) {
+        var c_id = flagCheckedValue[i];
+        console.log(c_id);
+        if ((flag != '') && (c_id != '')) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open('POST', '../services/flagCatagory.php', true);
+            xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhttp.send('c_id=' + c_id + '&flag=' + flag);
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var res = this.responseText;
+                    if (res == 'flaged') {
+                        document.querySelector('#flag>form').reset();
+                    } else {}
+                }
+            }
+        }
+    }
+    location.reload();
+}
