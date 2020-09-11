@@ -8,11 +8,7 @@
 
 <head>
     <title>Work</title>
-    <link rel="stylesheet" type="text/css" href="../css/work.css">
     <link rel="stylesheet" type="text/css" href="../css/body.css">
-    <link rel="stylesheet" type="text/css" href="../css/adminNav.css">
-    <link rel="stylesheet" type="text/css" href="../css/orderList.css">
-    <script type="text/javascript" src="../js/script.js"></script>
 </head>
 
 <body>
@@ -80,6 +76,7 @@
         </tr>
     </table>
     </script>
+    <script type="text/javascript" src="../js/script.js"></script>
 </body>
 
 </html>

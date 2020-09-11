@@ -26,6 +26,7 @@
 		}
 	?>
 	<p id="about-text">This website is an online service marketplace. Here you can find home services and the service provider will be your neighbor. Make your life more convenient and hassle-free.</p>
+	
 	<script type="text/javascript" src="../js/script.js"></script>
 </body>
 </html>

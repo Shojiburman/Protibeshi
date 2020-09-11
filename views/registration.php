@@ -7,9 +7,6 @@
 <head>
     <title>Registration</title>
     <link rel="stylesheet" type="text/css" href="../css/body.css">
-    <link rel="stylesheet" type="text/css" href="../css/nav.css">
-    <link rel="stylesheet" type="text/css" href="../css/registration.css">
-    <script type="text/javascript" src="../js/script.js"></script>
 </head>
 
 <body>
@@ -282,6 +279,7 @@
             return false;
         }
     </script>
+    <script type="text/javascript" src="../js/script.js"></script>
 </body>
 
 </html>

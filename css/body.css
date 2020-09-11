@@ -6,157 +6,161 @@
     text-decoration: none;
 }
 
-body { 
-  background-color: white!important; 
-  color: #333; 
-  font-size: 14px; 
-  font-family: Verdana, Arial, sans-serif;
-  line-height: 20px;
+body {
+    background-color: white !important;
+    color: #333;
+    font-size: 14px;
+    font-family: Verdana, Arial, sans-serif;
+    line-height: 20px;
 }
 
-ul,ol {
-	list-style: none;
+ul,
+ol {
+    list-style: none;
 }
 
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .btn {
-  display: block;
-  color: white !important;
-  font-size: 1.09em;
-  font-weight: bolder;
-  width: 200px !important;
-  padding: 15px 30px!important;
-  border-radius: 10px!important; 
-  background-color: #0aab8e!important; 
-  border: 1.5px solid #0aab8e!important; 
-  margin: 20px auto !important; 
-  cursor: pointer;
-  transition: .7s;
+    display: block;
+    color: white !important;
+    font-size: 1.09em;
+    font-weight: bolder;
+    width: 200px !important;
+    padding: 15px 30px !important;
+    border-radius: 10px !important;
+    background-color: #0aab8e !important;
+    border: 1.5px solid #0aab8e !important;
+    margin: 20px auto !important;
+    cursor: pointer;
+    transition: .7s;
 }
 
 .btn:hover {
-  color: #333 !important;
-  background-color: white!important; 
+    color: #333 !important;
+    background-color: white !important;
 }
 
 .de-active {
-  display: none;
+    display: none;
 }
 
-.sub-title{
-  flex-wrap: wrap;
-  float: left;
-  font-size: 10px;
-  width: max-content;
-  color: grey;
-  margin-right: 10px;
-  margin-bottom: 20px;
+.sub-title {
+    flex-wrap: wrap;
+    float: left;
+    font-size: 10px;
+    width: max-content;
+    color: grey;
+    margin-right: 10px;
+    margin-bottom: 20px;
 }
 
 #view-service {
-  display: block;
-  width: 1200px;
-  padding: 20px;
-  margin: 20px auto;
-  box-shadow: -1px 2px 20px 0px #bfbebe;
+    display: block;
+    width: 1200px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: -1px 2px 20px 0px #bfbebe;
 }
 
 #view-service div {
-  display: flex;
-  width: max-content;
+    display: flex;
+    width: max-content;
 }
 
-#view-service h1{
-  color: #0aab8e;
-  text-align: left;
-  line-height: 20px;
-  height: 20px;
-  margin: 10px 0;
+#view-service h1 {
+    color: #0aab8e;
+    text-align: left;
+    line-height: 20px;
+    height: 20px;
+    margin: 10px 0;
 }
 
 #see-more div.see-more-service {
-  display: block;
-  width: 1200px;
-  padding: 20px;
-  margin: 20px auto;
-  box-shadow: -1px 2px 20px 0px #bfbebe;
+    display: block;
+    width: 1200px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: -1px 2px 20px 0px #bfbebe;
 }
 
 #see-more div.see-more-service div {
-  display: flex;
-  width: max-content;
+    display: flex;
+    width: max-content;
 }
 
-#see-more div.see-more-service h1{
-  color: #0aab8e;
-  text-align: left;
-  line-height: 20px;
-  height: 20px;
-  margin: 10px 0;
+#see-more div.see-more-service h1 {
+    color: #0aab8e;
+    text-align: left;
+    line-height: 20px;
+    height: 20px;
+    margin: 10px 0;
 }
 
 #content {
-  margin: 0 auto;
+    margin: 0 auto;
 }
 
 #content tr td {
-  background-color: #eaeaea;
+    background-color: #eaeaea;
 }
 
 .work {
-  width: 340px;
-  height: 600px;
-  margin-right: 5px;
+    width: 340px;
+    height: 600px;
+    margin-right: 5px;
 }
 
 .work ul {
     list-style: none;
     padding-left: 0;
 }
+
 .work ul li {
-  display: block;
-  width: 70%;
-  padding: 10px;
-  margin: 0px auto;
+    display: block;
+    width: 70%;
+    padding: 10px;
+    margin: 0px auto;
 }
+
 .work ul li a {
     display: block;
     text-align: center;
 }
 
 .work ul li a {
-  text-decoration: none; 
-  color: #0aab8e; 
-  padding: 10px 30px; 
-  border: 1.5px solid #0aab8e; 
-  border-radius: 5px; 
-  background-color: white;
+    text-decoration: none;
+    color: #0aab8e;
+    padding: 10px 30px;
+    border: 1.5px solid #0aab8e;
+    border-radius: 5px;
+    background-color: white;
 }
 
 .work ul li a:hover {
-  color: white; 
-  background-color: #0aab8e;
+    color: white;
+    background-color: #0aab8e;
 }
 
 #searchResult {
-  display: none;
-  width: max-content;
-  margin: 0px auto 30px auto;
+    display: none;
+    width: max-content;
+    margin: 0px auto 30px auto;
 }
 
-#searchResult thead tr th, #searchResult tbody tr td {
-  border: 1px solid #0aab8e;
-  border-radius: 5px;
-  padding: 5px;
-  text-align: center;
-  box-shadow: -1px 2px 0px 0px #bfbebe;
+#searchResult thead tr th,
+#searchResult tbody tr td {
+    border: 1px solid #0aab8e;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    box-shadow: -1px 2px 0px 0px #bfbebe;
 }
 
-#searchResult tbody tr{
-  cursor: pointer;
+#searchResult tbody tr {
+    cursor: pointer;
 }
 
 #searchResult tbody tr:hover {
@@ -166,163 +170,561 @@ a {
 
 
 .active {
-  display: block !important;
+    display: block !important;
 }
 
 
 #dashboard {
-  border: 2px solid #0aab8e !important;
+    border: 2px solid #0aab8e !important;
 }
 
 #hero_section {
-  display: block;
-  width: 1000px;
-  
-  margin: 50px auto;
+    display: block;
+    width: 1000px;
+
+    margin: 50px auto;
 }
 
 #hero_section h1 {
-  text-align: center;
-  font-size: 36px;
-  padding: 50px;
-  line-height: 70px;
+    text-align: center;
+    font-size: 36px;
+    padding: 50px;
+    line-height: 70px;
 }
 
 #hero_section h1 span {
-  display: block;
+    display: block;
 }
 
 #hero_section form {
-  background-color: #0aab8e;;
-  display: flex;
-  flex-wrap: wrap;
-  width: max-content;
-  padding: 10px;
-  border-radius: 7px;
-  margin: 0 auto;
-  box-shadow: 4px 4px 7px 1px #bfbebe;
+    background-color: #0aab8e;
+    ;
+    display: flex;
+    flex-wrap: wrap;
+    width: max-content;
+    padding: 10px;
+    border-radius: 7px;
+    margin: 0 auto;
+    box-shadow: 4px 4px 7px 1px #bfbebe;
 }
 
 #hero_section form input {
-  width: 330px;
-  padding: 20px;
-  margin-right: 2px;
-  border-radius: 7px 0 0 7px;
+    width: 330px;
+    padding: 20px;
+    margin-right: 2px;
+    border-radius: 7px 0 0 7px;
+    box-shadow: inset 1.3px 0 4px black;
 }
 
 #hero_section form select {
-  background-color: #fff;
-  width: 330px;
-  padding: 20px;
-  margin-right: 2px;
-  border-radius: 0 7px 7px 0;
+    background-color: #fff;
+    width: 330px;
+    padding: 20px;
+    margin-right: 2px;
+    border-radius: 0 7px 7px 0;
+    box-shadow: inset 1px 0 4px black;
 }
 
 #hero_section form button {
-  cursor: pointer;
-  color: #fff;
-  background-color: #d01f1f00;
-  width: 140px;
-  height: 60px;
-  font-size: 18px;
-  text-align: center center;
-  margin: auto 0;
-  padding: 20px;
-  transition: .5s;
+    cursor: pointer;
+    color: #fff;
+    background-color: #d01f1f00;
+    width: 140px;
+    height: 60px;
+    font-size: 18px;
+    text-align: center center;
+    margin: auto 0;
+    padding: 20px;
+    transition: .5s;
 }
 
 #hero_section form button:hover {
-  color: #222;
+    background-color: #d01f1f00;
+    box-shadow: inset 1px 0 4px black;
+    border-radius: 7px;
+
 }
 
 
 /*--------------------------------nav-------------------------------*/
 
-#adminNav, #buyerWork, #dealerNav, #sellerNav {
-  margin: 30px auto;
+#adminNav,
+#buyerWork,
+#dealerNav,
+#sellerNav {
+    margin: 30px auto;
 }
 
-#adminNav tr, #buyerWork tr, #dealerNav tr, #sellerNav tr{
-  height: 50px;
+#adminNav tr,
+#buyerWork tr,
+#dealerNav tr,
+#sellerNav tr {
+    height: 50px;
 }
 
-#adminNav tr td a, #buyerWork tr td a,#dealerNav tr td a, #sellerNav tr td a {
-  border: 2px solid black;
-  border-radius: 7%;
-  padding: 10px 15px;
-  margin-right: 20px;
-  text-decoration: none;
-  color: black;
+#adminNav tr td a,
+#buyerWork tr td a,
+#dealerNav tr td a,
+#sellerNav tr td a {
+    border: 2px solid black;
+    border-radius: 7%;
+    padding: 10px 15px;
+    margin-right: 20px;
+    text-decoration: none;
+    color: black;
 }
 
-#adminNav tr td a:hover, #buyerWork tr td a:hover, #dealerNav tr td a:hover, #sellerNav tr td a:hover {
-  transition: .3s;
-  border: 2px solid #0aab8e;
-  background-color: #0aab8e;
-  color: white;
+#adminNav tr td a:hover,
+#buyerWork tr td a:hover,
+#dealerNav tr td a:hover,
+#sellerNav tr td a:hover {
+    transition: .3s;
+    border: 2px solid #0aab8e;
+    background-color: #0aab8e;
+    color: white;
 }
 
-#adminNav tr td a:last-child:hover, #buyerWork tr td a:last-child:hover, #dealerNav tr td a:last-child:hover, #sellerNav tr td a:last-child:hover {
-  border: 0;
-  background-color: white;
-  border-radius: 0;
-  padding: 10px 0px;
-  margin-right: 20px;
-  text-decoration: none;
+#adminNav tr td a:last-child:hover,
+#buyerWork tr td a:last-child:hover,
+#dealerNav tr td a:last-child:hover,
+#sellerNav tr td a:last-child:hover {
+    border: 0;
+    background-color: white;
+    border-radius: 0;
+    padding: 10px 0px;
+    margin-right: 20px;
+    text-decoration: none;
 }
 
-#adminNav tr td a:last-child, #buyerWork tr td a:last-child, #dealerNav tr td a:last-child, #sellerNav tr td a:last-child {
-  border: 0;
-  border-radius: 0;
-  padding: 10px 0px;
-  margin-right: 20px;
-  text-decoration: none;
+#adminNav tr td a:last-child,
+#buyerWork tr td a:last-child,
+#dealerNav tr td a:last-child,
+#sellerNav tr td a:last-child {
+    border: 0;
+    border-radius: 0;
+    padding: 10px 0px;
+    margin-right: 20px;
+    text-decoration: none;
 }
 
-#adminNav tr td a img, #buyerWork tr td a img, #dealerNav tr td a img, #sellerNav tr td a img {
-  width: auto; 
-  height: 30px; 
-  vertical-align: middle; 
-  padding-bottom: 5px;
+#adminNav tr td a img,
+#buyerWork tr td a img,
+#dealerNav tr td a img,
+#sellerNav tr td a img {
+    width: auto;
+    height: 30px;
+    vertical-align: middle;
+    padding-bottom: 5px;
 }
 
 #nav {
-  margin: 30px auto;
+    margin: 30px auto;
 }
 
-#nav tr{
-  height: 50px;
+#nav tr {
+    height: 50px;
 }
 
 #nav td a {
-  border: 2px solid #333; 
-  border-radius: 7%; 
-  padding: 10px 15px; 
-  margin-right: 20px; 
-  color: #333;
+    border: 2px solid #333;
+    border-radius: 7%;
+    padding: 10px 15px;
+    margin-right: 20px;
+    color: #333;
 }
 
 /*------------------------------------about-----------------------------------*/
 
-#about-text p {
-  font-size: 1.12rem;
-  text-align: center;
-  width: 900px;
-  margin: 100px auto;
-  padding-top: 10px;
+#about-text {
+    font-size: 1.12rem;
+    text-align: center;
+    width: 900px;
+    margin: 100px auto;
+    padding-top: 10px;
 }
 
-#about-text p::after {
-  text-indent: -9999px;
-  content: 'hghh';
-  display: block;
-  width: 200px;
-  height: 0;
-  border-bottom: 2px solid #0aab8e;
-  padding-top: 20px;
-  margin: 0 auto;
+#about-text::after {
+    text-indent: -9999px;
+    content: 'hghh';
+    display: block;
+    width: 200px;
+    height: 0;
+    border-bottom: 2px solid #0aab8e;
+    padding-top: 20px;
+    margin: 0 auto;
+}
+
+
+/*----------------------------------adminWork----------------------------------*/
+
+#adminWork {
+    border: 2px solid #0aab8e !important;
+}
+
+
+#add>form input,
+#add>form textarea,
+#add>form select,
+#edit>form input,
+#edit>form textarea,
+#edit>form select,
+#flag form input {
+    display: block;
+    width: 400px;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 25px auto;
+}
+
+#add>form textarea,
+#edit>form textarea {
+    max-width: 400px;
+    max-height: 400px;
+    min-width: 400px;
+    min-height: 100px;
+    height: 100px;
+}
+
+#add>form select,
+#edit>form select {
+    width: 420px;
+}
+
+.Submit {
+    display: block;
+    width: 150px !important;
+    cursor: pointer;
+    background-color: white;
+    border: 1.5px solid #0aab8e;
+    border-radius: 5px;
+    padding: 10px 30px;
+    margin: 20px auto;
+    cursor: pointer;
+}
+
+.Submit:hover {
+    width: 150px !important;
+    color: white;
+    background-color: #0aab8e;
+}
+
+.option {
+    width: max-content;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+.option li {
+    width: 87px;
+    text-align: center;
+    margin: 10px 20px;
+}
+
+.option li button {
+    cursor: pointer;
+    width: 100px;
+    color: white;
+    text-align: center;
+    padding: 10px 15px;
+    border: 1.5px solid #0aab8e;
+    border-radius: 5px;
+    background-color: #0aab8e;
+}
+
+.option li button:hover {
+    color: #0aab8e;
+    background-color: white;
+}
+
+.option4 {
+    width: max-content;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+
+.option4 li {
+    width: 87px;
+    text-align: center;
+    margin: 10px 20px;
+}
+
+.option4 li button {
+    cursor: pointer;
+    width: 100px;
+    color: white;
+    text-align: center;
+    padding: 10px 15px;
+    border: 1.5px solid #0aab8e;
+    border-radius: 5px;
+    background-color: #0aab8e;
+}
+
+.option4 li button:hover {
+    color: #0aab8e;
+    background-color: white;
+}
+
+#add,
+#view,
+#edit,
+#flag,
+#delete {
+    width: 1000px;
+    height: 600px;
+}
+
+.title {
+    width: max-content;
+    margin: 30px auto;
+}
+
+#view>table,
+#delete>table {
+    margin: 0px auto 30px auto;
+}
+
+#view>table tr:nth-child(1),
+#delete>table tr:nth-child(1) {
+    font-weight: bold;
+}
+
+#view>table tr td,
+#delete>table tr td {
+    border: 1px solid #0aab8e;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+}
+
+#delete p {
+    background-color: #ff8080;
+    width: max-content;
+    padding: 5px 5px;
+    border-radius: 5px;
+    margin: 0 auto 20px auto;
+}
+
+table[changeValue="1"] #edit,
+table[changeValue="1"] #flag,
+table[changeValue="1"] #delete,
+table[changeValue="1"] #view,
+table[changeValue="2"] #add,
+table[changeValue="2"] #view,
+table[changeValue="2"] #flag,
+table[changeValue="2"] #delete,
+table[changeValue="3"] #add,
+table[changeValue="3"] #view,
+table[changeValue="3"] #edit,
+table[changeValue="3"] #delete,
+table[changeValue="4"] #add,
+table[changeValue="4"] #view,
+table[changeValue="4"] #edit,
+table[changeValue="4"] #flag,
+table[changeValue="5"] #add,
+table[changeValue="5"] #edit,
+table[changeValue="5"] #flag,
+table[changeValue="5"] #delete {
+    display: none !important;
 }
 
 
 
 
+/*---------------------------------profile-----------------------------*/
+
+#profile-section input,
+textarea {
+    margin: 10px;
+    border-radius: 4px;
+}
+
+#profile-section {
+    width: 982px;
+    margin: 0 auto;
+}
+
+#profile-section div.section {
+    float: left;
+    padding: 20px;
+    background-color: #f0f3f7;
+
+}
+
+#profile-section div.section:first-child {
+    display: flex;
+    text-align: center;
+    width: 300px;
+    height: 700px;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2px;
+}
+
+#profile-section div.section:first-child p {
+    text-align: center;
+    border-bottom: 1px solid #0aab8e;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin: 0px auto;
+}
+
+#name {
+    border-top: 1px solid #0aab8e !important;
+    margin-top: 20px !important;
+}
+
+#profile-section div.section:last-child {
+    display: flex;
+    text-align: center;
+    width: 600px;
+    height: 700px;
+    align-items: center;
+    justify-content: center;
+}
+
+
+#profilePic {
+    display: block;
+    width: 200px;
+    height: 200px;
+    margin: 60px auto 0 auto;
+}
+
+#profilePic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    padding: 7px;
+}
+
+#editBtn {
+    display: block;
+    width: max-content;
+    padding: 4px 4px 2px 4px;
+    border: 1px solid #0aab8e;
+    border-radius: 5px;
+    margin: 20px auto;
+
+}
+
+#editBtn img {
+    width: 15px;
+    height: 15px;
+}
+
+#profile-section div.section:last-child h3 {
+    display: block;
+    width: max-content;
+    margin: 20px auto 10px auto;
+    color: #0aab8e;
+}
+
+#profile-section div.section:last-child input,
+#profile-section div.section:last-child textarea {
+    display: block;
+    margin: 20px auto;
+    padding: 20px;
+    width: 400px;
+}
+
+#profile-section div.section:last-child textarea {
+    max-width: 400px;
+    max-height: 70px;
+}
+
+#msg {
+    text-align: center;
+}
+
+.g {
+    color: #0aab8e;
+}
+
+.gb {
+    border: 2px solid #0aab8e;
+}
+
+.r {
+    color: red;
+}
+
+.rb {
+    border: 2px solid red;
+}
+
+#profile {
+    border: 2px solid #0aab8e !important;
+}
+
+#profile-section input[type="file"] {
+    display: block !important;
+    width: 175.7px !important;
+    margin: 20px auto !important;
+}
+
+
+/*---------------------------------------------registration--------------------------------------*/
+
+#reg,
+#log {
+    border: 0;
+    margin: 60px auto;
+}
+
+#reg h1,
+#log h1 {
+    display: block;
+    width: max-content;
+    color: #0aab8e;
+    padding: 10px;
+    margin: 10px auto 40px auto;
+}
+
+#reg input,
+#reg select,
+#log input {
+    display: block;
+    background-color: white;
+    width: 600px;
+    padding: 15px;
+    border: 1px solid #0aab8e;
+    border-radius: 5px;
+    margin: 7px auto;
+}
+
+#reg select {
+    width: 630px;
+}
+
+
+#registration,
+#login, #about {
+    border: 2px solid #0aab8e !important;
+}
+
+#nameformmsg,
+#emailformmsg,
+#passformmsg,
+#submitformmsg {
+    display: none;
+    width: 600px;
+    margin: 0 auto;
+    font-size: 12px;
+}
+
+
+#remember {
+    display: block;
+    width: 600px;
+    margin: 0 auto
+}
+
+#remember>input,
+#remember label {
+    display: inline-block !important;
+    width: max-content;
+}
