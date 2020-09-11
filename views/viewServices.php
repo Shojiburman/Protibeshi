@@ -1,25 +1,38 @@
 <?php
 	session_start();
     include '../php/session.php';
+    require_once('../db/db.php');
 
 	if(isset($_GET["uid"])){
 		$id = $_GET["uid"];
-	}
-	require_once('../db/db.php');
-	$conn = dbConnection();
-	if(!$conn){
-		echo "DB connection error";
-	}
-	$sql = "SELECT s.name AS sname, c.name AS cname, us.name AS uname, u.details, u.price, u.us_id, us.u_id  from services s, us_services u, users us, catagory c where s.s_id = u.s_id AND us.u_id = u.u_id AND s.c_id = c.c_id AND u.us_id = '$id'";
-	if (($result = $conn->query($sql)) !== FALSE){
-		$data = array();
-        while($row = $result->fetch_assoc()){
-			$name = $row['uname'];
-			$sname = $row['sname'];
-			$price = $row['price'];
-			$details = $row['details'];
-			$catagory = $row['cname'];
-			$u_id = $row['u_id'];
+		$conn = dbConnection();
+		if(!$conn){
+			echo "DB connection error";
+		}
+		$sql = "SELECT u.s_id, s.name, u.price, u.details, c.name AS cname, u.u_id
+				FROM services s
+				INNER JOIN us_services u
+				ON s.s_id = u.s_id
+				INNER JOIN catagory c
+				ON s.c_id = c.c_id
+				AND u.us_id = '$id';";
+
+		if (($result = $conn->query($sql)) !== FALSE){
+	        while($row = $result->fetch_assoc()){
+				$name = $row['u_id'];
+				$sname = $row['name'];
+				$price = $row['price'];
+				$details = $row['details'];
+				$catagory = $row['cname'];
+				$u_id = $row['u_id'];
+			}
+		}
+
+		$sql = "SELECT name from users WHERE u_id = '$u_id'";
+		if (($result = $conn->query($sql)) !== FALSE){
+	        while($row = $result->fetch_assoc()){
+				$name = $row['name'];
+			}
 		}
 	}
 ?>
@@ -35,13 +48,13 @@
 <body>
 	<?php
         if(isset($_SESSION['id']) || isset($_COOKIE['remember'])){
-            if($c_type == '0'){
+            if($_SESSION['uType'] == '0'){
                 include '../views/sellerNav.html';
-            } else if($c_type == '1'){
+            } else if($_SESSION['uType'] == '1'){
                 include '../views/buyerNav.html';
-            } else if($c_type == '2'){
+            } else if($_SESSION['uType'] == '2'){
                 include '../views/dealerNav.html';
-            } else if($c_type == '3'){
+            } else if($_SESSION['uType'] == '3'){
                 include '../views/adminNav.html';
             }
             
@@ -49,13 +62,83 @@
             include '../views/nav.html';
         }
     ?>
-	<div id="view-profile">
+	<div id="view-service">
 		<h1><?php echo $sname ?></h1>
-		<p class="sub-title"><?php echo $name ?></p>
-		<p class="sub-title"><?php echo $catagory ?></p>
-		<p class="sub-title">৳<?php echo $price ?></p>
-		<p class="clearfix"></p>
+		<div>
+			<p class="sub-title"><?php echo $name ?></p>
+			<p class="sub-title"><?php echo $catagory ?></p>
+			<p class="sub-title">৳<?php echo $price ?></p>
+		</div>
 		<p><?php echo $details ?></p>
 	</div>
+
+	<button class="btn" onclick="seeMore()">see more</button>
+
+	<div id="see-more"></div>
+
+
+	<script type="text/javascript">
+		function seeMore(){
+            var el = document.querySelectorAll('#see-more div');
+            el.forEach(function (value, index) {
+                value.remove();
+            });
+            document.querySelector('.btn').classList.add('de-active');
+            var type = document.querySelector('#view-service .sub-title:nth-child(2)').innerHTML.trim();
+            console.log(type);
+            if(type != ''){
+                var xhttp = new XMLHttpRequest();
+                xhttp.open('POST', '../services/seeMoreServices.php', true);
+                xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                xhttp.send('type='+type);
+                xhttp.onreadystatechange = function (){
+                    if(this.readyState == 4 && this.status == 200){
+                        var res = this.responseText;
+                        console.log(res);
+                        if(res != '' && res != "not found" && res != "not ok"){
+                            //document.getElementById("see-more").classList.add('active');
+                            var results = JSON.parse(res);
+                            console.log(results);
+                            if (results.length) {
+                                results.forEach(function (value, index) {
+                                    var div = document.createElement('div');
+                                    div.setAttribute("class", "see-more-service");
+                                    var innerDiv = document.createElement('div');
+                                    div.appendChild(innerDiv);
+                                    for (const [k, v] of Object.entries(value)) {
+                                        if(k != 'u_id'){
+                                        	if(k == 'sname'){
+                                        		var h1 = document.createElement('h1');
+	                                            var txt = document.createTextNode(v);
+	                                            h1.appendChild(txt);
+	                                            div.insertBefore(h1, innerDiv);
+                                        	} else if(k == 'details'){
+                                        		var p = document.createElement('p');
+	                                            var txt = document.createTextNode(v);
+	                                            p.appendChild(txt);
+	                                            div.appendChild(p);
+                                        	} else if((k == 'name') || (k == 'catagory') || (k == 'price')){
+	                                            var p = document.createElement('p');
+	                                            p.setAttribute("class", "sub-title");
+	                                            var txt = document.createTextNode(v);
+	                                            p.appendChild(txt);
+	                                            innerDiv.appendChild(p);
+                                        	}
+                                        }
+                                    }
+                                    div.setAttribute("data-id", value.u_id);
+                                    document.querySelector('#see-more').appendChild(div);
+                                });
+                            }
+                        }
+                        else {
+                            console.log(res);
+                        }
+                    }   
+                }
+            }
+        }
+    </script>
+    <script type="text/javascript" src="../js/script.js"></script>
 </body>
 </html>

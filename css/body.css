@@ -42,19 +42,21 @@ a {
   background-color: white!important; 
 }
 
-.clearfix {
-  clear: both;
+.de-active {
+  display: none;
 }
 
 .sub-title{
+  flex-wrap: wrap;
   float: left;
   font-size: 10px;
+  width: max-content;
   color: grey;
   margin-right: 10px;
   margin-bottom: 20px;
 }
 
-#view-profile{
+#view-service {
   display: block;
   width: 1200px;
   padding: 20px;
@@ -62,11 +64,80 @@ a {
   box-shadow: -1px 2px 20px 0px #bfbebe;
 }
 
-#view-profile h1{
+#view-service div {
+  display: flex;
+  width: max-content;
+}
+
+#view-service h1{
   color: #0aab8e;
   text-align: left;
   line-height: 20px;
   height: 20px;
   margin: 10px 0;
+}
+
+#see-more div.see-more-service {
+  display: block;
+  width: 1200px;
+  padding: 20px;
+  margin: 20px auto;
+  box-shadow: -1px 2px 20px 0px #bfbebe;
+}
+
+#see-more div.see-more-service div {
+  display: flex;
+  width: max-content;
+}
+
+#see-more div.see-more-service h1{
+  color: #0aab8e;
+  text-align: left;
+  line-height: 20px;
+  height: 20px;
+  margin: 10px 0;
+}
+
+#content {
+  margin: 0 auto;
+}
+
+#content tr td {
+  background-color: #eaeaea;
+}
+
+.work {
+  width: 340px;
+  height: 600px;
+  margin-right: 5px;
+}
+
+.work ul {
+    list-style: none;
+    padding-left: 0;
+}
+.work ul li {
+  display: block;
+  width: 70%;
+  padding: 10px;
+  margin: 0px auto;
+}
+.work ul li a {
+    display: block;
+    text-align: center;
+}
+
+.work ul li a {
+  text-decoration: none; 
+  color: #0aab8e; 
+  padding: 10px 30px; 
+  border: 1.5px solid #0aab8e; 
+  border-radius: 5px; 
+  background-color: white;
+}
+
+.work ul li a:hover {
+  color: white; 
+  background-color: #0aab8e;
 }
 

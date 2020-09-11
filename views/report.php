@@ -39,13 +39,13 @@
 <body>
     <?php
         if(isset($_SESSION['id']) || isset($_COOKIE['remember'])){
-            if($c_type == '0'){
+            if($_SESSION['uType'] == '0'){
                 include '../views/sellerNav.html';
-            } else if($c_type == '1'){
+            } else if($_SESSION['uType'] == '1'){
                 include '../views/buyerNav.html';
-            } else if($c_type == '2'){
+            } else if($_SESSION['uType'] == '2'){
                 include '../views/dealerNav.html';
-            } else if($c_type == '3'){
+            } else if($_SESSION['uType'] == '3'){
                 include '../views/adminNav.html';
             }
             
