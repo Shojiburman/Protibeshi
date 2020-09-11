@@ -8,6 +8,7 @@
 	$name = $_POST['name'];
 	$email = $_POST['email'];
 	$pass = $_POST['pass'];
+    $uType = $_POST['uType'];
 
     if (isset($_POST['name'])) {
         $name = strtolower(trim($_POST['name']));
@@ -41,7 +42,16 @@
         }
     } else {
         $passErr = 'Password is required';
-    } 
+    }
+
+    if (isset($_POST['uType'])) {
+        $uType = $_POST['uType'];
+        if ($uType == '') {
+            $uTypeErr = 'User type can not be empty';
+        }
+    } else {
+        $uTypeErr = 'User Type is required';
+    }
 
     if (isset($_POST['email'])) {
         $email = trim($_POST['email']);
@@ -96,12 +106,20 @@
         }
     }
 
-    if (isset($nameErr) || isset($emailErr) || isset($passErr)) {
+    if (isset($nameErr) || isset($emailErr) || isset($passErr) || isset($uTypeErr)) {
     	echo "not ok";
     } else {
-
-    	if(($name != '') && ($email != '') && ($pass != '')){
-			$sql = "INSERT INTO users (name, email, pass) VALUES ('". $name ."', '". $email ."', '". $pass ."');";
+        if($uType == 'Seller'){
+            $uType = '0';
+        } else if($uType == 'Buyer'){
+            $uType = '1';
+        } else if($uType == 'Dealer'){
+            $uType = '2';
+        } else {
+            $uType = '';
+        }
+    	if(($name != '') && ($email != '') && ($pass != '') && ($uType != '')){
+			$sql = "INSERT INTO users (name, email, pass, admin) VALUES ('". $name ."', '". $email ."', '". $pass ."', '". $uType ."');";
 			if ($conn->query($sql) === TRUE) {
 				echo "insert";
 			} else {

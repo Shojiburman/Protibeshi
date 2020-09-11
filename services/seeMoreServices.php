@@ -5,6 +5,7 @@
 		echo "DB connection error";
 	}
 	$type = $_POST['type'];
+	$existService = $_POST['existService'];
 
 	$sql = "SELECT u.s_id, s.name, u.price, u.details, c.name AS cname, u.u_id
 			FROM services s
@@ -12,7 +13,8 @@
 			ON s.s_id = u.s_id
 			INNER JOIN catagory c
 			ON s.c_id = c.c_id
-			AND c.name = '$type';";
+			AND c.name = '$type'
+			AND u.us_id <> '$existService';";
 	if($type != ''){
 		
 		if (($result = $conn->query($sql)) !== FALSE){

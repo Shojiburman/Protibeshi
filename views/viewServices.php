@@ -62,7 +62,7 @@
             include '../views/nav.html';
         }
     ?>
-	<div id="view-service">
+	<div id="view-service" data-id='<?php echo $id?>'>
 		<h1><?php echo $sname ?></h1>
 		<div>
 			<p class="sub-title"><?php echo $name ?></p>
@@ -85,12 +85,13 @@
             });
             document.querySelector('.btn').classList.add('de-active');
             var type = document.querySelector('#view-service .sub-title:nth-child(2)').innerHTML.trim();
+            var existService = document.querySelector('#view-service').getAttribute('data-id');
             console.log(type);
             if(type != ''){
                 var xhttp = new XMLHttpRequest();
                 xhttp.open('POST', '../services/seeMoreServices.php', true);
                 xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                xhttp.send('type='+type);
+                xhttp.send('type='+type+'&existService='+existService);
                 xhttp.onreadystatechange = function (){
                     if(this.readyState == 4 && this.status == 200){
                         var res = this.responseText;

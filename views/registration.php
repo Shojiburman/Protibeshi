@@ -26,6 +26,12 @@
             <p id="emailformmsg"></p>
             <input name="pass" type="password" placeholder="Password" oninput="Password()">
             <p id="passformmsg"></p>
+            <select name="uType" oninput="userType()">
+                    <option value="0">Are you</option>
+                    <option value="Seller">Seller</option>
+                    <option value="Buyer">Buyer</option>
+                    <option value="Dealer">Dealer</option>
+            </select>
             <input class="btn" name="submit" type="button" value="SIGN UP" onclick="Submit()">
             <p id="submitformmsg"></p>
         </form>
@@ -157,18 +163,29 @@
             }
         }
 
+        function userType(){
+            if(document.querySelector('[name="uType"]').value.trim() == '0'){
+                document.querySelector('[name="uType"]').style.cssText = "border: 1px solid red;";
+            } else {
+                document.querySelector('[name="uType"]').style.cssText = "border: 1px solid #0aab8e;";
+            }
+        }
+
         function Submit(){
             var name = document.querySelector('[name="name"]').value.trim();
             var email = document.querySelector('[name="email"]').value.trim();
             var pass = document.querySelector('[name="pass"]').value.trim();
-            if((name != '') && (email != '') && (pass != '') && (msg == 'Success!')){
+            var uType = document.querySelector('[name="uType"]').value.trim();
+            console.log(uType);
+            if((name != '') && (email != '') && (pass != '') && (uType != '') && (msg == 'Success!')){
                 var xhttp = new XMLHttpRequest();
                 xhttp.open('POST', '../services/registration.php', true);
                 xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                xhttp.send('name='+name+'&email='+email+'&pass='+pass);
+                xhttp.send('name='+name+'&email='+email+'&pass='+pass+'&uType='+uType);
                 xhttp.onreadystatechange = function (){
                     if(this.readyState == 4 && this.status == 200){
                         var res = this.responseText;
+                        console.log(res);
                         if(res == 'insert'){
                             document.querySelector('#reg form').reset();
                             location.assign('login.php');
