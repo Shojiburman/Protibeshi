@@ -62,7 +62,6 @@
                 <h1 class="title">Service list</h1>
                 <table >
                     <tr>
-                        <td>ID</td>
                         <td>Name</td>
                         <td>Details</td>
                         <td>Price</td>
@@ -84,7 +83,6 @@
                                 $price = $row['price'];
                                 $c_id = $row['catagory'];
                                 echo "<tr>
-                                        <td>{$id}</td>
                                         <td>{$name}</td>
                                         <td>{$details}</td>
                                         <td>{$price}</td>
@@ -101,15 +99,8 @@
             <td id="edit">
                 <h1 class="title">Edit Sevice</h1>
                 <form onsubmit="return validateMyForm()">
-                    <input type="text" name="name" placeholder="Service Name">
                     <textarea type="text" name="details" value="" placeholder="Details"></textarea>
                     <input type="text" name="price" placeholder="Price">
-                    <select name="catagory">
-                        <option value="0">Select</option>
-                        <option value="1">Home</option>
-                        <option value="2">Hotel</option>
-                        <option value="3">Office</option>
-                    </select>
                     <input class="Submit" type="button" name="submit" value="Confirm" onclick="update()">
                 </form>
                 <?php include 'sellerManage.html' ?>
@@ -138,19 +129,17 @@
             }
             if(checkedValue != null){
                 var xhttp = new XMLHttpRequest();
-                xhttp.open('POST', '../services/getEditService.php', true);
+                xhttp.open('POST', '../services/getEditUserService.php', true);
                 xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                xhttp.send('s_id='+checkedValue);
+                xhttp.send('us_id='+checkedValue);
 
                 xhttp.onreadystatechange = function (){
                     if(this.readyState == 4 && this.status == 200){
                         if(this.responseText != ""){
                             var val = this.responseText.split("|");
                             serviceId = val[0];
-                            document.querySelector('#edit>form [name="name"]').value = val[1];
-                            document.querySelector('#edit>form [name="details"]').value = val[2];
-                            document.querySelector('#edit>form [name="price"]').value = val[3];
-                            document.querySelector('#edit>form [name="catagory"]').selectedIndex = val[4]+1;
+                            document.querySelector('#edit>form [name="details"]').value = val[1];
+                            document.querySelector('#edit>form [name="price"]').value = val[2];
                             document.querySelector('table[changeValue]').setAttribute("changeValue", "2");
                         } else {
                             location.reload();
@@ -208,38 +197,38 @@
             if(flagCheckedValue != null){
                 for(var i = 0; i < flagCheckedValue.length; i++){
                     var xhttp = new XMLHttpRequest();
-                    xhttp.open('POST', '../services/deleteService.php', true);
+                    xhttp.open('POST', '../services/deleteUserService.php', true);
                     xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                    xhttp.send('s_id='+flagCheckedValue[i]);
+                    xhttp.send('us_id='+flagCheckedValue[i]);
 
                     xhttp.onreadystatechange = function (){
                         if(this.readyState == 4 && this.status == 200){
-
-                            if(this.responseText == "delete"){
+                            var res = this.responseText;
+                            if(res == "delete"){
+                                location.reload();
                             }
                         }   
                     }
-                } location.reload();
+                }
             } else {
                 location.reload();
             }
         }
 
         function update(){
-            var s_id = serviceId;
-            var name = document.querySelector('#edit>form [name="name"]').value;
+            var us_id = serviceId;
             var details = document.querySelector('#edit>form [name="details"]').value;
             var price = document.querySelector('#edit>form [name="price"]').value;
-            var c_id = document.querySelector('#edit>form [name="catagory"]').value;
 
-            if((name != '') && (details != '') && (price != '') && (c_id != '') && (c_id != '')){
+            if((details != '') && (price != '') && (us_id != '')){
                 var xhttp = new XMLHttpRequest();
-                xhttp.open('POST', '../services/updateService.php', true);
+                xhttp.open('POST', '../services/updateUserService.php', true);
                 xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                xhttp.send('s_id='+s_id+'&name='+name+'&details='+details+'&price='+price+'&catagory='+c_id);
+                xhttp.send('us_id='+us_id+'&details='+details+'&price='+price);
                 xhttp.onreadystatechange = function (){
                     if(this.readyState == 4 && this.status == 200){
                         var res = this.responseText;
+                        console.log(res);
                         if(res == 'update'){
                             document.querySelector('#edit>form').reset();
                             location.reload();
