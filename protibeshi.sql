@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 11, 2020 at 05:11 PM
+-- Generation Time: Sep 12, 2020 at 12:12 AM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.2.28
 
@@ -83,17 +83,19 @@ INSERT INTO `cart` (`cart_id`, `u_id`, `us_id`, `bill`) VALUES
 CREATE TABLE `catagory` (
   `c_id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `details` varchar(400) NOT NULL
+  `details` varchar(400) NOT NULL,
+  `flag` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `catagory`
 --
 
-INSERT INTO `catagory` (`c_id`, `name`, `details`) VALUES
-(1, 'Home', 'gffgh'),
-(2, 'Hotel', 'gffgh'),
-(3, 'Office', 'gffgh');
+INSERT INTO `catagory` (`c_id`, `name`, `details`, `flag`) VALUES
+(1, 'Home', 'gffgh', 0),
+(2, 'Hotel', 'gffgh', 0),
+(3, 'Office', 'gffgh', 0),
+(4, 'Tv mounting', 'LED TV 55\"', 0);
 
 -- --------------------------------------------------------
 
@@ -113,9 +115,8 @@ CREATE TABLE `coupon` (
 --
 
 INSERT INTO `coupon` (`coupon_id`, `name`, `percentage`, `expiredate`) VALUES
-(2, 'pagol', 0.5, '2021-06-16'),
-(9, 'Anis ', 0.1, '2020-09-16'),
-(10, 'athh', 0.15, '2021-07-01');
+(2, 'fhyjh', 0.5, '2021-06-16'),
+(9, 'Anis jh', 0.1, '2020-09-16');
 
 -- --------------------------------------------------------
 
@@ -136,9 +137,9 @@ CREATE TABLE `faq` (
 --
 
 INSERT INTO `faq` (`f_id`, `name`, `ans`, `date`, `flag`) VALUES
-(1, 'why', 'thats why', '0000-00-00', 1),
-(8, 'how about', 'here is', '2020-09-02', 1),
-(9, 'ygt', 'gdfg xhbfdhefbdef sdjibhfdgdgb uibhdugdbgng bgduggndngd dghdggdnfgn ognrfhfngnfbgn ognfngfngfng dfgnfngfnfbh dfgnfnbgnfb dfgndfnhfnh ofkgnffnfnbnfbn fkbnfbnnfbnfb dfkbnfnbfnnf fknbhfnfnbgng fonbfnbfnbfn', '2020-10-09', 0);
+(1, 'why', 'thats why', '0000-00-00', 0),
+(8, 'how about', 'here is', '2020-09-02', 0),
+(9, 'g', 'jgfjjgh', '2020-10-09', 0);
 
 -- --------------------------------------------------------
 
@@ -231,13 +232,14 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`u_id`, `name`, `pass`, `email`, `admin`, `work`, `pnumber`, `address`, `dob`, `bio`, `picture`, `flag`) VALUES
 (4, 'nahid ahmed', '12345678', 'nahid@gmail.com', 0, '', '', '', '0000-00-00', '', '', 0),
 (5, 'shojibur rahman', '123456789', 'shojib@gmail.com', 1, 'student', '1827058898', 'uttara', '1998-06-30', 'lorem ipsum', 'microsoft.png', 0),
-(6, 'shajid', '12345678', 'shajid@gmail.com', 3, '', '1827', 'dhaka', '0000-00-00', 'child', 'cartton-shojib3.png', 0),
+(6, 'shajid', '123456789', 'shajid@gmail.com', 3, 'home', '1827056645', 'dhaka', '0000-00-00', 'child', 'cartton-shojib3.png', 0),
 (8, 'pabel', '123456789', 'pabel@gmail.com', 2, 'student', '0125228', 'uttara', '0000-00-00', '', 'pabel.jpg', 0),
 (70, 'rahman', '1234567', 'rahman@gmail.com', 0, 'student', '', '', '2020-09-16', '', '', 0),
 (78, 'ghghg ghghgh', '12345678', 'nur@gmail.com', 0, '', '', '', '0000-00-00', '', '', 0),
 (79, 'juhan nur', '123456789', 'juhan@gmail.com', 1, '', '', '', '0000-00-00', '', '', 0),
 (80, 'rfh thth', '12345678', 'tuhin@gmail.com', 2, '', '', '', '0000-00-00', '', '', 0),
-(81, 'amena rimi', '12345678', 'amena@gmail.com', 0, '', '', '', '0000-00-00', '', '', 0);
+(81, 'amena rimi', '1234567812', 'amena@gmail.com', 0, '', '', '', '0000-00-00', '', '', 0),
+(83, 'gfhjg dgfh', '689 5668gju', 'gh@gmail.coi', 0, '', '', '', '0000-00-00', '', '', 0);
 
 -- --------------------------------------------------------
 
@@ -354,19 +356,19 @@ ALTER TABLE `cart`
 -- AUTO_INCREMENT for table `catagory`
 --
 ALTER TABLE `catagory`
-  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `c_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `coupon`
 --
 ALTER TABLE `coupon`
-  MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `coupon_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `faq`
 --
 ALTER TABLE `faq`
-  MODIFY `f_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `f_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `leaderboard`
@@ -390,7 +392,7 @@ ALTER TABLE `transaction`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
+  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=84;
 
 --
 -- AUTO_INCREMENT for table `us_services`
