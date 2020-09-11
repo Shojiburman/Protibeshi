@@ -38,7 +38,7 @@
         }
     ?>
 
-    <div id="hero_section">
+    <div id="profile-section">
         <div class="section">
             <div>
                 <div id="profilePic">

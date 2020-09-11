@@ -5,7 +5,6 @@
     <link rel="stylesheet" type="text/css" href="../css/protibeshi.css">
     <link rel="stylesheet" type="text/css" href="../css/body.css">
     <link rel="stylesheet" type="text/css" href="../css/nav.css">
-    <script type="text/javascript" src="../js/script.js"></script>
 </head>
 <body>
 	<?php
@@ -13,17 +12,29 @@
     ?>
     <div id="hero_section">
         <h1>Most Powerful Directory<span></span>Available for Service Providers</h1>
-        <form action="" method="" class="item">
+        <form onsubmit="return validateMyForm()">
             <input type="text" name="search" value="" placeholder="I'm looking for">
-            <select name="catagory">
-                    <option value="0">Job</option>
-                    <option value="1">Dealer</option>
-                    <option value="2">Seller</option>
+            <select name="type">
+                    <option value="Job">Job</option>
+                    <option value="Dealer">Dealer</option>
+                    <option value="Seller">Seller</option>
+                    <option value="Services">Services</option>
                 </select>
-            <button>
-                <a href="#">search</a>
-            </button>
+            <button onclick="Search()">search</button>
         </form>
     </div>
+    <table id='searchResult'>
+        <thead>
+            <tr>
+                <th>Service Provider</th>
+                <th>Service Name</th>
+                <th>Price</th>
+                <th>Catagory</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <script type="text/javascript" src="../js/script.js"></script>
 </body>
 </html>

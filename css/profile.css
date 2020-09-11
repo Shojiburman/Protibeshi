@@ -3,19 +3,19 @@ input, textarea {
 	border-radius: 4px;
 }
 
-#hero_section {
+#profile-section {
 	width: 982px;
 	margin: 0 auto;
 }
 
-#hero_section div.section {
+#profile-section div.section {
 	float: left;
 	padding: 20px;
 	background-color: #f0f3f7;
 	
 }
 
-#hero_section div.section:first-child {
+#profile-section div.section:first-child {
 	display: flex;
     text-align: center;
     width: 300px;
@@ -25,7 +25,7 @@ input, textarea {
     margin-right: 2px;
 }
 
-#hero_section div.section:first-child p {
+#profile-section div.section:first-child p {
 	text-align: center;
 	border-bottom: 1px solid #0aab8e; 
 	padding-bottom: 10px; 
@@ -38,7 +38,7 @@ input, textarea {
 	margin-top: 20px !important;
 }
 
-#hero_section div.section:last-child {
+#profile-section div.section:last-child {
 	display: flex;
     text-align: center;
     width: 600px;
@@ -78,21 +78,21 @@ input, textarea {
 	height: 15px;
 }
 
-#hero_section div.section:last-child h3 {
+#profile-section div.section:last-child h3 {
 	display: block;
 	width: max-content;
 	margin: 20px auto 10px auto; 
 	color: #0aab8e;
 }
 
-#hero_section div.section:last-child input, #hero_section div.section:last-child textarea {
+#profile-section div.section:last-child input, #profile-section div.section:last-child textarea {
 	display: block;
 	margin: 20px auto;
 	padding: 20px; 
 	width: 400px;
 }
 
-#hero_section div.section:last-child textarea {
+#profile-section div.section:last-child textarea {
 	max-width: 400px;
 	max-height: 70px;
 }
