@@ -11,7 +11,6 @@
     <link rel="stylesheet" type="text/css" href="../css/body.css">
     <link rel="stylesheet" type="text/css" href="../css/dashboard.css">
     <link rel="stylesheet" type="text/css" href="../css/adminNav.css">
-    <script type="text/javascript" src="../js/script.js"></script>
 </head>
 
 <body>
@@ -177,12 +176,8 @@
                 });
             }
         }
-
-        function view(clicked){
-            var id = clicked.getAttribute('data-id');
-            location.assign('viewServices.php?uid=' + encodeURIComponent(id));
-        }
     </script>
+    <script type="text/javascript" src="../js/script.js"></script>
 </body>
 
 </html>

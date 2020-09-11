@@ -36,12 +36,12 @@
     <table id="content" changeValue="5">
         <tr>
             <?php
-                include 'work.html';
+                include 'sellerWork.html';
             ?>
             <td id="add">
                 <h1 class="title">Add Service</h1>
                 <form onsubmit="return validateMyForm()">
-                <select name="catagory">
+                <select name="catagory" onclick="change()">
                     <option value="0">Select</option>
                     <option value="Home">Home</option>
                     <option value="Hotel">Hotel</option>
@@ -244,13 +244,14 @@
             el.forEach(function (value, index) {
                 value.remove();
             });
+            var type = document.querySelector('[name="catagory"]').value.trim();
             var search = document.querySelector('[name="service"]').value.trim();
 
-            if(search != ''){
+            if(search != '' && type != ''){
                 var xhttp = new XMLHttpRequest();
                 xhttp.open('POST', '../services/searchService.php', true);
                 xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                xhttp.send('search='+search);
+                xhttp.send('search='+search+'&type='+type);
                 xhttp.onreadystatechange = function (){
                     if(this.readyState == 4 && this.status == 200){
                         var res = this.responseText;
@@ -292,6 +293,10 @@
             el.forEach(function (value, index) {
                 value.remove();
             });
+        }
+
+        function change(){
+            document.querySelector('[name="service"]').value = '';
         }
 
     </script>
