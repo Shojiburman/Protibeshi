@@ -163,3 +163,166 @@ a {
     background-color: #0aab8e;
 }
 
+
+
+.active {
+  display: block !important;
+}
+
+
+#dashboard {
+  border: 2px solid #0aab8e !important;
+}
+
+#hero_section {
+  display: block;
+  width: 1000px;
+  
+  margin: 50px auto;
+}
+
+#hero_section h1 {
+  text-align: center;
+  font-size: 36px;
+  padding: 50px;
+  line-height: 70px;
+}
+
+#hero_section h1 span {
+  display: block;
+}
+
+#hero_section form {
+  background-color: #0aab8e;;
+  display: flex;
+  flex-wrap: wrap;
+  width: max-content;
+  padding: 10px;
+  border-radius: 7px;
+  margin: 0 auto;
+  box-shadow: 4px 4px 7px 1px #bfbebe;
+}
+
+#hero_section form input {
+  width: 330px;
+  padding: 20px;
+  margin-right: 2px;
+  border-radius: 7px 0 0 7px;
+}
+
+#hero_section form select {
+  background-color: #fff;
+  width: 330px;
+  padding: 20px;
+  margin-right: 2px;
+  border-radius: 0 7px 7px 0;
+}
+
+#hero_section form button {
+  cursor: pointer;
+  color: #fff;
+  background-color: #d01f1f00;
+  width: 140px;
+  height: 60px;
+  font-size: 18px;
+  text-align: center center;
+  margin: auto 0;
+  padding: 20px;
+  transition: .5s;
+}
+
+#hero_section form button:hover {
+  color: #222;
+}
+
+
+/*--------------------------------nav-------------------------------*/
+
+#adminNav, #buyerWork, #dealerNav, #sellerNav {
+  margin: 30px auto;
+}
+
+#adminNav tr, #buyerWork tr, #dealerNav tr, #sellerNav tr{
+  height: 50px;
+}
+
+#adminNav tr td a, #buyerWork tr td a,#dealerNav tr td a, #sellerNav tr td a {
+  border: 2px solid black;
+  border-radius: 7%;
+  padding: 10px 15px;
+  margin-right: 20px;
+  text-decoration: none;
+  color: black;
+}
+
+#adminNav tr td a:hover, #buyerWork tr td a:hover, #dealerNav tr td a:hover, #sellerNav tr td a:hover {
+  transition: .3s;
+  border: 2px solid #0aab8e;
+  background-color: #0aab8e;
+  color: white;
+}
+
+#adminNav tr td a:last-child:hover, #buyerWork tr td a:last-child:hover, #dealerNav tr td a:last-child:hover, #sellerNav tr td a:last-child:hover {
+  border: 0;
+  background-color: white;
+  border-radius: 0;
+  padding: 10px 0px;
+  margin-right: 20px;
+  text-decoration: none;
+}
+
+#adminNav tr td a:last-child, #buyerWork tr td a:last-child, #dealerNav tr td a:last-child, #sellerNav tr td a:last-child {
+  border: 0;
+  border-radius: 0;
+  padding: 10px 0px;
+  margin-right: 20px;
+  text-decoration: none;
+}
+
+#adminNav tr td a img, #buyerWork tr td a img, #dealerNav tr td a img, #sellerNav tr td a img {
+  width: auto; 
+  height: 30px; 
+  vertical-align: middle; 
+  padding-bottom: 5px;
+}
+
+#nav {
+  margin: 30px auto;
+}
+
+#nav tr{
+  height: 50px;
+}
+
+#nav td a {
+  border: 2px solid #333; 
+  border-radius: 7%; 
+  padding: 10px 15px; 
+  margin-right: 20px; 
+  color: #333;
+}
+
+/*------------------------------------about-----------------------------------*/
+
+#about-text p {
+  font-size: 1.12rem;
+  text-align: center;
+  width: 900px;
+  margin: 100px auto;
+  padding-top: 10px;
+}
+
+#about-text p::after {
+  text-indent: -9999px;
+  content: 'hghh';
+  display: block;
+  width: 200px;
+  height: 0;
+  border-bottom: 2px solid #0aab8e;
+  padding-top: 20px;
+  margin: 0 auto;
+}
+
+
+
+

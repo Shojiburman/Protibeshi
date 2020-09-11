@@ -2,9 +2,8 @@
 <html>
 <head>
 	<title>Protibeshi</title>
-    <link rel="stylesheet" type="text/css" href="../css/protibeshi.css">
     <link rel="stylesheet" type="text/css" href="../css/body.css">
-    <link rel="stylesheet" type="text/css" href="../css/nav.css">
+    
 </head>
 <body>
 	<?php

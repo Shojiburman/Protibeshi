@@ -9,8 +9,7 @@
 <head>
     <title>Logged in Dashboard</title>
     <link rel="stylesheet" type="text/css" href="../css/body.css">
-    <link rel="stylesheet" type="text/css" href="../css/dashboard.css">
-    <link rel="stylesheet" type="text/css" href="../css/adminNav.css">
+    
 </head>
 
 <body>
