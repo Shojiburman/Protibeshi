@@ -728,3 +728,26 @@ textarea {
     display: inline-block !important;
     width: max-content;
 }
+
+/*-----------------------------------------seller work-----------------------------*/
+
+#seller-add-searched-service {
+    display: none;
+    width: 420px;
+    border-radius: 25px;
+    margin: 0px auto;
+}
+
+#seller-add-searched-service tbody tr {
+    padding: 10px;
+    cursor: pointer;
+    margin-bottom: 25px;
+}
+
+#seller-add-searched-service tbody tr td {
+    color: #333;
+    width: 420px;
+    padding: 10px;
+    background-color: white;
+    margin: 0px auto;
+}

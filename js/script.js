@@ -1016,3 +1016,190 @@ function flagedCatagory() {
     }
     location.reload();
 }
+
+
+function sellerManagefun1() {
+    document.querySelector('table[changeValue]').setAttribute("changeValue", "1");
+}
+
+function sellerManagefun2() {
+    var inputElements = document.querySelectorAll('[name="selector"]');
+    for (var i = 0; inputElements[i]; ++i) {
+        if (inputElements[i].checked) {
+            checkedValue = inputElements[i].value;
+            break;
+        }
+    }
+    if (checkedValue != null) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/getEditUserService.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('us_id=' + checkedValue);
+
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.responseText != "") {
+                    var val = this.responseText.split("|");
+                    serviceId = val[0];
+                    document.querySelector('#edit>form [name="details"]').value = val[1];
+                    document.querySelector('#edit>form [name="price"]').value = val[2];
+                    document.querySelector('table[changeValue]').setAttribute("changeValue", "2");
+                } else {
+                    location.reload();
+                }
+            }
+        }
+    } else {
+        document.querySelector('table[changeValue]').setAttribute("changeValue", "5");
+    }
+}
+
+function sellerManagefun4() {
+    var inputElements = document.querySelectorAll('[name="selector"]');
+    for (var i = 0; inputElements[i]; ++i) {
+        if (inputElements[i].checked) {
+            var valu = inputElements[i].value;
+            flagCheckedValue.push(valu);
+        }
+    }
+    if (flagCheckedValue != "") {
+        document.querySelector('table[changeValue]').setAttribute("changeValue", "4");
+    } else {
+        location.reload();
+    }
+}
+
+function sellerManagefun5() {
+    location.reload();
+    document.querySelector('table[changeValue]').setAttribute("changeValue", "5");
+}
+
+function sellerManagecreate() {
+    var s_id = document.querySelector('#add [name="service"]').getAttribute("val");
+    var details = document.querySelector('#add [name="details"]').value;
+    var price = document.querySelector('#add [name="price"]').value;
+    var c_id = document.querySelector('#add [name="catagory"]').value;
+    console.log(s_id);
+    if ((s_id != '') && (details != '') && (price != '') && (c_id != '')) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/insertUserService.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('s_id=' + s_id + '&details=' + details + '&price=' + price + '&catagory=' + c_id);
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var res = this.responseText;
+                if (res == 'insert') {
+                    console.log(res);
+                    document.querySelector('#add form').reset();
+                } else {}
+            }
+        }
+    }
+}
+
+function sellerManageDelete() {
+    if (flagCheckedValue != null) {
+        for (var i = 0; i < flagCheckedValue.length; i++) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open('POST', '../services/deleteUserService.php', true);
+            xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhttp.send('us_id=' + flagCheckedValue[i]);
+
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var res = this.responseText;
+                    if (res == "delete") {
+                        location.reload();
+                    }
+                }
+            }
+        }
+    } else {
+        location.reload();
+    }
+}
+
+function sellerManageupdate() {
+    var us_id = serviceId;
+    var details = document.querySelector('#edit>form [name="details"]').value;
+    var price = document.querySelector('#edit>form [name="price"]').value;
+
+    if ((details != '') && (price != '') && (us_id != '')) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/updateUserService.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('us_id=' + us_id + '&details=' + details + '&price=' + price);
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var res = this.responseText;
+                console.log(res);
+                if (res == 'update') {
+                    document.querySelector('#edit>form').reset();
+                    location.reload();
+                } else {}
+            }
+        }
+    }
+}
+
+function sellerAddSearchService() {
+    var el = document.querySelectorAll('#seller-add-searched-service tbody tr');
+    el.forEach(function(value, index) {
+        value.remove();
+    });
+    var type = document.querySelector('[name="catagory"]').value.trim();
+    var search = document.querySelector('[name="service"]').value.trim();
+
+
+    if (search != '' && type != '') {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/searchService.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('search=' + search + '&type=' + type);
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var res = this.responseText;
+                if (res != '' && res != "not found" && res != "not ok") {
+                    document.getElementById("seller-add-searched-service").classList.add('active');
+                    var results = JSON.parse(res);
+                    console.log(results);
+                    if (results.length) {
+                        results.forEach(function(value, index) {
+                            var tr = document.createElement('tr');
+                            tr.setAttribute("onclick", "sellerAddServiceView(this)");
+                            for (const [k, v] of Object.entries(value)) {
+                                if (k != 's_id') {
+                                    var td = document.createElement('td');
+                                    var txt = document.createTextNode(v);
+                                    td.appendChild(txt);
+                                    tr.appendChild(td);
+                                }
+                            }
+                            tr.setAttribute("data-id", value.s_id);
+                            document.querySelector('#seller-add-searched-service tbody').appendChild(tr);
+                        });
+                    }
+                } else {
+                    console.log(res);
+                }
+            }
+        }
+    } else {
+        document.getElementById("seller-add-searched-service").classList.remove('active');
+    }
+}
+
+function sellerAddServiceView(clicked) {
+    var id = clicked.getAttribute('data-id');
+    document.querySelector('[name="service"]').value = clicked.getElementsByTagName('td')[0].innerHTML;
+    document.querySelector('[name="service"]').setAttribute("val", id);
+    document.getElementById("seller-add-searched-service").classList.remove('active');
+    var el = document.querySelectorAll('#seller-add-searched-service tbody tr');
+    el.forEach(function(value, index) {
+        value.remove();
+    });
+}
+
+function sellerManagechange() {
+    document.querySelector('[name="service"]').value = '';
+}
