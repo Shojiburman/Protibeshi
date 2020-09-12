@@ -38,14 +38,14 @@
                 <h1 class="title">Add users</h1>
                 <form id="form" onsubmit="return validateMyForm()">
                 <input type="text" name="name" placeholder="User Name">
-                <input type="text" name="email" placeholder="User email">
+                <input type="text" name="email" placeholder="User email" oninput="Email()" onfocusout="validateEmail()">
                 <input type="password" name="password" placeholder="User password">
                 <select name="utype">
-                    <option value="0">Select</option>
-                    <option value="1">Seller</option>
-                    <option value="2">Buyer</option>
-                    <option value="3">Dealer</option>
-                    <option value="4">Admin</option>
+                    <option value="select">Select</option>
+                    <option value="0">Seller</option>
+                    <option value="1">Buyer</option>
+                    <option value="2">Dealer</option>
+                    <option value="3">Admin</option>
                 </select>
                 <input class="Submit" type="button" name="submit" value="Create" onclick="createUsers()">
                 </form>

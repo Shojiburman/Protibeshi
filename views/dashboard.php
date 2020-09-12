@@ -103,18 +103,7 @@
         </div>
     <?php }?>
 
-    <table id='searchResult'>
-        <thead>
-            <tr>
-                <th>Service Provider</th>
-                <th>Service Name</th>
-                <th>Price</th>
-                <th>Catagory</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+    <div id="see-more"></div>
     
     <script type="text/javascript" src="../js/script.js"></script>
 </body>

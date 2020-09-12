@@ -1,6 +1,21 @@
 var checkedValue = "";
 var flagCheckedValue = [];
 var serviceId = "";
+var msg = '';
+var profileEmail;
+
+(function() {
+    if(document.getElementById('profile-section')){
+        document.querySelector('#profile-section [name="email"]').addEventListener("keydown", function(event) {
+            event.preventDefault();
+        }, false);
+        profileEmail = document.querySelector('#profile-section [name="email"]').value.trim();
+    }
+})();
+
+function editEmailPrevent() {
+    document.querySelector('#profile-section [name="email"]').preventDefault();
+}
 
 function validateMyForm() {
     return false;
@@ -12,57 +27,79 @@ function view(clicked) {
 }
 
 function Search() {
-    var el = document.querySelectorAll('#searchResult tbody tr');
+    /*var el = document.querySelectorAll('#searchResult tbody tr');
     el.forEach(function(value, index) {
         value.remove();
-    });
+    });*/
+
+    document.getElementById("see-more").classList.remove('de-active');
+
     var search = document.querySelector('[name="search"]').value.trim();
     var type = document.querySelector('[name="type"]').value.trim();
 
-    if ((search != '') && (type != '')) {
+    if(type != ''){
         var xhttp = new XMLHttpRequest();
-        xhttp.open('POST', '../services/serach.php', true);
+        xhttp.open('POST', '../services/searchService.php', true);
         xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhttp.send('search=' + search + '&type=' + type);
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
+        xhttp.send('type='+type+'&search='+search);
+        xhttp.onreadystatechange = function (){
+            if(this.readyState == 4 && this.status == 200){
                 var res = this.responseText;
-                if (res != '' && res != "not found" && res != "not ok") {
-                    document.getElementById("searchResult").classList.add('active');
+                console.log(res);
+                if(res != '' && res != "not found" && res != "not ok"){
+                    //document.getElementById("see-more").classList.add('active');
                     var results = JSON.parse(res);
                     console.log(results);
                     if (results.length) {
-                        results.forEach(function(value, index) {
-                            var tr = document.createElement('tr');
-                            tr.setAttribute("onclick", "view(this)");
+                        results.forEach(function (value, index) {
+                            var div = document.createElement('div');
+                            div.setAttribute("class", "see-more-service");
+                            var innerDiv = document.createElement('div');
+                            div.appendChild(innerDiv);
                             for (const [k, v] of Object.entries(value)) {
-                                if (k != 'u_id') {
-                                    var td = document.createElement('td');
-                                    var txt = document.createTextNode(v);
-                                    td.appendChild(txt);
-                                    tr.appendChild(td);
+                                if(k != 'u_id'){
+                                    if(k == 'sname'){
+                                        var h1 = document.createElement('h1');
+                                        var txt = document.createTextNode(v);
+                                        h1.appendChild(txt);
+                                        div.insertBefore(h1, innerDiv);
+                                    } else if(k == 'details'){
+                                        var p = document.createElement('p');
+                                        var txt = document.createTextNode(v);
+                                        p.appendChild(txt);
+                                        div.appendChild(p);
+                                    } else if((k == 'name') || (k == 'catagory') || (k == 'price')){
+                                        var p = document.createElement('p');
+                                        p.setAttribute("class", "sub-title");
+                                        var txt = document.createTextNode(v);
+                                        p.appendChild(txt);
+                                        innerDiv.appendChild(p);
+                                    }
                                 }
                             }
-                            tr.setAttribute("data-id", value.u_id);
-                            document.querySelector('#searchResult tbody').appendChild(tr);
+                            div.setAttribute("data-id", value.u_id);
+                            document.querySelector('#see-more').appendChild(div);
                         });
                     }
-                } else {
+                }
+                else {
                     console.log(res);
                 }
-            }
+            }   
         }
     }
 }
 
 function checkSearch() {
-    var search = document.querySelector('[name="search"]').value.trim();
-    if (search == '') {
-        document.getElementById("searchResult").classList.remove('active');
-        var el = document.querySelectorAll('#searchResult tbody tr');
-        el.forEach(function(value, index) {
-            value.remove();
-        });
+    if(document.querySelector('[name="search"]')){
+        var search = document.querySelector('[name="search"]').innerHTML;
+        if (search == '') {
+            document.getElementById("see-more").classList.add('de-active');
+            var el = document.querySelectorAll('#see-more>div');
+            el.forEach(function(value, index) {
+                value.remove();
+            });
+        }
     }
 }
 
@@ -417,7 +454,6 @@ function updateProfile() {
     var data = {
         'u_id': u_id,
         'name': name,
-        'email': email,
         'work': work,
         'number': number,
         'address': address,
@@ -439,6 +475,7 @@ function updateProfile() {
             if (res == 'update') {
                 document.getElementById('msg').classList.add('g');
                 document.getElementById('msg').innerHTML = 'Successfully Updated';
+                document.querySelector('#profile-section [name="email"]').value = profileEmail;
                 //location.reload();
             } else {
                 document.getElementById('msg').classList.add('r');
@@ -1202,4 +1239,318 @@ function sellerAddServiceView(clicked) {
 
 function sellerManagechange() {
     document.querySelector('[name="service"]').value = '';
+}
+
+function Name() {
+    console.log('hi');
+    var name = document.querySelector('[name="name"]').value.trim();
+    if (name != '') {
+        msg = 'Success!';
+        if (name.split(' ').length > 1) {
+            msg = 'Success!';
+            if (name.charAt(0).toLowerCase() != name.charAt(0).toUpperCase()) {
+                msg = 'Success!';
+                if (!validateName(name)) {
+                    msg = '*Name must contain a-z, A-Z, dot(.) or dash(-)';
+                } else {
+                    msg = 'Success!';
+                }
+            } else {
+                msg = '*Name must start with a letter';
+            }
+        } else {
+            msg = '*Name can not be less than two words';
+        }
+    } else {
+        msg = '*Name can not be empty';
+    }
+    if (msg != 'Success!') {
+        document.getElementById('nameformmsg').innerHTML = msg;
+        document.querySelector('[name="name"]').style.cssText = "border: 1px solid red;";
+        document.getElementById('nameformmsg').style.cssText = "display: block; color: red";
+    } else {
+        document.getElementById('nameformmsg').innerHTML = '';
+        document.getElementById('nameformmsg').style.cssText = "display: none;";
+        document.querySelector('[name="name"]').style.cssText = "border: 1px solid #0aab8e;";
+    }
+}
+
+function Email() {
+    var email = document.querySelector('[name="email"]').value.trim();
+    if (email != '') {
+        msg = "Success!";
+        if (email.indexOf(" ") == -1) {
+            msg = 'Success!';
+            if (multipleAT(email)) {
+                msg = 'Success!';
+                if (email.indexOf("@") > 0) {
+                    msg = 'Success!';
+                    if (email.indexOf(".") > -1) {
+                        msg = 'Success!';
+                        var domainExt = email.split("@")[1];
+                        var domain = domainExt.split(".")[0];
+                        var ext = domainExt.replace(domain, '');
+                        if (domain.length != 0 && validateDomainName(domain)) {
+                            msg = 'Success!';
+                            if (ext.length > 1 && validateDomainExt(ext)) {
+                                msg = 'Success!';
+                            } else {
+                                msg = '*Email must have more than 1 letter and letters only after last ".", should not have number.';
+                            }
+                        } else {
+                            msg = '*Email can only have dot(.), dash(-), chracters and numbers between "@" and last "." with no adjacent "@" or "."';
+                        }
+                    } else {
+                        msg = '*Email must have "."';
+                    }
+                } else {
+                    msg = '*Email can not start with "@"';
+                }
+            } else {
+                msg = '*Email can not have multiple "@"';
+            }
+        } else {
+            msg = '*Email can not have spaces';
+        }
+    } else {
+        msg = '*Email can not be empty';
+    }
+    if (msg != 'Success!') {
+        document.getElementById('emailformmsg').innerHTML = msg;
+        document.querySelector('[name="email"]').style.cssText = "border: 1px solid red;";
+        document.getElementById('emailformmsg').style.cssText = "display: block; color: red";
+    } else {
+        document.getElementById('emailformmsg').innerHTML = '';
+        document.getElementById('emailformmsg').style.cssText = "display: block;";
+        document.querySelector('[name="email"]').style.cssText = "border: 1px solid #0aab8e;";
+    }
+}
+
+function Password() {
+    var pass = document.querySelector('[name="pass"]').value.trim();
+    if (pass == "") {
+        msg = '*password cant empty';
+        document.querySelector('[name="pass"]').style.cssText = "border: 1px solid red;";
+        document.getElementById('passformmsg').innerHTML = '*password cant empty';
+        document.getElementById('passformmsg').style.cssText = "display: block;";
+        document.getElementById('passformmsg').style.color = "red";
+    } else if (pass.length < 6) {
+        msg = 'password is too weak';
+        document.querySelector('[name="pass"]').style.cssText = "border: 1px solid 0aab8e;";
+        document.getElementById('passformmsg').innerHTML = 'password is too weak';
+        document.getElementById('passformmsg').style.cssText = "display: block;";
+        document.getElementById('passformmsg').style.color = "#FF9800";
+    } else if (pass.length >= 6 && pass.length < 7) {
+        msg = 'Success!';
+        document.querySelector('[name="pass"]').style.cssText = "border: 1px solid 0aab8e;";
+        document.getElementById('passformmsg').innerHTML = 'password is weak';
+        document.getElementById('passformmsg').style.cssText = "display: block;";
+        document.getElementById('passformmsg').style.color = "#3d791f";
+    } else if (pass.length >= 8 && pass.length < 9) {
+        msg = 'Success!';
+        document.querySelector('[name="pass"]').style.cssText = "border: 1px solid 0aab8e;";
+        document.getElementById('passformmsg').innerHTML = 'password is strong';
+        document.getElementById('passformmsg').style.cssText = "display: block;";
+        document.getElementById('passformmsg').style.color = "#4CAF50";
+    } else if (pass.length >= 12) {
+        msg = 'Success!';
+        document.querySelector('[name="pass"]').style.cssText = "border: 1px solid 0aab8e;";
+        document.getElementById('passformmsg').innerHTML = 'password is too strong';
+        document.getElementById('passformmsg').style.cssText = "display: block;";
+        document.getElementById('passformmsg').style.color = "green";
+    }
+}
+
+function userType() {
+    if (document.querySelector('[name="uType"]').value.trim() == '0') {
+        document.querySelector('[name="uType"]').style.cssText = "border: 1px solid red;";
+    } else {
+        document.querySelector('[name="uType"]').style.cssText = "border: 1px solid #0aab8e;";
+    }
+}
+
+function Submit() {
+    var name = document.querySelector('[name="name"]').value.trim();
+    var email = document.querySelector('[name="email"]').value.trim();
+    var pass = document.querySelector('[name="pass"]').value.trim();
+    var uType = document.querySelector('[name="uType"]').value.trim();
+    console.log(uType);
+    if ((name != '') && (email != '') && (pass != '') && (uType != '') && (msg == 'Success!')) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/registration.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('name=' + name + '&email=' + email + '&pass=' + pass + '&uType=' + uType);
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var res = this.responseText;
+                console.log(res);
+                if (res == 'insert') {
+                    document.querySelector('#reg form').reset();
+                    location.assign('login.php');
+                } else {
+                    document.getElementById('submitformmsg').innerHTML = 'Try again';
+                    document.getElementById('submitformmsg').style.cssText = "display: block; color: red";
+                }
+            }
+        }
+    }
+}
+
+function validateName(string) {
+    var array = string.split('');
+    var flag = true;
+    array.forEach(function(value) {
+        if ((value == '.') || (value == '-') || (value == ' ') || (value.toLowerCase() != value.toUpperCase())) {} else {
+            flag = false;
+        }
+    });
+    return flag;
+}
+
+function multipleAT(string) {
+    var array = string.split('@');
+    if (array.length == 2) {
+        return true
+    }
+    return false;
+}
+
+function validateDomainName(string) {
+    var array = string.split('');
+    var flag = true;
+    array.forEach(function(value) {
+        if ((value == '')) {
+            flag = false;
+        } else {
+            if (value == '-' || value == '.' || ((value.toLowerCase() != value.toUpperCase()))) {} else {
+                flag = false;
+            }
+        }
+    });
+    return flag;
+}
+
+function validateDomainExt(string) {
+    var array = string.replace('.', '');
+    array = array.split('');
+    var flag = true;
+    array.forEach(function(value) {
+        if (value == ' ') {
+            flag = false;
+        } else {
+            if ((value.toLowerCase() != value.toUpperCase())) { flag = true; } else {
+                flag = false;
+            }
+        }
+    });
+    return flag;
+}
+
+function validateEmail() {
+    var email = document.querySelector('[name="email"]').value.trim();
+    console.log(email);
+    if ((email != '')) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/email.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('email=' + email);
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var res = this.responseText;
+                console.log(res);
+                if (res == 'found') {
+                    document.getElementById('emailformmsg').innerHTML = "*Email is taken.";
+                    document.querySelector('[name="email"]').style.cssText = "border: 1px solid red;";
+                    document.getElementById('emailformmsg').style.cssText = "display: block; color: red";
+                } else if (res == 'not found') {
+                    document.getElementById('emailformmsg').innerHTML = '';
+                    document.getElementById('nameformmsg').style.cssText = "display: none;";
+                    document.querySelector('[name="name"]').style.cssText = "border: 1px solid #0aab8e;";
+
+                } else if (res == 'not ok') {
+                    document.getElementById('emailformmsg').innerHTML = '*Email can not be Empty';
+                    document.getElementById('emailformmsg').style.cssText = "display: block; color: red;";
+                    document.querySelector('[name="email"]').style.cssText = "border: 1px solid red;";
+                } else {
+                    document.getElementById('emailformmsg').innerHTML = '';
+                    document.getElementById('nameformmsg').style.cssText = "display: none;";
+                }
+            }
+        }
+    }
+    return false;
+}
+
+
+function logEmail(){
+    var email = document.querySelector('[name="email"]').value.trim();
+    if (email != '') {
+        msg = 'Success!';
+    } else {
+        msg = '*Email can not be empty';
+    }
+    if(msg != 'Success!') {
+        document.getElementById('emailformmsg').innerHTML = msg;
+        document.querySelector('[name="email"]').style.cssText = "border: 1px solid red;";
+        document.getElementById('emailformmsg').style.cssText = "display: block; color: red";
+    } else {
+        document.getElementById('emailformmsg').innerHTML = '';
+        document.getElementById('emailformmsg').style.cssText = "display: none;";
+        document.querySelector('[name="email"]').style.cssText = "border: 1px solid #0aab8e;";
+    } 
+}
+function logPassword(){
+    var pass = document.querySelector('[name="pass"]').value.trim();
+    if (pass != '') {
+        msg = 'Success!';
+    } else {
+        msg = '*Password can not be empty';
+    }
+    if(msg != 'Success!') {
+        document.getElementById('passformmsg').innerHTML = msg;
+        document.querySelector('[name="pass"]').style.cssText = "border: 1px solid red;";
+        document.getElementById('passformmsg').style.cssText = "display: block; color: red";
+    } else {
+        document.getElementById('passformmsg').innerHTML = '';
+        document.getElementById('passformmsg').style.cssText = "display: none;";
+        document.querySelector('[name="pass"]').style.cssText = "border: 1px solid #0aab8e;";
+    } 
+}
+function logSubmit(){
+    var email = document.querySelector('[name="email"]').value.trim();
+    var pass = document.querySelector('[name="pass"]').value.trim();
+    if((email != '') && (pass != '') && (msg == "Success!")){
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/login.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('email='+email+'&pass='+pass);
+        xhttp.onreadystatechange = function (){
+            if(this.readyState == 4 && this.status == 200){
+                var res = this.responseText;
+                console.log(res);
+                if(res == '0'){
+                    //document.querySelector('#log form').reset();
+                    location.assign('dashboard.php');
+                } else if(res == '1'){
+                    //document.querySelector('#log form').reset();
+                    location.assign('dashboard.php');
+                } else if(res == '2'){
+                    //document.querySelector('#log form').reset();
+                    location.assign('dashboard.php');
+                } else if(res == '3'){
+                    //document.querySelector('#log form').reset();
+                    location.assign('dashboard.php');
+                }
+                else {
+                    document.getElementById('submitformmsg').style.cssText = "display: block; color: red";
+                    document.getElementById('submitformmsg').innerHTML = "Invalid Credential";
+                }
+            }   
+        }
+    } else {
+        document.getElementById('passformmsg').innerHTML = 'Fillup all field';
+        document.querySelector('[name="email"]').style.cssText = "border: 1px solid red;";
+        document.querySelector('[name="pass"]').style.cssText = "border: 1px solid red;";
+        document.getElementById('passformmsg').style.cssText = "display: block; color: red";
+    }
 }
