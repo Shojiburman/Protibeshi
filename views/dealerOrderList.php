@@ -9,7 +9,6 @@
 <head>
     <title>Work</title>
     <link rel="stylesheet" type="text/css" href="../css/body.css">
-    <link rel="stylesheet" type="text/css" href="../css/p_css.css">
 </head>
 
 <body onload="filter()">
@@ -37,7 +36,7 @@
             ?>
             <td id="view">
                 <h1 class="title">Order list</h1>
-                <div>
+                <div id="orderlistFilter">
                     <p>Filter by</p> 
                     <select name="selectFilter">
                         <option value="default">Default</option>

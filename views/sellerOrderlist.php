@@ -37,7 +37,7 @@
             ?>
             <td id="view">
                 <h1 class="title">Order list</h1>
-                <div>
+                <div id="orderlistFilter">
                     <p>Filter by</p> 
                     <select name="selectFilter">
                         <option value="default">Default</option>
