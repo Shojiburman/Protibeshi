@@ -9,6 +9,7 @@
 <head>
     <title>Work</title>
     <link rel="stylesheet" type="text/css" href="../css/body.css">
+    <link rel="stylesheet" type="text/css" href="../css/p_css.css">
 </head>
 
 <body>
@@ -36,16 +37,19 @@
             ?>
             <td id="view">
                 <h1 class="title">Order list</h1>
-                <table>
-                    <tr>
-                        Filter by :
-                        <select name="catagory" onclick="sellerManagechange()">
+                <div>
+                     <p>Filter by</p> 
+                        <select name="catagory">
                             <option value="0">Select</option>
                             <option value="p_high">Price (High to Low)</option>
                             <option value="p_low">Price (Low to High)</option>
                             <option value="name_az">Name (A-Z)</option>
                         </select>
-                    </tr>
+                        <button onclick="filter()">Save</button>
+                </div>
+          
+                <table>
+
                     <tr>
                         <td>ID</td>
                         <td>Buyer</td>
@@ -80,12 +84,16 @@
                         }
                         $conn->close();
                     ?>
+                    <tr>
+                        
+                    </tr>
                 </table>
             </td>
         </tr>
     </table>
     </script>
     <script type="text/javascript" src="../js/script.js"></script>
+    <script type="text/javascript" src="../js/seller_script.js"></script>
 </body>
 
 </html>
