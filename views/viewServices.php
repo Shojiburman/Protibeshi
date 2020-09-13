@@ -30,6 +30,8 @@
     
 	<div id="view-service-see-more"></div>
 
+    <button class="btn" onclick="back()">Back</button>
+
     <script type="text/javascript" src="../js/script.js"></script>
 </body>
 </html>

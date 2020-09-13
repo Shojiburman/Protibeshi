@@ -10,7 +10,8 @@
 			INNER JOIN us_services u
 			ON s.s_id = u.s_id
 			INNER JOIN catagory c
-			ON s.c_id = c.c_id;";
+			ON s.c_id = c.c_id
+			AND s.flag = '0';";
 		
 	if (($result = $conn->query($sql)) !== FALSE){
 		$data = array();

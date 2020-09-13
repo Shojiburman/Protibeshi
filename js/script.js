@@ -82,6 +82,12 @@ var profileEmail;
 
 function browseUser(p){
     console.log(p.getAttribute('data-uid'));
+    var id = p.getAttribute('data-uid');
+    location.assign('viewProfile.php?uid=' + encodeURIComponent(id));
+}
+
+function back(){
+    window.history.back();
 }
 
 function editEmailPrevent() {
