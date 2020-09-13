@@ -49,7 +49,6 @@ a {
 
 .sub-title {
     flex-wrap: wrap;
-    float: left;
     font-size: 10px;
     width: max-content;
     color: grey;
@@ -549,12 +548,12 @@ textarea {
 }
 
 #profile-section {
+    display: flex;
     width: 982px;
     margin: 0 auto;
 }
 
 #profile-section div.section {
-    float: left;
     padding: 20px;
     background-color: #f0f3f7;
 
@@ -591,7 +590,6 @@ textarea {
     align-items: center;
     justify-content: center;
 }
-
 
 #profilePic {
     display: block;
@@ -760,4 +758,121 @@ textarea {
     padding: 10px;
     background-color: white;
     margin: 0px auto;
+}
+
+
+/*------------------------view profile-------------------*/
+
+.view-profile-content div.see-more-service {
+    display: block;
+    width: 800px !important;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: inset -1px 2px 11px 0px #bfbebe!important;
+}
+
+.view-profile-content div.see-more-service p {
+    text-align: justify;
+}
+
+.view-profile-content div.see-more-service div {
+    display: flex;
+    width: max-content;
+}
+
+
+.view-profile-content div.see-more-service h1 {
+    color: #0aab8e;
+    text-align: left;
+    line-height: 20px;
+    height: 20px;
+    margin: 10px 0;
+}
+
+
+/*----------------*/
+
+#view-profile {
+    display: flex;
+    width: 1200px;
+    text-align: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+#view-profile div.section {
+    padding: 20px;
+    background-color: #f0f3f7;
+
+}
+
+#view-profile div.section:first-child {
+    display: flex;
+    text-align: center;
+    width: 300px;
+    height: 700px;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2px !important;
+}
+
+#view-profile div.section {
+    height: auto;
+}
+
+#view-profile div.section:first-child {
+    display: block;
+    width: 500px ;
+    height: auto;
+    margin: 0 auto;
+}
+
+#view-profile div.section:last-child {
+    display: flex;
+    text-align: center;
+    width: 600px;
+    height: 700px;
+    align-items: center;
+    justify-content: center;
+}
+
+#view-profile div.section:last-child {
+    width: 1200px;
+    height: auto;
+}
+
+#addBtn {
+    display: block;
+    width: max-content;
+    padding: 4px;
+    margin: 20px auto;
+}
+
+#addBtn img {
+    width: 30px;
+    height: 30px;
+}
+
+.profile-about-info {
+    text-align: left;
+    padding: 10px 0px;
+    margin: 0;
+}
+
+.profile-about-info:first-child {
+    border-bottom: 1px solid #0aab8e;
+    text-align: center !important;
+}
+
+.profile-about-info:last-child {
+    display: block;
+    text-align: justify;
+    padding: 0;
+}
+
+.view-profile-content>div h3 {
+    color: #0aab8e;
+    display: block;
+    text-align: left;
+    margin: 5px 0;
 }
