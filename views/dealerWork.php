@@ -50,9 +50,9 @@
                     <option value="2">Hotel</option>
                     <option value="3">Office</option>
                 </select>
-                <input id="Submit" type="button" name="submit" value="Create" onclick="create()">
+                <input class="Submit" type="button" name="submit" value="Create" onclick="dealercreateServices()">
                 </form>
-                <?php include 'manage.html' ?>
+                <?php include 'dealerManage.html' ?>
             </td>
             <td id="view">
                 <h1 class="title">Service list</h1>
@@ -61,7 +61,6 @@
                         <td>ID</td>
                         <td>Name</td>
                         <td>Details</td>
-                        <td>Price</td>
                         <td>Flag</td>
                         <td>Catagory TYPE</td>
                         <td>Select Service</td>
@@ -71,20 +70,18 @@
                         if ($conn->connect_error) {
                           die("Connection failed: " . $conn->connect_error);
                         }
-                        $sql = "select * from services";
+                        $sql = "SELECT * from services";
                         if (($result = $conn->query($sql)) !== FALSE){
                             while($row = $result->fetch_assoc()){
                                 $id = $row['s_id'];
                                 $name =  $row['name'];
                                 $details = $row['details'];
-                                $price = $row['price'];
                                 $flag = $row['flag'];
                                 $c_id = $row['c_id'];
                                 echo "<tr>
                                         <td>{$id}</td>
                                         <td>{$name}</td>
                                         <td>{$details}</td>
-                                        <td>{$price}</td>
                                         <td>{$flag}</td>
                                         <td>{$c_id}</td>
                                         <td><input type='checkbox' name='selector' value = '{$id}'></td>
@@ -94,7 +91,7 @@
                         $conn->close();
                     ?>
                 </table>
-                <?php include 'manage.html' ?>
+                <?php include 'dealerManage.html' ?>
             </td>
             <td id="edit">
                 <h1 class="title">Edit Sevice</h1>
@@ -108,22 +105,14 @@
                         <option value="2">Hotel</option>
                         <option value="3">Office</option>
                     </select>
-                    <input id="Submit" type="button" name="submit" value="Confirm" onclick="update()">
+                    <input class="Submit" type="button" name="submit" value="Confirm" onclick="dealerupdateServices()">
                 </form>
-                <?php include 'manage.html' ?>
-            </td>
-            <td id="flag">
-                <h1 class="title">Flag Sevice</h1>
-                <form onsubmit="return validateMyForm()">
-                    <input type="text" name="flag" placeholder="Flag Value">
-                    <input id="Submit" type="button" name="submit" value="Confirm" onclick="flaged()">
-                </form>
-                <?php include 'manage.html' ?>
+                <?php include 'dealerManage.html' ?>
             </td>
             <td id="delete">
                 <h1 class="title">Delete Sevice</h1>
-                <input id="Submit" type="button" name="submit" value="Confirm" onclick="Delete()">
-                <?php include 'manage.html' ?>
+                <input class="Submit" type="button" name="submit" value="Confirm" onclick="dealerDeleteServices()">
+                <?php include 'dealerManage.html' ?>
             </td>
         </tr>
     </table>
@@ -131,10 +120,10 @@
         var checkedValue = "";
         var flagCheckedValue = [];
         var serviceId = "";
-        function fun1(){
+        function dealerfun1(){
             document.querySelector('table[changeValue]').setAttribute("changeValue", "1");
         }
-        function fun2(){
+        function dealerfun2(){
             var inputElements = document.querySelectorAll('[name="selector"]');
             for(var i=0; inputElements[i]; ++i){
                   if(inputElements[i].checked){
@@ -167,21 +156,7 @@
                 document.querySelector('table[changeValue]').setAttribute("changeValue", "5");
             }
         }
-        function fun3(){
-            var inputElements = document.querySelectorAll('[name="selector"]');
-            for(var i=0; inputElements[i]; ++i){
-              if(inputElements[i].checked){
-                   var valu = inputElements[i].value;
-                   flagCheckedValue.push(valu);
-              }
-            } 
-            if(flagCheckedValue != ""){
-                document.querySelector('table[changeValue]').setAttribute("changeValue", "3");
-            } else {
-                location.reload();
-            }
-        }
-        function fun4(){
+        function dealerfun4(){
             var inputElements = document.querySelectorAll('[name="selector"]');
             for(var i=0; inputElements[i]; ++i){
                   if(inputElements[i].checked){
@@ -195,12 +170,12 @@
                 location.reload();
             }
         }
-        function fun5(){
+        function dealerfun5(){
             location.reload();
             document.querySelector('table[changeValue]').setAttribute("changeValue", "5");
         }
 
-        function create(){
+        function dealercreateServices(){
             var name = document.querySelector('#add [name="name"]').value;
             var details = document.querySelector('#add [name="details"]').value;
             var price = document.querySelector('#add [name="price"]').value;
@@ -222,7 +197,7 @@
             }
         }
 
-        function Delete(){
+        function dealerDeleteServices(){
             if(flagCheckedValue != null){
                 for(var i = 0; i < flagCheckedValue.length; i++){
                     var xhttp = new XMLHttpRequest();
@@ -243,7 +218,7 @@
             }
         }
 
-        function update(){
+        function dealerupdateServices(){
             var s_id = serviceId;
             var name = document.querySelector('#edit>form [name="name"]').value;
             var details = document.querySelector('#edit>form [name="details"]').value;
@@ -266,30 +241,6 @@
                     }   
                 }
             }
-        }
-
-        function flaged(){
-            var flag = document.querySelector('#flag>form [name="flag"]').value;
-            console.log(flag);
-            for(var i = 0; i < flagCheckedValue.length; i++){
-                var s_id = flagCheckedValue[i];
-                console.log(s_id);
-                if((flag != '') && (s_id != '')){
-                    var xhttp = new XMLHttpRequest();
-                    xhttp.open('POST', '../services/flagService.php', true);
-                    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                    xhttp.send('s_id='+s_id+'&flag='+flag);
-                    xhttp.onreadystatechange = function (){
-                        if(this.readyState == 4 && this.status == 200){
-                            var res = this.responseText;
-                            if(res == 'flaged'){
-                                document.querySelector('#flag>form').reset();
-                            } else {
-                            }
-                        }   
-                    }
-                }
-            } location.reload();
         }
     </script>
 </body>

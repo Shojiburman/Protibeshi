@@ -18,7 +18,7 @@
 				$email = $row['email'];
 				$work = $row['work'];
 				$dob = $row['dob'];
-				$pnumber = $row['pnumber'];	
+				$pnumber = $row['pnumber'];
 			}
 		}
 ?>
@@ -28,7 +28,7 @@
 	<title><?php echo ucwords($name); ?> Profile</title>
 	<link rel="stylesheet" type="text/css" href="../css/body.css">
 </head>
-<body>
+<body onload="checkFrnd()">
 	<?php
         if(isset($_SESSION['id']) || isset($_COOKIE['remember'])){
             if($_SESSION['uType'] == '0'){
@@ -53,11 +53,13 @@
 		            <div id="profilePic">
 		                <img src="<?php echo $c_pic; ?>">
 		            </div>
-		            <div id="addBtn"><img src="add.svg"></div>
+		            <div id="addBtn" class="cursor" frndrg="<?php echo $userid?>" frndrs="<?php echo $_SESSION['id']?>" onclick="addFrnd()">
+	            		<img src="add.svg">
+		            </div>
 		            <h3>Full Name</h3>
-		            <p class="profile-about-info"><?php echo strtoupper($c_name);?></p>
+		            <p class="profile-about-info"><?php echo strtoupper($name);?></p>
 		            <h3>Contuct info</h3>
-		            <p class="profile-about-info"><?php echo ($c_email);?></p>
+		            <p class="profile-about-info"><?php echo ($email);?></p>
 		            <p class="profile-about-info"><?php echo ($pnumber);?></p>
 		            <h3>Profession</h3>
 		            <p class="profile-about-info"><?php echo ($work);?></p>
@@ -95,9 +97,8 @@
 				<div class="see-more-service cursor" data-id="">
 					<h1><?php echo $sname ?></h1>
 					<div>
-						<p class="sub-title"><?php echo $name ?></p>
 						<p class="sub-title"><?php echo $catagory ?></p>
-						<p class="sub-title">৳ price</p>
+						<p class="sub-title">৳<?php echo $price ?></p>
 					</div>
 					<p><?php echo $details ?></p>
 				</div>

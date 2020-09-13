@@ -4,52 +4,49 @@ var serviceId = "";
 var msg = '';
 var profileEmail;
 
-(function() {
-    if(document.getElementById('profile-section')){
+function profileEmailPreventEdit() {
+    if (document.getElementById('profile-section')) {
         document.querySelector('#profile-section [name="email"]').addEventListener("keydown", function(event) {
             event.preventDefault();
         }, false);
         profileEmail = document.querySelector('#profile-section [name="email"]').value.trim();
     }
-})();
+}
 
-(function() {
-    if(document.querySelectorAll('#view-service-see-more')){
+function viewDervices() {
+    if (document.querySelectorAll('#view-service-see-more')) {
         var el = document.querySelectorAll('#view-service-see-more div');
-        el.forEach(function (value, index) {
+        el.forEach(function(value, index) {
             value.remove();
         });
         var xhttp = new XMLHttpRequest();
         xhttp.open('POST', '../services/seeMoreServices.php', true);
         xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhttp.send();
-        xhttp.onreadystatechange = function (){
-            if(this.readyState == 4 && this.status == 200){
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
                 var res = this.responseText;
-                console.log(res);
-                if(res != '' && res != "not found" && res != "not ok"){
-                    //document.getElementById("see-more").classList.add('active');
+                if (res != '' && res != "not found" && res != "not ok") {
                     var results = JSON.parse(res);
-                    console.log(results);
                     if (results.length) {
-                        results.forEach(function (value, index) {
+                        results.forEach(function(value, index) {
                             var div = document.createElement('div');
                             div.setAttribute("class", "see-more-service");
                             var innerDiv = document.createElement('div');
                             div.appendChild(innerDiv);
                             for (const [k, v] of Object.entries(value)) {
-                                if((k != 'u_id') && (k != 'us_id')){
-                                    if(k == 'sname'){
+                                if ((k != 'u_id') && (k != 'us_id')) {
+                                    if (k == 'sname') {
                                         var h1 = document.createElement('h1');
                                         var txt = document.createTextNode(v);
                                         h1.appendChild(txt);
                                         div.insertBefore(h1, innerDiv);
-                                    } else if(k == 'details'){
+                                    } else if (k == 'details') {
                                         var p = document.createElement('p');
                                         var txt = document.createTextNode(v);
                                         p.appendChild(txt);
                                         div.appendChild(p);
-                                    } else if((k == 'name')){
+                                    } else if ((k == 'name')) {
                                         var p = document.createElement('p');
                                         p.setAttribute("class", "sub-title");
                                         p.setAttribute("data-uid", value.u_id);
@@ -58,7 +55,7 @@ var profileEmail;
                                         var txt = document.createTextNode(v);
                                         p.appendChild(txt);
                                         innerDiv.appendChild(p);
-                                    } else if((k == 'catagory') || (k == 'price')){
+                                    } else if ((k == 'catagory') || (k == 'price')) {
                                         var p = document.createElement('p');
                                         p.setAttribute("class", "sub-title");
                                         var txt = document.createTextNode(v);
@@ -71,22 +68,20 @@ var profileEmail;
                             document.querySelector('#view-service-see-more').appendChild(div);
                         });
                     }
+                } else {
+                    console.log('not ok');
                 }
-                else {
-                    console.log(res);
-                }
-            }   
+            }
         }
     }
-})();
+}
 
-function browseUser(p){
-    console.log(p.getAttribute('data-uid'));
+function browseUser(p) {
     var id = p.getAttribute('data-uid');
     location.assign('viewProfile.php?uid=' + encodeURIComponent(id));
 }
 
-function back(){
+function back() {
     window.history.back();
 }
 
@@ -104,48 +99,43 @@ function view(clicked) {
 }
 
 function Search() {
-    /*var el = document.querySelectorAll('#searchResult tbody tr');
-    el.forEach(function(value, index) {
-        value.remove();
-    });*/
-
     document.getElementById("see-more").classList.remove('de-active');
 
     var search = document.querySelector('[name="search"]').value.trim();
     var type = document.querySelector('[name="type"]').value.trim();
 
-    if(type != ''){
+    if (type != '') {
         var xhttp = new XMLHttpRequest();
         xhttp.open('POST', '../services/searchService.php', true);
         xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhttp.send('type='+type+'&search='+search);
-        xhttp.onreadystatechange = function (){
-            if(this.readyState == 4 && this.status == 200){
+        xhttp.send('type=' + type + '&search=' + search);
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
                 var res = this.responseText;
-                console.log(res);
-                if(res != '' && res != "not found" && res != "not ok"){
+
+                if (res != '' && res != "not found" && res != "not ok") {
                     //document.getElementById("see-more").classList.add('active');
                     var results = JSON.parse(res);
-                    console.log(results);
+
                     if (results.length) {
-                        results.forEach(function (value, index) {
+                        results.forEach(function(value, index) {
                             var div = document.createElement('div');
                             div.setAttribute("class", "see-more-service");
                             var innerDiv = document.createElement('div');
                             div.appendChild(innerDiv);
                             for (const [k, v] of Object.entries(value)) {
-                                if(k != 'u_id'){
-                                    if(k == 'sname'){
+                                if (k != 'u_id') {
+                                    if (k == 'sname') {
                                         var h1 = document.createElement('h1');
                                         var txt = document.createTextNode(v);
                                         h1.appendChild(txt);
                                         div.insertBefore(h1, innerDiv);
-                                    } else if(k == 'details'){
+                                    } else if (k == 'details') {
                                         var p = document.createElement('p');
                                         var txt = document.createTextNode(v);
                                         p.appendChild(txt);
                                         div.appendChild(p);
-                                    } else if((k == 'name') || (k == 'catagory') || (k == 'price')){
+                                    } else if ((k == 'name') || (k == 'catagory') || (k == 'price')) {
                                         var p = document.createElement('p');
                                         p.setAttribute("class", "sub-title");
                                         var txt = document.createTextNode(v);
@@ -158,17 +148,16 @@ function Search() {
                             document.querySelector('#see-more').appendChild(div);
                         });
                     }
+                } else {
+                    console.log('not ok');
                 }
-                else {
-                    console.log(res);
-                }
-            }   
+            }
         }
     }
 }
 
 function checkSearch() {
-    if(document.querySelector('[name="search"]')){
+    if (document.querySelector('[name="search"]')) {
         var search = document.querySelector('[name="search"]').innerHTML;
         if (search == '') {
             document.getElementById("see-more").classList.add('de-active');
@@ -257,7 +246,7 @@ function createService() {
     var details = document.querySelector('#add [name="details"]').value;
     var c_id = document.querySelector('#add [name="catagory"]').value;
     if ((name != '') && (details != '') && (c_id != '')) {
-        console.log("12");
+
         var xhttp = new XMLHttpRequest();
         xhttp.open('POST', '../services/insertService.php', true);
         xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -265,7 +254,7 @@ function createService() {
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var res = this.responseText;
-                console.log(res);
+
                 if (res == 'insert') {
                     document.querySelector('#add>form').reset();
                 } else {}
@@ -308,11 +297,9 @@ function updateService() {
         xhttp.open('POST', '../services/updateService.php', true);
         xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhttp.send('s_id=' + s_id + '&name=' + name + '&details=' + details + '&catagory=' + c_id);
-        console.log(s_id);
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var res = this.responseText;
-                console.log(res);
                 if (res == 'update') {
                     location.reload();
                 } else {}
@@ -325,10 +312,9 @@ function updateService() {
 
 function flagedService() {
     var flag = document.querySelector('#flag>form [name="flag"]').value;
-    console.log(flag);
     for (var i = 0; i < flagCheckedValue.length; i++) {
         var s_id = flagCheckedValue[i];
-        console.log(s_id);
+
         if ((flag != '') && (s_id != '')) {
             var xhttp = new XMLHttpRequest();
             xhttp.open('POST', '../services/flagService.php', true);
@@ -479,7 +465,7 @@ function updateUsers() {
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var res = this.responseText;
-                console.log(res);
+
                 if (res == 'update') {
                     document.querySelector('#edit>form').reset();
                     document.querySelector('table[changeValue]').setAttribute("changeValue", "5");
@@ -492,7 +478,7 @@ function updateUsers() {
 
 function flagedUsers() {
     var flag = document.querySelector('#flag>form [name="flag"]').value;
-    console.log(flag);
+
     for (var i = 0; i < flagCheckedValue.length; i++) {
         var u_id = flagCheckedValue[i];
         if ((flag != '') && (u_id != '')) {
@@ -539,7 +525,6 @@ function updateProfile() {
     };
 
     data = JSON.stringify(data);
-    //console.log(data);
 
     var xhttp = new XMLHttpRequest();
     xhttp.open('POST', '../services/profile.php', true);
@@ -647,7 +632,6 @@ function changePass() {
         };
 
         data = JSON.stringify(data);
-        //console.log(data);
 
         var xhttp = new XMLHttpRequest();
         xhttp.open('POST', '../services/changePass.php', true);
@@ -657,7 +641,6 @@ function changePass() {
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var res = this.responseText;
-                console.log(res);
                 if (res == 'update') {
                     document.getElementById('msg').classList.add('g');
                     document.getElementById('msg').classList.remove('r');
@@ -1042,7 +1025,6 @@ function createCatagory() {
     var name = document.querySelector('#add [name="name"]').value;
     var details = document.querySelector('#add [name="details"]').value;
     if ((name != '') && (details != '')) {
-        console.log("12");
         var xhttp = new XMLHttpRequest();
         xhttp.open('POST', '../services/insertCatagory.php', true);
         xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -1050,7 +1032,6 @@ function createCatagory() {
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var res = this.responseText;
-                console.log(res);
                 if (res == 'insert') {
                     document.querySelector('#add>form').reset();
                 } else {}
@@ -1092,11 +1073,11 @@ function updateCatagory() {
         xhttp.open('POST', '../services/updateCatagory.php', true);
         xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhttp.send('c_id=' + c_id + '&name=' + name + '&details=' + details);
-        console.log(c_id);
+
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var res = this.responseText;
-                console.log(res);
+
                 if (res == 'update') {
                     location.reload();
                 } else {}
@@ -1109,10 +1090,8 @@ function updateCatagory() {
 
 function flagedCatagory() {
     var flag = document.querySelector('#flag>form [name="flag"]').value;
-    console.log(flag);
     for (var i = 0; i < flagCheckedValue.length; i++) {
         var c_id = flagCheckedValue[i];
-        console.log(c_id);
         if ((flag != '') && (c_id != '')) {
             var xhttp = new XMLHttpRequest();
             xhttp.open('POST', '../services/flagCatagory.php', true);
@@ -1193,7 +1172,6 @@ function sellerManagecreate() {
     var details = document.querySelector('#add [name="details"]').value;
     var price = document.querySelector('#add [name="price"]').value;
     var c_id = document.querySelector('#add [name="catagory"]').value;
-    console.log(s_id);
     if ((s_id != '') && (details != '') && (price != '') && (c_id != '')) {
         var xhttp = new XMLHttpRequest();
         xhttp.open('POST', '../services/insertUserService.php', true);
@@ -1203,7 +1181,6 @@ function sellerManagecreate() {
             if (this.readyState == 4 && this.status == 200) {
                 var res = this.responseText;
                 if (res == 'insert') {
-                    console.log(res);
                     document.querySelector('#add form').reset();
                 } else {}
             }
@@ -1246,7 +1223,6 @@ function sellerManageupdate() {
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var res = this.responseText;
-                console.log(res);
                 if (res == 'update') {
                     document.querySelector('#edit>form').reset();
                     location.reload();
@@ -1276,7 +1252,6 @@ function sellerAddSearchService() {
                 if (res != '' && res != "not found" && res != "not ok") {
                     document.getElementById("seller-add-searched-service").classList.add('active');
                     var results = JSON.parse(res);
-                    console.log(results);
                     if (results.length) {
                         results.forEach(function(value, index) {
                             var tr = document.createElement('tr');
@@ -1294,7 +1269,7 @@ function sellerAddSearchService() {
                         });
                     }
                 } else {
-                    console.log(res);
+                    console.log('not ok');
                 }
             }
         }
@@ -1319,7 +1294,6 @@ function sellerManagechange() {
 }
 
 function Name() {
-    console.log('hi');
     var name = document.querySelector('[name="name"]').value.trim();
     if (name != '') {
         msg = 'Success!';
@@ -1451,7 +1425,6 @@ function Submit() {
     var email = document.querySelector('[name="email"]').value.trim();
     var pass = document.querySelector('[name="pass"]').value.trim();
     var uType = document.querySelector('[name="uType"]').value.trim();
-    console.log(uType);
     if ((name != '') && (email != '') && (pass != '') && (uType != '') && (msg == 'Success!')) {
         var xhttp = new XMLHttpRequest();
         xhttp.open('POST', '../services/registration.php', true);
@@ -1460,7 +1433,6 @@ function Submit() {
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var res = this.responseText;
-                console.log(res);
                 if (res == 'insert') {
                     document.querySelector('#reg form').reset();
                     location.assign('login.php');
@@ -1525,7 +1497,6 @@ function validateDomainExt(string) {
 
 function validateEmail() {
     var email = document.querySelector('[name="email"]').value.trim();
-    console.log(email);
     if ((email != '')) {
         var xhttp = new XMLHttpRequest();
         xhttp.open('POST', '../services/email.php', true);
@@ -1534,7 +1505,6 @@ function validateEmail() {
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var res = this.responseText;
-                console.log(res);
                 if (res == 'found') {
                     document.getElementById('emailformmsg').innerHTML = "*Email is taken.";
                     document.querySelector('[name="email"]').style.cssText = "border: 1px solid red;";
@@ -1559,14 +1529,14 @@ function validateEmail() {
 }
 
 
-function logEmail(){
+function logEmail() {
     var email = document.querySelector('[name="email"]').value.trim();
     if (email != '') {
         msg = 'Success!';
     } else {
         msg = '*Email can not be empty';
     }
-    if(msg != 'Success!') {
+    if (msg != 'Success!') {
         document.getElementById('emailformmsg').innerHTML = msg;
         document.querySelector('[name="email"]').style.cssText = "border: 1px solid red;";
         document.getElementById('emailformmsg').style.cssText = "display: block; color: red";
@@ -1574,16 +1544,17 @@ function logEmail(){
         document.getElementById('emailformmsg').innerHTML = '';
         document.getElementById('emailformmsg').style.cssText = "display: none;";
         document.querySelector('[name="email"]').style.cssText = "border: 1px solid #0aab8e;";
-    } 
+    }
 }
-function logPassword(){
+
+function logPassword() {
     var pass = document.querySelector('[name="pass"]').value.trim();
     if (pass != '') {
         msg = 'Success!';
     } else {
         msg = '*Password can not be empty';
     }
-    if(msg != 'Success!') {
+    if (msg != 'Success!') {
         document.getElementById('passformmsg').innerHTML = msg;
         document.querySelector('[name="pass"]').style.cssText = "border: 1px solid red;";
         document.getElementById('passformmsg').style.cssText = "display: block; color: red";
@@ -1591,43 +1562,91 @@ function logPassword(){
         document.getElementById('passformmsg').innerHTML = '';
         document.getElementById('passformmsg').style.cssText = "display: none;";
         document.querySelector('[name="pass"]').style.cssText = "border: 1px solid #0aab8e;";
-    } 
+    }
 }
-function logSubmit(){
+
+function logSubmit() {
     var email = document.querySelector('[name="email"]').value.trim();
     var pass = document.querySelector('[name="pass"]').value.trim();
-    if((email != '') && (pass != '') && (msg == "Success!")){
+    if ((email != '') && (pass != '') && (msg == "Success!")) {
         var xhttp = new XMLHttpRequest();
         xhttp.open('POST', '../services/login.php', true);
         xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhttp.send('email='+email+'&pass='+pass);
-        xhttp.onreadystatechange = function (){
-            if(this.readyState == 4 && this.status == 200){
+        xhttp.send('email=' + email + '&pass=' + pass);
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
                 var res = this.responseText;
-                console.log(res);
-                if(res == '0'){
+                if ((res == '0') || (res == '1') || (res == '2') || (res == '3')) {
                     //document.querySelector('#log form').reset();
                     location.assign('dashboard.php');
-                } else if(res == '1'){
-                    //document.querySelector('#log form').reset();
-                    location.assign('dashboard.php');
-                } else if(res == '2'){
-                    //document.querySelector('#log form').reset();
-                    location.assign('dashboard.php');
-                } else if(res == '3'){
-                    //document.querySelector('#log form').reset();
-                    location.assign('dashboard.php');
-                }
-                else {
+                } else {
                     document.getElementById('submitformmsg').style.cssText = "display: block; color: red";
                     document.getElementById('submitformmsg').innerHTML = "Invalid Credential";
                 }
-            }   
+            }
         }
     } else {
         document.getElementById('passformmsg').innerHTML = 'Fillup all field';
         document.querySelector('[name="email"]').style.cssText = "border: 1px solid red;";
         document.querySelector('[name="pass"]').style.cssText = "border: 1px solid red;";
         document.getElementById('passformmsg').style.cssText = "display: block; color: red";
+    }
+}
+
+function addFrnd() {
+    var rg = document.getElementById('addBtn').getAttribute('frndrg');
+    var rs = document.getElementById('addBtn').getAttribute('frndrs');
+    if ((rg != '') && (rs != '')) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/addFrnd.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('rg=' + rg + '&rs=' + rs);
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var res = this.responseText;
+                if (res == 'insert') {
+                    
+                } else if(res == 'sent'){
+                    console.log(res);
+                    document.querySelector('#addBtn img').setAttribute("src", "frnd.svg");
+                } else if(res == 'frnd'){
+                    console.log(res);
+                    document.querySelector('#addBtn img').setAttribute("src", "friends.svg");
+                }
+                else {
+                    console.log(res);
+                }
+            }
+        }
+    }
+}
+
+function checkFrnd(){
+    console.log('checkFrnd');
+    var rg = document.getElementById('addBtn').getAttribute('frndrg');
+    var rs = document.getElementById('addBtn').getAttribute('frndrs');
+    if ((rg != '') && (rs != '')) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/addFrnd.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('check='+'check'+'&rg=' + rg + '&rs=' + rs);
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var res = this.responseText;
+                console.log(res);
+                if (res == 'insert') {
+                    
+                } else if(res == 'sent'){
+                    console.log(res);
+                    document.querySelector('#addBtn img').setAttribute("src", "frnd.svg");
+                } else if(res == 'frnd'){
+                    console.log(res);
+                    document.querySelector('#addBtn img').setAttribute("src", "friends.svg");
+                }
+                else {
+                    console.log(res);
+                }
+            }
+        }
     }
 }

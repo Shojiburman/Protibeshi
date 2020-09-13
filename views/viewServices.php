@@ -10,7 +10,7 @@
 	<title>View profile</title>
 	<link rel="stylesheet" type="text/css" href="../css/body.css">
 </head>
-<body>
+<body onload="viewDervices()">
 	<?php
         if(isset($_SESSION['id']) || isset($_COOKIE['remember'])){
             if($_SESSION['uType'] == '0'){

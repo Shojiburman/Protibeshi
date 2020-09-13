@@ -710,7 +710,8 @@ textarea {
 #login,
 #about,
 #protibeshi,
-#view-services {
+#view-services,
+#dealerWork {
     border: 2px solid #0aab8e !important;
 }
 
@@ -862,12 +863,6 @@ textarea {
 .profile-about-info:first-child {
     border-bottom: 1px solid #0aab8e;
     text-align: center !important;
-}
-
-.profile-about-info:last-child {
-    display: block;
-    text-align: justify;
-    padding: 0;
 }
 
 .view-profile-content>div h3 {
