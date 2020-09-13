@@ -36,7 +36,7 @@
     <table id="content" changeValue="5">
         <tr>
             <?php
-                include 'work.html';
+                include 'dealerWork.html';
             ?>
             <td id="add">
                 <h1 class="title">Add Sevice</h1>

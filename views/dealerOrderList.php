@@ -7,7 +7,7 @@
 <html>
 
 <head>
-    <title>Seller Order List</title>
+    <title>Work</title>
     <link rel="stylesheet" type="text/css" href="../css/body.css">
     <link rel="stylesheet" type="text/css" href="../css/p_css.css">
 </head>
@@ -33,7 +33,7 @@
     <table id="content" uid="<?php echo $_SESSION['id'];?>">
         <tr>
             <?php
-                include 'sellerWork.html';
+                include 'dealerWork.html';
             ?>
             <td id="view">
                 <h1 class="title">Order list</h1>
@@ -62,7 +62,7 @@
             </td>
         </tr>
     </table>
-
+    
     <script type="text/javascript" src="../js/script.js"></script>
 </body>
 
