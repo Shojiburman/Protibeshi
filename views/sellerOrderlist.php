@@ -43,56 +43,27 @@
                             <option value="0">Select</option>
                             <option value="p_high">Price (High to Low)</option>
                             <option value="p_low">Price (Low to High)</option>
-                            <option value="name_az">Name (A-Z)</option>
                         </select>
                         <button onclick="filter()">Save</button>
                 </div>
           
                 <table>
-
+                    <thead>
                     <tr>
                         <td>ID</td>
                         <td>Buyer</td>
                         <td>Service</td>
                         <td>Bill</td>
-                    </tr>
-                    <?php 
-                        $conn = dbConnection();
-                        if ($conn->connect_error) {
-                          die("Connection failed: " . $conn->connect_error);
-                        }
-                        $sql = "select * from cart";
-                        if (($result = $conn->query($sql)) !== FALSE){
-                            while($row = $result->fetch_assoc()){
-                                $cart_id = $row['cart_id'];
-                                $u_id =  $row['u_id'];
-                                $us_id = $row['us_id'];
-                                $bill = $row['bill'];
-                                $sql = "select name from users where u_id = '$u_id'";
-                                if (($result = $conn->query($sql)) !== FALSE){
-                                    while($row = $result->fetch_assoc()){
-                                        $name = $row['name'];
-                                    }
-                                }
-                                echo "<tr>
-                                        <td>{$cart_id}</td>
-                                        <td>{$name}</td>
-                                        <td>{$us_id}</td>
-                                        <td>{$bill}</td>
-                                    </tr>";
-                            }
-                        }
-                        $conn->close();
-                    ?>
-                    <tr>
+                    </tr>    
+                    </thead>
+                    <tbody>
                         
-                    </tr>
+                    </tbody>
                 </table>
             </td>
         </tr>
     </table>
     </script>
-    <script type="text/javascript" src="../js/script.js"></script>
     <script type="text/javascript" src="../js/seller_script.js"></script>
 </body>
 
