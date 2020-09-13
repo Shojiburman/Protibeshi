@@ -13,6 +13,77 @@ var profileEmail;
     }
 })();
 
+(function() {
+    if(document.querySelectorAll('#view-service-see-more')){
+        var el = document.querySelectorAll('#view-service-see-more div');
+        el.forEach(function (value, index) {
+            value.remove();
+        });
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/seeMoreServices.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send();
+        xhttp.onreadystatechange = function (){
+            if(this.readyState == 4 && this.status == 200){
+                var res = this.responseText;
+                console.log(res);
+                if(res != '' && res != "not found" && res != "not ok"){
+                    //document.getElementById("see-more").classList.add('active');
+                    var results = JSON.parse(res);
+                    console.log(results);
+                    if (results.length) {
+                        results.forEach(function (value, index) {
+                            var div = document.createElement('div');
+                            div.setAttribute("class", "see-more-service");
+                            var innerDiv = document.createElement('div');
+                            div.appendChild(innerDiv);
+                            for (const [k, v] of Object.entries(value)) {
+                                if((k != 'u_id') && (k != 'us_id')){
+                                    if(k == 'sname'){
+                                        var h1 = document.createElement('h1');
+                                        var txt = document.createTextNode(v);
+                                        h1.appendChild(txt);
+                                        div.insertBefore(h1, innerDiv);
+                                    } else if(k == 'details'){
+                                        var p = document.createElement('p');
+                                        var txt = document.createTextNode(v);
+                                        p.appendChild(txt);
+                                        div.appendChild(p);
+                                    } else if((k == 'name')){
+                                        var p = document.createElement('p');
+                                        p.setAttribute("class", "sub-title");
+                                        p.setAttribute("data-uid", value.u_id);
+                                        p.setAttribute("onclick", "browseUser(this)");
+                                        p.classList.add('cursor');
+                                        var txt = document.createTextNode(v);
+                                        p.appendChild(txt);
+                                        innerDiv.appendChild(p);
+                                    } else if((k == 'catagory') || (k == 'price')){
+                                        var p = document.createElement('p');
+                                        p.setAttribute("class", "sub-title");
+                                        var txt = document.createTextNode(v);
+                                        p.appendChild(txt);
+                                        innerDiv.appendChild(p);
+                                    }
+                                }
+                            }
+                            div.setAttribute("data-id", value.us_id);
+                            document.querySelector('#view-service-see-more').appendChild(div);
+                        });
+                    }
+                }
+                else {
+                    console.log(res);
+                }
+            }   
+        }
+    }
+})();
+
+function browseUser(p){
+    console.log(p.getAttribute('data-uid'));
+}
+
 function editEmailPrevent() {
     document.querySelector('#profile-section [name="email"]').preventDefault();
 }
