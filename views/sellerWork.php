@@ -52,6 +52,7 @@
                 <textarea type="text" name="details" value="" placeholder="Details"></textarea>
                 <input type="text" name="price" placeholder="Price">
                 <input class="Submit" type="button" name="submit" value="Create" onclick="sellerManagecreate()">
+                <input class="Submit" type="button" name="submit" value="Save" onclick="saveToDraft()">
                 </form>
                 <?php include 'sellerManage.html' ?>
             </td>
@@ -111,6 +112,7 @@
     </table>
 
     <script type="text/javascript" src="../js/script.js"></script>
+    <script type="text/javascript" src="../js/seller_script.js"></script>
     
 </body>
 
