@@ -9,7 +9,7 @@
 	$type = $_POST['type'];
 
 	if(($search != '') && ($type == 'Services')){
-		$sql = "SELECT u.s_id, s.name, u.price, u.details, c.name AS cname, u.u_id
+		$sql = "SELECT u.s_id, s.name, u.price, u.details, c.name AS cname, u.us_id, u.u_id
 			FROM services s
 			INNER JOIN us_services u
 			ON s.s_id = u.s_id
@@ -24,7 +24,7 @@
 				$price = $row['price'];
 				$details = $row['details'];
 				$catagory = $row['cname'];
-				$u_id = $row['u_id'];
+				$u_id = $row['us_id'];
 
 
 				$test = [

@@ -13,7 +13,7 @@ function profileEmailPreventEdit() {
     }
 }
 
-function viewDervices() {
+function viewServices() {
     if (document.querySelectorAll('#view-service-see-more')) {
         var el = document.querySelectorAll('#view-service-see-more div');
         el.forEach(function(value, index) {
@@ -50,7 +50,7 @@ function viewDervices() {
                                         var p = document.createElement('p');
                                         p.setAttribute("class", "sub-title");
                                         p.setAttribute("data-uid", value.u_id);
-                                        p.setAttribute("onclick", "browseUser(this)");
+                                        p.setAttribute("onclick", "browseUserProfile(this)");
                                         p.classList.add('cursor');
                                         var txt = document.createTextNode(v);
                                         p.appendChild(txt);
@@ -76,9 +76,34 @@ function viewDervices() {
     }
 }
 
+function browseUserProfile(p) {
+    var id = p.getAttribute('data-uid');
+    if(id != ''){
+        location.assign('viewProfile.php?uid=' + encodeURIComponent(id));
+    }
+}
+
 function browseUser(p) {
     var id = p.getAttribute('data-uid');
-    location.assign('viewProfile.php?uid=' + encodeURIComponent(id));
+    var type = document.querySelector('#see-more .see-more-service .sub-title:nth-child(2)').innerHTML;
+    console.log(type);
+    if (type != null) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/checkcatagory.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('checkcatagory=' + type);
+
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var res = this.responseText;
+                if (res == 'found') {
+                    location.assign('placeOrder.php?uid=' + encodeURIComponent(id));
+                } else if('not found') {
+                    location.assign('viewProfile.php?uid=' + encodeURIComponent(id));
+                }
+            }
+        }
+    }
 }
 
 function back() {
@@ -100,6 +125,10 @@ function view(clicked) {
 
 function Search() {
     document.getElementById("see-more").classList.remove('de-active');
+    var el = document.querySelectorAll('#see-more .see-more-service');
+        el.forEach(function (value, index) {
+            value.remove();
+        });
 
     var search = document.querySelector('[name="search"]').value.trim();
     var type = document.querySelector('[name="type"]').value.trim();
@@ -121,6 +150,9 @@ function Search() {
                         results.forEach(function(value, index) {
                             var div = document.createElement('div');
                             div.setAttribute("class", "see-more-service");
+                            div.classList.add('cursor');
+                            console.log('worked')
+                            div.setAttribute("onclick", "browseUser(this)");
                             var innerDiv = document.createElement('div');
                             div.appendChild(innerDiv);
                             for (const [k, v] of Object.entries(value)) {
@@ -144,7 +176,7 @@ function Search() {
                                     }
                                 }
                             }
-                            div.setAttribute("data-id", value.u_id);
+                            div.setAttribute("data-uid", value.u_id);
                             document.querySelector('#see-more').appendChild(div);
                         });
                     }
@@ -1775,3 +1807,71 @@ function leaderFilter() {
         }
     }
 }
+
+function addCart(){
+    var us_id = document.querySelector('#place-order').getAttribute('data');
+    var bill = document.querySelector('.highlight:nth-child(3) span').innerHTML.substring(1);
+    var u_id = document.querySelector('#place-order').getAttribute('data-uid');
+    console.log(u_id);
+    if ((us_id != '') && (bill != '') && (u_id != '')) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/addToCart.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('us_id=' + us_id + '&bill=' + bill + '&u_id=' + u_id);
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var res = this.responseText;
+                if (res == 'insert') {
+                } else {}
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
