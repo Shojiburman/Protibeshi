@@ -36,48 +36,23 @@
             ?>
             <td id="view">
                 <h1 class="title">Leaderboard</h1>
-                <table >
-                    <tr>
+                <p>Filter by</p> 
+                <select name="selectFilter" onchange="filter()">
+                    <option value="default">All</option>
+                    <option value="500">Seller</option>
+                    <option value="1000">Dealer</option>
+                </select>
+                <table id="leaderboardTable">
+                    <thead> 
                         <td>SL.NO</td>
                         <td>Name</td>
                         <td>Bio</td>
                         <td>Income</td>
                         <td>Role</td>
-                    </tr>
-                    <?php 
-                        $conn = dbConnection();
-                        if ($conn->connect_error) {
-                          die("Connection failed: " . $conn->connect_error);
-                        }
-                        $sql = "SELECT usr.name, usr.bio, l.income, usr.admin
-					            FROM leaderboard l
-					            INNER JOIN users usr
-					            ON l.u_id = usr.u_id ORDER BY l.income DESC";
-					    $i = 1;
-                        if (($result = $conn->query($sql)) !== FALSE){
-                            while($row = $result->fetch_assoc()){
-                                $id = $i;
-                                $name =  $row['name'];
-                                $Bio = $row['bio'];
-                                $Income = $row['income'];
-                                $Role = $row['admin'];
-                                if($Role == '0'){
-                                	$Role = 'Seller';
-                                } else if ('2'){
-                                	$Role = 'Dealer';
-                                }
-                                echo "<tr>
-                                        <td>{$id}</td>
-                                        <td>{$name}</td>
-                                        <td>{$Bio}</td>
-                                        <td>{$Income}</td>
-                                        <td>{$Role}</td>
-                                    </tr>";
-                                $i++;
-                            }
-                        }
-                        $conn->close();
-                    ?>
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
                 </table>
             </td>
         </tr>
@@ -86,3 +61,8 @@
 </body>
 
 </html>
+
+$sql = "SELECT usr.name, usr.bio, l.income, usr.admin
+                                FROM leaderboard l
+                                INNER JOIN users usr
+                                ON l.u_id = usr.u_id ORDER BY l.income DESC";
