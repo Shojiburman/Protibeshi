@@ -26,8 +26,6 @@ function filter()
                     if (results.length) {
                         results.forEach(function (value, index) {
                             var tr = document.createElement('tr');
-                           
-                           
                             for (const [k, v] of Object.entries(value)) {
                                 var td = document.createElement('td');
                                 var txt = document.createTextNode(v);
@@ -45,5 +43,11 @@ function filter()
         }
 	}
 
+
+
+
+}
+
+function filter_leaderboard (){
 
 }
