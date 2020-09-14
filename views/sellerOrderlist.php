@@ -39,20 +39,19 @@
                 <h1 class="title">Order list</h1>
                 <div id="orderlistFilter">
                     <p>Filter by</p> 
-                    <select name="selectFilter">
+                    <select name="selectFilter" onchange="filter()">
                         <option value="default">Default</option>
                         <option value="500">৳0-৳500</option>
                         <option value="1000">৳500-৳1000</option>
                         <option value="1001">৳1000-</option>
                     </select>
-                    <button onclick="filter()">Save</button>
                 </div>
           
                 <table id="orderListTable">
                     <thead> 
                         <td>ID</td>
+                        <td>Services</td>
                         <td>Buyer</td>
-                        <td>Service</td>
                         <td>Bill</td>  
                     </thead>
                     <tbody>

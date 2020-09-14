@@ -5,7 +5,6 @@
 		echo "DB connection error";
 	}
 	$data = 'no';
-	$check = "";
 	$check = $_POST['check'];
 	$rg = $_POST['rg'];
 	$rs = $_POST['rs'];
@@ -26,7 +25,7 @@
         }
     }
 
-    if($check == ''){
+    if($check != ''){
     	if($data == 'ok'){
 	    	$sql = "INSERT INTO request_bookmark_profile (bookmark_id, u_id) VALUES ('". $rg ."', '". $rs ."');";
 			if ($conn->query($sql) === TRUE) {

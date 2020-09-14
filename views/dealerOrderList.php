@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../css/body.css">
 </head>
 
-<body onload="filter()">
+<body onload="filter()" onload="sort()">
     <?php
         if(isset($_SESSION['id']) || isset($_COOKIE['remember'])){
             if($_SESSION['uType'] == '0'){
@@ -38,20 +38,27 @@
                 <h1 class="title">Order list</h1>
                 <div id="orderlistFilter">
                     <p>Filter by</p> 
-                    <select name="selectFilter">
+                    <select name="selectFilter" onchange="filter()">
                         <option value="default">Default</option>
                         <option value="500">৳0-৳500</option>
                         <option value="1000">৳500-৳1000</option>
                         <option value="1001">৳1000-</option>
                     </select>
-                    <button onclick="filter()">Save</button>
+                    <p>Sort by</p> 
+                    <select name="selectSort" onchange="sort()">
+                        <option value="default">Default</option>
+                        <option value="AZ">A-Z</option>
+                        <option value="ZA">Z-A</option>
+                        <option value="HL">Highest - Lowest</option>
+                        <option value="LH">Lowest - Highest</option>
+                    </select>
                 </div>
           
                 <table id="orderListTable">
                     <thead> 
                         <td>ID</td>
-                        <td>Buyer</td>
                         <td>Service</td>
+                        <td>Buyer</td>
                         <td>Bill</td>  
                     </thead>
                     <tbody>
