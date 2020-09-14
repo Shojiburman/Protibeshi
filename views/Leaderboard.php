@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../css/body.css">
 </head>
 
-<body>
+<body onload="leaderFilter()">
     <?php
         if(isset($_SESSION['id']) || isset($_COOKIE['remember'])){
             if($_SESSION['uType'] == '0'){
@@ -36,12 +36,15 @@
             ?>
             <td id="view">
                 <h1 class="title">Leaderboard</h1>
-                <p>Filter by</p> 
-                <select name="selectFilter" onchange="filter()">
-                    <option value="default">All</option>
-                    <option value="500">Seller</option>
-                    <option value="1000">Dealer</option>
-                </select>
+                <div id="leaderboardFilter">
+                    <p>Filter by</p> 
+                    <select name="selectFilter" onchange="leaderFilter()">
+                        <option value="default">All</option>
+                        <option value="1">Seller</option>
+                        <option value="2">Dealer</option>
+                    </select>
+                </div>
+                
                 <table id="leaderboardTable">
                     <thead> 
                         <td>SL.NO</td>
@@ -61,8 +64,3 @@
 </body>
 
 </html>
-
-$sql = "SELECT usr.name, usr.bio, l.income, usr.admin
-                                FROM leaderboard l
-                                INNER JOIN users usr
-                                ON l.u_id = usr.u_id ORDER BY l.income DESC";

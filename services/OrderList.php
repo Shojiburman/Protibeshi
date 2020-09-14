@@ -323,5 +323,78 @@
                 echo json_encode($data);
             }
         }
-    }  
+    } else if(isset($_POST['leaderFilter'])){
+        $leaderFilter = $_POST['leaderFilter'];
+
+        if($leaderFilter == '1'){
+            $sql = "SELECT usr.name, usr.bio, l.income, usr.admin
+                    FROM leaderboard l
+                    INNER JOIN users usr
+                    ON l.u_id = usr.u_id
+                    AND usr.admin = '0' ORDER BY l.income DESC";
+
+            if (($result = $conn->query($sql)) !== FALSE){
+                $data = array();
+                $i = 1;
+                while($row = $result->fetch_assoc()){
+                    $test = [
+                            "ID" => $i,
+                            "Name" => $row['name'],
+                            "Bio" => $row['bio'],
+                            "Income" => $row['income'],
+                            "Role" => 'Seller',
+                        ];
+                    $i++;
+                    array_push($data, $test);
+                }
+                echo json_encode($data);
+            }
+        } else if($leaderFilter == '2'){
+            $sql = "SELECT usr.name, usr.bio, l.income, usr.admin
+                    FROM leaderboard l
+                    INNER JOIN users usr
+                    ON l.u_id = usr.u_id
+                    AND usr.admin = '2' ORDER BY l.income DESC";
+
+            if (($result = $conn->query($sql)) !== FALSE){
+                $data = array();
+                $i = 1;
+                while($row = $result->fetch_assoc()){
+                    $test = [
+                            "ID" => $i,
+                            "Name" => $row['name'],
+                            "Bio" => $row['bio'],
+                            "Income" => $row['income'],
+                            "Role" => 'Seller',
+                        ];
+                    $i++;
+                    array_push($data, $test);
+                }
+                echo json_encode($data);
+            }
+        } else if($leaderFilter == 'default'){
+            $sql = "SELECT usr.name, usr.bio, l.income, usr.admin
+                    FROM leaderboard l
+                    INNER JOIN users usr
+                    ON l.u_id = usr.u_id
+                    ORDER BY l.income DESC";
+
+            if (($result = $conn->query($sql)) !== FALSE){
+                $data = array();
+                $i = 1;
+                while($row = $result->fetch_assoc()){
+                    $test = [
+                            "ID" => $i,
+                            "Name" => $row['name'],
+                            "Bio" => $row['bio'],
+                            "Income" => $row['income'],
+                            "Role" => 'Seller',
+                        ];
+                    $i++;
+                    array_push($data, $test);
+                }
+                echo json_encode($data);
+            }
+        }    
+    }
 ?>
