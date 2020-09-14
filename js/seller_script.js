@@ -65,3 +65,57 @@ function saveToDraft() {
         }
     }
 }
+
+function sellerDraftupdate() {
+    var us_id = serviceId;
+    var details = document.querySelector('#edit>form [name="details"]').value;
+    var price = document.querySelector('#edit>form [name="price"]').value;
+
+    if ((details != '') && (price != '') && (us_id != '')) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/updateSellerDraft.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('us_id=' + us_id + '&details=' + details + '&price=' + price);
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var res = this.responseText;
+                if (res == 'update') {
+                    document.querySelector('#edit>form').reset();
+                    location.reload();
+                } else {}
+            }
+        }
+    }
+}
+
+function sellerDraftEdit() {
+    var inputElements = document.querySelectorAll('[name="selector"]');
+    for (var i = 0; inputElements[i]; ++i) {
+        if (inputElements[i].checked) {
+            checkedValue = inputElements[i].value;
+            break;
+        }
+    }
+    if (checkedValue != null) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/getDraftEditServices.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('us_id=' + checkedValue);
+
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.responseText != "") {
+                    var val = this.responseText.split("|");
+                    serviceId = val[0];
+                    document.querySelector('#edit>form [name="details"]').value = val[1];
+                    document.querySelector('#edit>form [name="price"]').value = val[2];
+                    document.querySelector('table[changeValue]').setAttribute("changeValue", "2");
+                } else {
+                    location.reload();
+                }
+            }
+        }
+    } else {
+        document.querySelector('table[changeValue]').setAttribute("changeValue", "5");
+    }
+}
