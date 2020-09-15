@@ -318,6 +318,29 @@ function deleteService() {
     }
 }
 
+function dealerDeleteServices() {
+    if (flagCheckedValue != null) {
+        for (var i = 0; i < flagCheckedValue.length; i++) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open('POST', '../services/deleteUserService.php', true);
+            xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhttp.send('us_id=' + flagCheckedValue[i]);
+
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+
+                    if (this.responseText == "delete") {
+                        location.reload();
+                    }
+                }
+            }
+        }
+        location.reload();
+    } else {
+        location.reload();
+    }
+}
+
 function updateService() {
     var s_id = serviceId;
     var name = document.querySelector('#edit>form [name="name"]').value.trim();

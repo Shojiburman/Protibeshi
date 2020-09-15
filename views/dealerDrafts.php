@@ -7,9 +7,9 @@
 <html>
 
 <head>
-    <title>Work</title>
+    <title>Drafts</title>
     <link rel="stylesheet" type="text/css" href="../css/body.css">
-    <script type="text/javascript" src="../js/script.js"></script>
+    
 </head>
 
 <body>
@@ -39,7 +39,7 @@
                 <h1 class="title">Add Service</h1>
                 <form onsubmit="return validateMyForm()">
                 <select name="catagory" onclick="sellerManagechange()">
-                    <option value="none">Select</option>
+                    <option value="0">Select</option>
                     <option value="Home">Home</option>
                     <option value="Hotel">Hotel</option>
                     <option value="Office">Office</option>
@@ -51,16 +51,13 @@
                 </table>
                 <textarea type="text" name="details" value="" placeholder="Details"></textarea>
                 <input type="text" name="price" placeholder="Price">
+                <input class="Submit" type="button" name="submit" value="Create" onclick="sellerManagecreate()">
+                <input class="Submit" type="button" name="submit" value="Save" onclick="saveToDraft()">
                 </form>
-                <div class="btn-inline">
-                    <button class="Submit" onclick="sellerManagecreate()">Publish</button>
-                    <button class="Submit" onclick="saveToDraft()">Draft</button>
-                </div>
-
-                <?php include 'dealerManage.html' ?>
+                <?php include 'sellerManage.html' ?>
             </td>
             <td id="view">
-                <h1 class="title">Service list</h1>
+                <h1 class="title">Draft Service list</h1>
                 <table >
                     <tr>
                         <td>Name</td>
@@ -75,10 +72,10 @@
                           die("Connection failed: " . $conn->connect_error);
                         }
                         $us_id = $_SESSION['id'];
-                        $sql = "SELECT us.us_id, s.name, us.details, us.price, c.name AS catagory from us_services us, services s, catagory c where us.s_id = s.s_id AND c.c_id = s.c_id AND us.u_id = '$us_id'";
+                        $sql = "SELECT us.d_id, s.name, us.details, us.price, c.name AS catagory from draft us, services s, catagory c where us.s_id = s.s_id AND c.c_id = s.c_id AND us.u_id = '$us_id'";
                         if (($result = $conn->query($sql)) !== FALSE){
                             while($row = $result->fetch_assoc()){
-                                $id = $row['us_id'];
+                                $id = $row['d_id'];
                                 $name =  $row['name'];
                                 $details = $row['details'];
                                 $price = $row['price'];
@@ -95,32 +92,28 @@
                         $conn->close();
                     ?>
                 </table>
-                <?php include 'dealerManage.html' ?>
+                <?php include 'sellerManage.html' ?>
             </td>
             <td id="edit">
                 <h1 class="title">Edit Sevice</h1>
-                <form >
-                    <input type="text" name="name" placeholder="Service Name">
+                <form onsubmit="return validateMyForm()">
                     <textarea type="text" name="details" value="" placeholder="Details"></textarea>
                     <input type="text" name="price" placeholder="Price">
-                    <select name="catagory">
-                        <option value="0">Select</option>
-                        <option value="1">Home</option>
-                        <option value="2">Hotel</option>
-                        <option value="3">Office</option>
-                    </select>
-                    <input class="Submit" type="button" name="submit" value="Confirm" onclick="dealerupdateServices()">
+                    <input class="Submit" type="button" name="submit" value="Confirm" onclick="sellerDraftupdate()">
                 </form>
-                <?php include 'dealerManage.html' ?>
+                <?php include 'sellerManage.html' ?>
             </td>
             <td id="delete">
                 <h1 class="title">Delete Sevice</h1>
-                <input class="Submit" type="button" name="submit" value="Confirm" onclick="dealerDeleteServices()">
-                <?php include 'dealerManage.html' ?>
+                <input class="Submit" type="button" name="submit" value="Confirm" onclick="sellerManageDelete()">
+                <?php include 'sellerManage.html' ?>
             </td>
         </tr>
     </table>
+
     <script type="text/javascript" src="../js/script.js"></script>
+    <script type="text/javascript" src="../js/seller_script.js"></script>
+    
 </body>
 
 </html>
