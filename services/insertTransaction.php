@@ -15,14 +15,13 @@
 		        while($row = $result->fetch_assoc()){
 		            $cid = $row['coupon_id'];
 		        }
-			}
-		} else {
-			$userid = $_SESSION['id'];
-			$sql = "INSERT INTO transaction (buyer_id, bill, coupon_id) VALUES ('$userid', '$price', 'cid')";
-			if ($conn->query($sql) === TRUE) {
-				echo "insert";
-			} else {
-				echo "not ok";
+		        $userid = $_SESSION['id'];
+				$sql = "INSERT INTO transaction (buyer_id, bill, coupon_id) VALUES ('$userid', '$price', 'cid')";
+				if ($conn->query($sql) === TRUE) {
+					echo "insert";
+				} else {
+					echo "not ok";
+				}
 			}
 		}
 	} else {
