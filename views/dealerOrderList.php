@@ -43,7 +43,7 @@
                 }
             ?>
             <td id="view">
-                <h1 class="title">Order list</h1>
+                <h1 class="title">Transaction List</h1>
                 <div id="orderlistFilter">
                     <p>Filter by</p> 
                     <select name="selectFilter" onchange="filter()">
@@ -55,8 +55,6 @@
                     <p>Sort by</p> 
                     <select name="selectSort" onchange="sort()">
                         <option value="default">Default</option>
-                        <option value="AZ">A-Z</option>
-                        <option value="ZA">Z-A</option>
                         <option value="HL">Highest - Lowest</option>
                         <option value="LH">Lowest - Highest</option>
                     </select>
@@ -64,10 +62,8 @@
           
                 <table id="orderListTable">
                     <thead> 
-                        <td>ID</td>
-                        <td>Service</td>
-                        <td>Buyer</td>
-                        <td>Bill</td>  
+                        <td>Transaction ID</td>
+                        <td>Transaction Bill</td>  
                     </thead>
                     <tbody>
                         

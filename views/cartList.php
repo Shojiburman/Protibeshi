@@ -43,43 +43,62 @@
                 }
             ?>
             <td id="view">
-                <h1 class="title">Order list</h1>
+                <h1 class="title">Item list</h1>
                 <table>
                     <tr>
                         <td>ID</td>
                         <td>Buyer</td>
                         <td>Service</td>
                         <td>Bill</td>
+                        <td>Select Cart</td>
                     </tr>
                     <?php 
                         $conn = dbConnection();
                         if ($conn->connect_error) {
                           die("Connection failed: " . $conn->connect_error);
                         }
-                        $sql = "select * from cart";
+                        $userid = $_SESSION['id'];
+                        $sql = "SELECT * from cart where u_id = '$userid'";
+                        $i=1;
                         if (($result = $conn->query($sql)) !== FALSE){
                             while($row = $result->fetch_assoc()){
                                 $cart_id = $row['cart_id'];
                                 $u_id =  $row['u_id'];
                                 $us_id = $row['us_id'];
                                 $bill = $row['bill'];
-                                $sql = "select name from users where u_id = '$u_id'";
-                                if (($result = $conn->query($sql)) !== FALSE){
-                                    while($row = $result->fetch_assoc()){
+                                $sql = "SELECT u.name, s.name AS sname 
+                                        from users u, us_services us, services s 
+                                        where u.u_id = us.u_id AND s.s_id = us.s_id AND us.us_id = '$us_id'";
+                                if (($result1 = $conn->query($sql)) !== FALSE){
+                                    while($row = $result1->fetch_assoc()){
                                         $name = $row['name'];
+                                        $sname = $row['sname'];
                                     }
                                 }
                                 echo "<tr>
-                                        <td>{$cart_id}</td>
+                                        <td>{$i}</td>
                                         <td>{$name}</td>
-                                        <td>{$us_id}</td>
+                                        <td>{$sname}</td>
                                         <td>{$bill}</td>
+                                        <td><input type='checkbox' name='selector' bill = '{$bill}' value = '{$cart_id}'></td>
                                     </tr>";
+                            $i++;
                             }
+                            
                         }
                         $conn->close();
                     ?>
                 </table>
+                <?php include 'cartManage.html'; ?>
+            </td>
+            <td id="edit">
+                <h1 class="title">Bill to Pay</h1>
+                <form >
+                    <input type="text" name="price" placeholder="Price">
+                    <input type="text" name="coupon" placeholder="Coupon Name">
+                    <input class="Submit" type="button" name="submit" value="Confirm" onclick="orderConfirm()">
+                </form>
+                <?php include 'cartManage.html' ?>
             </td>
         </tr>
     </table>

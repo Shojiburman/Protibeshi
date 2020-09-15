@@ -128,7 +128,10 @@
                             }
                         ?>
                     </select>
-                    <input class="Submit" type="button" name="submit" value="Confirm" onclick="sellerManageupdate()">
+                    <div class="btn-inline">
+                        <button class="Submit" onclick="sellerManageupdate()">Publish</button>
+                        <button class="Submit" onclick="sellerManagecreate()">Publish</button>
+                    </div>
                 </form>
                 <?php include 'dealerManage.html' ?>
             </td>

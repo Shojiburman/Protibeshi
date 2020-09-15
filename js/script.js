@@ -1823,14 +1823,13 @@ function filter() {
             value.remove();
         });
     var filter  =  document.querySelector('[name="selectFilter"]').value;
-    var uid = document.getElementById('content').getAttribute('uid');
     console.log(filter);
     if(filter != '')
     {
        var xhttp = new XMLHttpRequest();
         xhttp.open('POST', '../services/OrderList.php', true);
         xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhttp.send('filter='+filter+'&uid='+uid);
+        xhttp.send('filter='+filter);
         xhttp.onreadystatechange = function (){
             if(this.readyState == 4 && this.status == 200){
                 var res = this.responseText;
@@ -1964,6 +1963,146 @@ function addCart(){
                 }
             }
         }
+    }
+}
+
+function compare(){
+    var inputElements = document.querySelectorAll('[name="selector"]');
+    for (var i = 0; i < 2; ++i) {
+        if (inputElements[i].checked) {
+            var valu = inputElements[i].value;
+            flagCheckedValue.push(valu);
+        }
+    }
+    console.log(flagCheckedValue);
+    if (checkedValue != null) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/getEditService.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('s_id=' + checkedValue);
+
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.responseText != "") {
+                    var val = this.responseText.split("|");
+                    serviceId = val[0];
+                    document.querySelector('#edit>form [name="name"]').value = val[1];
+                    document.querySelector('#edit>form [name="details"]').value = val[2];
+                    document.querySelector('#edit>form [name="catagory"]').selectedIndex = val[3] + 1;
+                    document.querySelector('table[changeValue]').setAttribute("changeValue", "2");
+                } else {
+                    location.reload();
+                }
+            }
+        }
+    } else {
+        document.querySelector('table[changeValue]').setAttribute("changeValue", "5");
+    }
+}
+
+function orderNow(){
+    var inputElements = document.querySelectorAll('[name="selector"]');
+    flagCheckedValue = [];
+    for (var i = 0; inputElements[i]; ++i) {
+        if (inputElements[i].checked) {
+            var valu = inputElements[i].value;
+            flagCheckedValue.push(valu);
+        }
+    }
+    data = JSON.stringify(flagCheckedValue);
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open('POST', '../services/calculateBill.php', true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send('json=' + data);
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var res = this.responseText;
+            console.log(res);
+            if (res != '') {
+                document.querySelector('#edit>form [name="price"]').value = res;
+                document.querySelector('table[changeValue]').setAttribute("changeValue", "2");
+            } else {
+                location.reload();
+            }
+        }
+    }
+}
+
+function orderConfirm(){
+    var price = document.querySelector('#edit>form [name="price"]').value;
+    var coupon = document.querySelector('#edit>form [name="coupon"]').value;
+    if(price != ''){
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/insertTransaction.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        if(coupon != ''){
+            xhttp.send('price='+ price + '&coupon='+coupon);
+        } else {
+            xhttp.send('price='+ price);
+        }
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                if (this.responseText != "") {
+                    var val = this.responseText;
+                    console.log(val);
+                    if(val == 'insert'){
+                        allCartRemoveFromUsers();
+                        location.assign('dealerOrderList.php');
+                    }
+                } else {
+                    
+                }
+            }
+        }
+    }
+}
+
+function allCartRemoveFromUsers(){
+    var xhttp = new XMLHttpRequest();
+    xhttp.open('POST', '../services/deleteCart.php', true);
+    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhttp.send();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            if (this.responseText != "") {
+                var val = this.responseText;
+                console.log(val);
+                if(val == 'delete'){ 
+                }
+            } else {
+                
+            }
+        }
+    }
+}
+
+function cartRemove(){
+    var inputElements = document.querySelectorAll('[name="selector"]');
+    for (var i = 0; inputElements[i]; ++i) {
+        if (inputElements[i].checked) {
+            var valu = inputElements[i].value;
+            flagCheckedValue.push(valu);
+        }
+    }
+    if (flagCheckedValue != null) {
+        for (var i = 0; i < flagCheckedValue.length; i++) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open('POST', '../services/deleteCart.php', true);
+            xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhttp.send('cart_id=' + flagCheckedValue[i]);
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                    if (this.responseText == "delete") {
+                        
+                    }
+                }
+            }
+        } location.reload();
+    } else {
+        location.reload();
     }
 }
 
