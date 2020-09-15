@@ -365,7 +365,7 @@
                             "Name" => $row['name'],
                             "Bio" => $row['bio'],
                             "Income" => $row['income'],
-                            "Role" => 'Seller',
+                            "Role" => 'Dealer',
                         ];
                     $i++;
                     array_push($data, $test);
@@ -382,13 +382,20 @@
             if (($result = $conn->query($sql)) !== FALSE){
                 $data = array();
                 $i = 1;
+                $role = '';
                 while($row = $result->fetch_assoc()){
+                    if($row['admin'] == '0'){
+                        $role = 'Seller';
+                    } else if($row['admin'] == '2'){
+                        $role = 'Dealer';
+                    }
+
                     $test = [
                             "ID" => $i,
                             "Name" => $row['name'],
                             "Bio" => $row['bio'],
                             "Income" => $row['income'],
-                            "Role" => 'Seller',
+                            "Role" => $role,
                         ];
                     $i++;
                     array_push($data, $test);

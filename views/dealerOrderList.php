@@ -32,7 +32,15 @@
     <table id="content" uid="<?php echo $_SESSION['id'];?>">
         <tr>
             <?php
-                include 'dealerWork.html';
+                if($_SESSION['uType'] == '0'){
+                    include 'sellerWork.html';
+                } else if($_SESSION['uType'] == '1'){
+                    include 'buyerWork.html';
+                } else if($_SESSION['uType'] == '2'){
+                    include 'dealerWork.html';
+                } else if($_SESSION['uType'] == '3'){
+                    include 'Work.html';
+                }
             ?>
             <td id="view">
                 <h1 class="title">Order list</h1>

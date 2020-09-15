@@ -39,7 +39,7 @@
                 <h1 class="title">Add Service</h1>
                 <form onsubmit="return validateMyForm()">
                 <select name="catagory" onclick="sellerManagechange()">
-                    <option value="0">Select</option>
+                    <option value="none">Select</option>
                     <option value="Home">Home</option>
                     <option value="Hotel">Hotel</option>
                     <option value="Office">Office</option>
@@ -51,9 +51,12 @@
                 </table>
                 <textarea type="text" name="details" value="" placeholder="Details"></textarea>
                 <input type="text" name="price" placeholder="Price">
-                <input class="Submit" type="button" name="submit" value="Create" onclick="sellerManagecreate()">
-                <input class="Submit" type="button" name="submit" value="Save" onclick="saveToDraft()">
                 </form>
+                <div class="btn-inline">
+                    <button class="Submit" onclick="sellerManagecreate()">Publish</button>
+                    <button class="Submit" onclick="saveToDraft()">Draft</button>
+                </div>
+
                 <?php include 'sellerManage.html' ?>
             </td>
             <td id="view">

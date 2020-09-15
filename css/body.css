@@ -43,6 +43,12 @@ a {
     background-color: white !important;
 }
 
+.btn-inline {
+    display: flex;
+    width: 320px;
+    margin: 0 auto;
+}
+
 .de-active {
     display: none;
 }
@@ -754,7 +760,13 @@ textarea {
     width: 420px;
     padding: 10px;
     background-color: white;
+    border-radius: 5px;
     margin: 0px auto;
+}
+
+#seller-add-searched-service tbody tr td:hover {
+    background-color: #0aab8e;
+    transition: .4s;
 }
 
 

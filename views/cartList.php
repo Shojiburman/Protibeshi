@@ -56,7 +56,7 @@
                         if ($conn->connect_error) {
                           die("Connection failed: " . $conn->connect_error);
                         }
-                        $sql = "select * from transaction";
+                        $sql = "select * from cart";
                         if (($result = $conn->query($sql)) !== FALSE){
                             while($row = $result->fetch_assoc()){
                                 $cart_id = $row['cart_id'];

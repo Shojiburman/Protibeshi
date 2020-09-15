@@ -135,7 +135,7 @@ function Search() {
 
     if (type != '') {
         var xhttp = new XMLHttpRequest();
-        xhttp.open('POST', '../services/searchService.php', true);
+        xhttp.open('POST', '../services/search.php', true);
         xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
         xhttp.send('type=' + type + '&search=' + search);
         xhttp.onreadystatechange = function() {
@@ -1269,9 +1269,10 @@ function sellerAddSearchService() {
     el.forEach(function(value, index) {
         value.remove();
     });
-    var type = document.querySelector('[name="catagory"]').value.trim();
-    var search = document.querySelector('[name="service"]').value.trim();
-
+    var type = document.querySelector('#add [name="catagory"]').value.trim();
+    var search = document.querySelector('#add [name="service"]').value.trim();
+    console.log(type);
+    console.log(search);
 
     if (search != '' && type != '') {
         var xhttp = new XMLHttpRequest();
@@ -1281,6 +1282,7 @@ function sellerAddSearchService() {
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var res = this.responseText;
+                console.log(res);
                 if (res != '' && res != "not found" && res != "not ok") {
                     document.getElementById("seller-add-searched-service").classList.add('active');
                     var results = JSON.parse(res);
