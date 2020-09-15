@@ -119,3 +119,42 @@ function sellerDraftEdit() {
         document.querySelector('table[changeValue]').setAttribute("changeValue", "5");
     }
 }
+
+function sellerEditServices(){
+    console.log('work');
+    var inputElements = document.querySelectorAll('[name="selector"]');
+    var usType = document.querySelector('#edit h1').getAttribute("usType");
+    for (var i = 0; inputElements[i]; ++i) {
+        if (inputElements[i].checked) {
+            checkedValue = inputElements[i].value;
+            break;
+        }
+    }
+    console.log(checkedValue);
+    if (checkedValue != null) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/getEditUserService.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('draft=' + usType + '&us_id=' + checkedValue);
+
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+                if (this.responseText != "") {
+                    var val = this.responseText.split("|");
+                    console.log(val);
+                    serviceId = val[0];
+                    document.querySelector('#edit>form [name="name"]').value = val[1];
+                    document.querySelector('#edit>form [name="details"]').value = val[2];
+                    document.querySelector('#edit>form [name="price"]').value = val[3];
+                    document.querySelector('#edit>form [name="catagory"]').selectedIndex = val[4]-1;
+                    document.querySelector('table[changeValue]').setAttribute("changeValue", "2");
+                } else {
+                    location.reload();
+                }
+            }
+        }
+    } else {
+        document.querySelector('table[changeValue]').setAttribute("changeValue", "5");
+    }
+}
