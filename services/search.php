@@ -26,7 +26,6 @@
 				$catagory = $row['cname'];
 				$u_id = $row['us_id'];
 
-
 				$test = [
 					"sname" => $sname,
 					"name" => $name,

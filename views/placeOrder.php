@@ -69,6 +69,7 @@
 				<p class="highlight">Catagoty : <span><?php echo $catagory ?></span></p>
 				<p class="highlight">Price : <span><?php echo '৳'.$price ?></span></p>
 				<button class="btn" onclick="addCart()">Add to Cart</button>
+				<p class="de-active g">Added</p>
 			</div>
 		</div>
 <?php

@@ -13,7 +13,7 @@
 			FROM services s
 			INNER JOIN catagory c
 			ON s.c_id = c.c_id
-            AND c.name = '$type'
+            AND c.c_id = '$type'
 			AND s.name Like '%$search%'";
 		if (($result = $conn->query($sql)) !== FALSE){
 			$data = array();

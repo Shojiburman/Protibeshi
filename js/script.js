@@ -13,6 +13,14 @@ function profileEmailPreventEdit() {
     }
 }
 
+function serviceNamePreventEdit() {
+    if (document.getElementById('edit')) {
+        document.querySelector('#edit [name="name"]').addEventListener("keydown", function(event) {
+            event.preventDefault();
+        }, false);
+    }
+}
+
 function viewServices() {
     if (document.querySelectorAll('#view-service-see-more')) {
         var el = document.querySelectorAll('#view-service-see-more div');
@@ -64,7 +72,9 @@ function viewServices() {
                                     }
                                 }
                             }
-                            div.setAttribute("data-id", value.us_id);
+                            div.classList.add('cursor');
+                            div.setAttribute("data-uid", value.us_id);
+                            div.setAttribute("onclick", "browseUser(this)");
                             document.querySelector('#view-service-see-more').appendChild(div);
                         });
                     }
@@ -85,7 +95,7 @@ function browseUserProfile(p) {
 
 function browseUser(p) {
     var id = p.getAttribute('data-uid');
-    var type = document.querySelector('#see-more .see-more-service .sub-title:nth-child(2)').innerHTML;
+    var type = document.querySelector('.see-more-service .sub-title:nth-child(2)').innerHTML;
     console.log(type);
     if (type != null) {
         var xhttp = new XMLHttpRequest();
@@ -108,6 +118,17 @@ function browseUser(p) {
 
 function back() {
     window.history.back();
+}
+
+function emptyInput(evt){
+    console.log(work);
+    if(evt.value != ''){
+        evt.classList.remove('rb');
+        evt.classList.add('gb');
+    } else {
+        evt.classList.remove('gb');
+        evt.classList.add('rb');
+    }
 }
 
 function editEmailPrevent() {
@@ -338,6 +359,45 @@ function dealerDeleteServices() {
         location.reload();
     } else {
         location.reload();
+    }
+}
+
+function dealerEditServices() {
+    console.log('work');
+    var inputElements = document.querySelectorAll('[name="selector"]');
+    var usType = document.querySelector('#edit h1').getAttribute("usType");
+    for (var i = 0; inputElements[i]; ++i) {
+        if (inputElements[i].checked) {
+            checkedValue = inputElements[i].value;
+            break;
+        }
+    }
+    console.log(checkedValue);
+    if (checkedValue != null) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/getEditUserService.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('draft=' + usType + '&us_id=' + checkedValue);
+
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+                if (this.responseText != "") {
+                    var val = this.responseText.split("|");
+                    console.log(val);
+                    serviceId = val[0];
+                    document.querySelector('#edit>form [name="name"]').value = val[1];
+                    document.querySelector('#edit>form [name="details"]').value = val[2];
+                    document.querySelector('#edit>form [name="price"]').value = val[3];
+                    document.querySelector('#edit>form [name="catagory"]').selectedIndex = val[4]-1;
+                    document.querySelector('table[changeValue]').setAttribute("changeValue", "2");
+                } else {
+                    location.reload();
+                }
+            }
+        }
+    } else {
+        document.querySelector('table[changeValue]').setAttribute("changeValue", "5");
     }
 }
 
@@ -1267,18 +1327,20 @@ function sellerManageDelete() {
 
 function sellerManageupdate() {
     var us_id = serviceId;
+    var usType = document.querySelector('#edit h1').getAttribute("usType");
+    console.log(usType);
     var details = document.querySelector('#edit>form [name="details"]').value;
     var price = document.querySelector('#edit>form [name="price"]').value;
-
     if ((details != '') && (price != '') && (us_id != '')) {
         var xhttp = new XMLHttpRequest();
         xhttp.open('POST', '../services/updateUserService.php', true);
         xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhttp.send('us_id=' + us_id + '&details=' + details + '&price=' + price);
+        xhttp.send('draft='+usType+'&us_id=' + us_id + '&details=' + details + '&price=' + price);
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var res = this.responseText;
-                if (res == 'update') {
+                console.log(res);
+                if (res == '[update') {
                     document.querySelector('#edit>form').reset();
                     location.reload();
                 } else {}
@@ -1292,6 +1354,9 @@ function sellerAddSearchService() {
     el.forEach(function(value, index) {
         value.remove();
     });
+
+
+
     var type = document.querySelector('#add [name="catagory"]').value.trim();
     var search = document.querySelector('#add [name="service"]').value.trim();
     console.log(type);
@@ -1348,6 +1413,49 @@ function sellerAddServiceView(clicked) {
 
 function sellerManagechange() {
     document.querySelector('[name="service"]').value = '';
+}
+
+function saveToDraft() {
+    var s_id = document.querySelector('#add [name="service"]').getAttribute("val");
+    var details = document.querySelector('#add [name="details"]').value;
+    var price = document.querySelector('#add [name="price"]').value;
+    var c_id = document.querySelector('#add [name="catagory"]').value;
+    if ((s_id != '') && (details != '') && (price != '') && (c_id != '')) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/insertDraft.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('s_id=' + s_id + '&details=' + details + '&price=' + price + '&catagory=' + c_id);
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var res = this.responseText;
+                if (res == 'insert') {
+                    document.querySelector('#add form').reset();
+                } else {}
+            }
+        }
+    }
+}
+
+function dealerDraftDServicesDelete() {
+    if (flagCheckedValue != null) {
+        for (var i = 0; i < flagCheckedValue.length; i++) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open('POST', '../services/deleteUserService.php', true);
+            xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhttp.send('draft='+'draft'+'&us_id=' + flagCheckedValue[i]);
+
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var res = this.responseText;
+                    if (res == "draftdelete") {
+                        location.reload();
+                    }
+                }
+            }
+        }
+    } else {
+        location.reload();
+    }
 }
 
 function Name() {
@@ -1837,7 +1945,6 @@ function addCart(){
     var us_id = document.querySelector('#place-order').getAttribute('data');
     var bill = document.querySelector('.highlight:nth-child(3) span').innerHTML.substring(1);
     var u_id = document.querySelector('#place-order').getAttribute('data-uid');
-    console.log(u_id);
     if ((us_id != '') && (bill != '') && (u_id != '')) {
         var xhttp = new XMLHttpRequest();
         xhttp.open('POST', '../services/addToCart.php', true);
@@ -1846,8 +1953,15 @@ function addCart(){
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
                 var res = this.responseText;
+                console.log(res);
                 if (res == 'insert') {
-                } else {}
+                    document.querySelector('.place-order-section:nth-child(2) .vertical-center p:last-child').classList.remove('de-active');
+                } else if(res == 'already added'){
+                    document.querySelector('.place-order-section:nth-child(2) .vertical-center p:last-child').classList.remove('de-active');
+                    document.querySelector('.place-order-section:nth-child(2) .vertical-center p:last-child').innerHTML = res;
+                } else {
+                    document.querySelector('.place-order-section:nth-child(2) .vertical-center p:last-child').classList.add('de-active');
+                }
             }
         }
     }
