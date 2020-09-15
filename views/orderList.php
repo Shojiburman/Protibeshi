@@ -11,7 +11,7 @@
     <link rel="stylesheet" type="text/css" href="../css/body.css">
 </head>
 
-<body>
+<body onload="filter()" onload="sort()">
     <?php
         if(isset($_SESSION['id']) || isset($_COOKIE['remember'])){
             if($_SESSION['uType'] == '0'){
@@ -43,42 +43,32 @@
                 }
             ?>
             <td id="view">
-                <h1 class="title">Order list</h1>
-                <table>
-                    <tr>
-                        <td>ID</td>
-                        <td>Buyer</td>
-                        <td>Service</td>
-                        <td>Bill</td>
-                    </tr>
-                    <?php 
-                        $conn = dbConnection();
-                        if ($conn->connect_error) {
-                          die("Connection failed: " . $conn->connect_error);
-                        }
-                        $sql = "select * from transaction";
-                        if (($result = $conn->query($sql)) !== FALSE){
-                            while($row = $result->fetch_assoc()){
-                                $cart_id = $row['cart_id'];
-                                $u_id =  $row['u_id'];
-                                $us_id = $row['us_id'];
-                                $bill = $row['bill'];
-                                $sql = "select name from users where u_id = '$u_id'";
-                                if (($result = $conn->query($sql)) !== FALSE){
-                                    while($row = $result->fetch_assoc()){
-                                        $name = $row['name'];
-                                    }
-                                }
-                                echo "<tr>
-                                        <td>{$cart_id}</td>
-                                        <td>{$name}</td>
-                                        <td>{$us_id}</td>
-                                        <td>{$bill}</td>
-                                    </tr>";
-                            }
-                        }
-                        $conn->close();
-                    ?>
+                <h1 class="title">Transaction List</h1>
+                <div id="orderlistFilter">
+                    <p>Filter by</p> 
+                    <select name="selectFilter" onchange="filter()">
+                        <option value="default">Default</option>
+                        <option value="500">৳0-৳500</option>
+                        <option value="1000">৳500-৳1000</option>
+                        <option value="1001">৳1000-</option>
+                    </select>
+                    <p>Sort by</p> 
+                    <select name="selectSort" onchange="sort()">
+                        <option value="default">Default</option>
+                        <option value="HL">Highest - Lowest</option>
+                        <option value="LH">Lowest - Highest</option>
+                    </select>
+                </div>
+          
+                <table id="orderListTable">
+                    <thead> 
+                        <td>Transaction ID</td>
+                        <td>BUYER ID</td>
+                        <td>Transaction Bill</td>  
+                    </thead>
+                    <tbody>
+                        
+                    </tbody>
                 </table>
             </td>
         </tr>
