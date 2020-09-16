@@ -129,7 +129,7 @@
                         ?>
                     </select>
                     <div class="btn-inline">
-                        <button class="Submit" onclick="sellerManageupdate()">Publish</button>
+                        <button class="Submit" onclick="sellerManageupdate()">Save</button>
                         <button class="Submit" onclick="sellerManagecreate()">Publish</button>
                     </div>
                 </form>

@@ -94,9 +94,10 @@
 						$u_id = $row['u_id'];
 						$us_id = $row['us_id'];
 				?>
-				<div class="see-more-service cursor" data-id="">
+				<div class="see-more-service cursor" data-uid="<?php echo $us_id ?>" onclick="browseUser(this)">
 					<h1><?php echo $sname ?></h1>
 					<div>
+						<p class="sub-title de-active"></p>
 						<p class="sub-title"><?php echo $catagory ?></p>
 						<p class="sub-title">৳<?php echo $price ?></p>
 					</div>

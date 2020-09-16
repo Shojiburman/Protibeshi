@@ -48,6 +48,9 @@ function viewServices() {
                                         var h1 = document.createElement('h1');
                                         var txt = document.createTextNode(v);
                                         h1.appendChild(txt);
+                                        h1.classList.add('cursor');
+                                        h1.setAttribute("data-uid", value.us_id);
+                                        h1.setAttribute("onclick", "browseUser(this)");
                                         div.insertBefore(h1, innerDiv);
                                     } else if (k == 'details') {
                                         var p = document.createElement('p');
@@ -71,10 +74,16 @@ function viewServices() {
                                         innerDiv.appendChild(p);
                                     }
                                 }
+                                var valid = value.us_id;
                             }
-                            div.classList.add('cursor');
-                            div.setAttribute("data-uid", value.us_id);
-                            div.setAttribute("onclick", "browseUser(this)");
+                            var button = document.createElement('button');
+                            var span = document.createElement('span');
+                            var btxt = document.createTextNode('Compare');
+                            button.appendChild(btxt);
+                            button.appendChild(span);
+                            button.setAttribute("onclick", "compare(this)");
+                            button.setAttribute("data-uid", valid);
+                            div.appendChild(button);
                             document.querySelector('#view-service-see-more').appendChild(div);
                         });
                     }
@@ -1966,37 +1975,24 @@ function addCart(){
     }
 }
 
-function compare(){
-    var inputElements = document.querySelectorAll('[name="selector"]');
-    for (var i = 0; i < 2; ++i) {
-        if (inputElements[i].checked) {
-            var valu = inputElements[i].value;
-            flagCheckedValue.push(valu);
-        }
-    }
-    console.log(flagCheckedValue);
-    if (checkedValue != null) {
-        var xhttp = new XMLHttpRequest();
-        xhttp.open('POST', '../services/getEditService.php', true);
-        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhttp.send('s_id=' + checkedValue);
-
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                if (this.responseText != "") {
-                    var val = this.responseText.split("|");
-                    serviceId = val[0];
-                    document.querySelector('#edit>form [name="name"]').value = val[1];
-                    document.querySelector('#edit>form [name="details"]').value = val[2];
-                    document.querySelector('#edit>form [name="catagory"]').selectedIndex = val[3] + 1;
-                    document.querySelector('table[changeValue]').setAttribute("changeValue", "2");
-                } else {
-                    location.reload();
-                }
-            }
+function compare(evt){
+    if (typeof(Storage) !== "undefined") {
+    var cv = evt.getAttribute('data-uid');
+    var c1 = sessionStorage.getItem("compare1");
+        if(c1 != cv && c1 != ''){
+            sessionStorage.setItem("compare2", cv);
+            var c2 = sessionStorage.getItem("compare2");
+            console.log(v);
+            location.assign('compare.php?c1=' + encodeURIComponent(c1) + '&c2=' + encodeURIComponent(c2));
+            sessionStorage.setItem("compare1", '');
+            sessionStorage.setItem("compare2", '');
+        } else {
+            sessionStorage.setItem("compare1", cv);
+            var v = sessionStorage.getItem("compare1");
+            evt.querySelector("span").innerHTML = ' (1)';
         }
     } else {
-        document.querySelector('table[changeValue]').setAttribute("changeValue", "5");
+        document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
     }
 }
 
