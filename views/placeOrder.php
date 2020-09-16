@@ -1,4 +1,4 @@
-<?php
+d<?php
 	session_start();
 	include '../php/session.php';
 	require_once('../db/db.php');

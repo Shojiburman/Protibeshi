@@ -158,3 +158,29 @@ function sellerEditServices(){
         document.querySelector('table[changeValue]').setAttribute("changeValue", "5");
     }
 }
+
+
+sellerDraftupdate(){
+
+    var us_id = serviceId;
+    var usType = document.querySelector('#edit h1').getAttribute("usType");
+    console.log(usType);
+    var details = document.querySelector('#edit>form [name="details"]').value;
+    var price = document.querySelector('#edit>form [name="price"]').value;
+    if ((details != '') && (price != '') && (us_id != '')) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/updateUSellerDraft.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('draft='+usType+'&us_id=' + us_id + '&details=' + details + '&price=' + price);
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var res = this.responseText;
+                console.log(res);
+                if (res == '[update') {
+                    document.querySelector('#edit>form').reset();
+                    location.reload();
+                } else {}
+            }
+        }
+    }
+}

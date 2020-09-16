@@ -8,7 +8,7 @@
 	$details = $_POST['details'];
 	$price = $_POST['price'];
 
-	$sql = "UPDATE us_services SET details = '$details', price = '$price' WHERE d_id = '$d_id'";
+	$sql = "UPDATE draft SET details = '$details', price = '$price' WHERE d_id = '$d_id'";
 	if ($conn->query($sql) === TRUE) {
 		echo "update";
 	} else {

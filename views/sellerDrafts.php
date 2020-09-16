@@ -12,7 +12,7 @@
     
 </head>
 
-<body>
+<body onload="serviceNamePreventEdit()">
     <?php
         if(isset($_SESSION['id']) || isset($_COOKIE['remember'])){
             if($_SESSION['uType'] == '0'){
@@ -37,22 +37,30 @@
             ?>
             <td id="add">
                 <h1 class="title">Add Service</h1>
-                <form onsubmit="return validateMyForm()">
-                <select name="catagory" onclick="sellerManagechange()">
-                    <option value="0">Select</option>
-                    <option value="Home">Home</option>
-                    <option value="Hotel">Hotel</option>
-                    <option value="Office">Office</option>
-                </select>
-                <input type="text" name="service" val="0" placeholder="Service Name" oninput="sellerAddSearchService()">
-                <table id='seller-add-searched-service'>
-                    <tbody>
-                    </tbody>
-                </table>
-                <textarea type="text" name="details" value="" placeholder="Details"></textarea>
-                <input type="text" name="price" placeholder="Price">
-                <input class="Submit" type="button" name="submit" value="Create" onclick="sellerManagecreate()">
-                <input class="Submit" type="button" name="submit" value="Save" onclick="saveToDraft()">
+               <form onsubmit="return validateMyForm()">
+                    <select name="catagory" onchange="sellerManagechange()">
+                        <?php 
+                            $conn = dbConnection();
+                            if ($conn->connect_error) {
+                              die("Connection failed: " . $conn->connect_error);
+                            }
+                            $sql = "SELECT c_id,name FROM catagory";
+                            if (($result = $conn->query($sql)) !== FALSE){
+                            while($row = $result->fetch_assoc()){
+                        ?>
+                            <option value="<?php echo $row['c_id'];?>"><?php echo $row['name'];?></option>
+                        <?php
+                                }
+                            }
+                        ?>
+                    </select>
+                    <input type="text" name="service" val="0" placeholder="Service Name" oninput="sellerAddSearchService()">
+                    <table id='seller-add-searched-service'>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <textarea type="text" name="details" value="" placeholder="Details"></textarea>
+                    <input type="text" name="price" placeholder="Price">
                 </form>
                 <?php include 'sellerManage.html' ?>
             </td>
@@ -94,12 +102,29 @@
                 </table>
                 <?php include 'sellerManage.html' ?>
             </td>
-            <td id="edit">
-                <h1 class="title">Edit Sevice</h1>
-                <form onsubmit="return validateMyForm()">
+             <td id="edit">
+                <h1 class="title" usType = 'draft'>Edit Draft Sevice</h1>
+                <form >
+                    <input type="text" name="name" placeholder="Service Name">
                     <textarea type="text" name="details" value="" placeholder="Details"></textarea>
                     <input type="text" name="price" placeholder="Price">
-                    <input class="Submit" type="button" name="submit" value="Confirm" onclick="sellerDraftupdate()">
+                    <select name="catagory">
+                        <?php 
+                            $conn = dbConnection();
+                            if ($conn->connect_error) {
+                              die("Connection failed: " . $conn->connect_error);
+                            }
+                            $sql = "SELECT c_id,name FROM catagory";
+                            if (($result = $conn->query($sql)) !== FALSE){
+                            while($row = $result->fetch_assoc()){
+                        ?>
+                            <option value="<?php echo $row['c_id'];?>"><?php echo $row['name'];?></option>
+                        <?php
+                                }
+                            }
+                        ?>
+                    </select>
+                    <input class="Submit" type="button" name="submit" value="Confirm" onclick="sellerManageupdate()">
                 </form>
                 <?php include 'sellerManage.html' ?>
             </td>
