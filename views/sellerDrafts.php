@@ -130,7 +130,7 @@
             </td>
             <td id="delete">
                 <h1 class="title">Delete Sevice</h1>
-                <input class="Submit" type="button" name="submit" value="Confirm" onclick="sellerManageDelete()">
+                <input class="Submit" type="button" name="submit" value="Confirm" onclick="sellerDraftDelete()">
                 <?php include 'sellerManage.html' ?>
             </td>
         </tr>

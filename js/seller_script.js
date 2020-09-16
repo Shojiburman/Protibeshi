@@ -160,7 +160,7 @@ function sellerEditServices(){
 }
 
 
-sellerDraftupdate(){
+function sellerDraftupdate(){
 
     var us_id = serviceId;
     var usType = document.querySelector('#edit h1').getAttribute("usType");
@@ -182,5 +182,42 @@ sellerDraftupdate(){
                 } else {}
             }
         }
+    }
+}
+
+function sellerDraftDelete() {
+    if (flagCheckedValue != null) {
+        for (var i = 0; i < flagCheckedValue.length; i++) {
+            var xhttp = new XMLHttpRequest();
+            xhttp.open('POST', '../services/deleteUserService.php', true);
+            xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhttp.send('draft='+'draft'+'&us_id=' + flagCheckedValue[i]);
+
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    var res = this.responseText;
+                    if (res == "draftdelete") {
+                        location.reload();
+                    }
+                }
+            }
+        }
+    } else {
+        location.reload();
+    }
+}
+
+function fundl(){
+    var inputElements = document.querySelectorAll('[name="selector"]');
+    for (var i = 0; inputElements[i]; ++i) {
+        if (inputElements[i].checked) {
+            var valu = inputElements[i].value;
+            flagCheckedValue.push(valu);
+        }
+    }
+    if (flagCheckedValue != "") {
+        document.querySelector('table[changeValue]').setAttribute("changeValue", "4");
+    } else {
+        location.reload();
     }
 }
