@@ -8,11 +8,7 @@
 
 <head>
     <title>Manage FAQs</title>
-    <link rel="stylesheet" type="text/css" href="../css/work.css">
     <link rel="stylesheet" type="text/css" href="../css/body.css">
-    <link rel="stylesheet" type="text/css" href="../css/adminNav.css">
-    <link rel="stylesheet" type="text/css" href="../css/faqs.css">
-    <script type="text/javascript" src="../js/script.js"></script>
 </head>
 
 <body>
@@ -44,9 +40,9 @@
                 <input type="text" name="name" placeholder="FAQs Name">
                 <textarea type="text" name="ans" value="" placeholder="Details"></textarea>
                 <input type="date" name="date">
-                <input id="Submit" type="button" name="submit" value="Create" onclick="create()">
+                <input class="Submit" type="button" name="submit" value="Create" onclick="FAQcreate()">
                 </form>
-                <?php include 'manage.html' ?>
+                <?php include 'manageFAQ.html' ?>
             </td>
             <td id="view">
                 <h1 class="title">FAQs list</h1>
@@ -85,7 +81,7 @@
                         $conn->close();
                     ?>
                 </table>
-                <?php include 'manage.html' ?>
+                <?php include 'manageFAQ.html' ?>
             </td>
             <td id="edit">
                 <h1 class="title">Edit FAQs</h1>
@@ -93,185 +89,26 @@
                     <input type="text" name="name" placeholder="Service Name">
                     <textarea type="text" name="ans" value="" placeholder="Details"></textarea>
                     <input type="Date" name="date">
-                    <input id="Submit" type="button" name="submit" value="Confirm" onclick="update()">
+                    <input class="Submit" type="button" name="submit" value="Confirm" onclick="FAQupdate()">
                 </form>
-                <?php include 'manage.html' ?>
+                <?php include 'manageFAQ.html' ?>
             </td>
             <td id="flag">
                 <h1 class="title">Flag FAQs</h1>
                 <form onsubmit="return validateMyForm()">
                     <input type="text" name="flag" placeholder="Flag Value">
-                    <input id="Submit" type="button" name="submit" value="Confirm" onclick="flaged()">
+                    <input class="Submit" type="button" name="submit" value="Confirm" onclick="FAQflaged()">
                 </form>
-                <?php include 'manage.html' ?>
+                <?php include 'manageFAQ.html' ?>
             </td>
             <td id="delete">
                 <h1 class="title">Delete FAQs</h1>
-                <input id="Submit" type="button" name="submit" value="Confirm" onclick="Delete()">
-                <?php include 'manage.html' ?>
+                <input class="Submit" type="button" name="submit" value="Confirm" onclick="FAQDelete()">
+                <?php include 'manageFAQ.html' ?>
             </td>
         </tr>
     </table>
-    <script type="text/javascript">
-        var checkedValue = "";
-        var flagCheckedValue = [];
-        var serviceId = "";
-        function fun1(){
-            document.querySelector('table[changeValue]').setAttribute("changeValue", "1");
-        }
-        function fun2(){
-            var inputElements = document.querySelectorAll('[name="selector"]');
-            for(var i=0; inputElements[i]; ++i){
-                  if(inputElements[i].checked){
-                       checkedValue = inputElements[i].value;
-                       break;
-                  }
-            }
-            if(checkedValue != null){
-                var xhttp = new XMLHttpRequest();
-                xhttp.open('POST', '../services/getEditFaq.php', true);
-                xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                xhttp.send('f_id='+checkedValue);
-
-                xhttp.onreadystatechange = function (){
-                    if(this.readyState == 4 && this.status == 200){
-                        if(this.responseText != ""){
-                            var val = this.responseText.split("|");
-                            serviceId = val[0];
-                            document.querySelector('#edit>form [name="name"]').value = val[1];
-                            document.querySelector('#edit>form [name="ans"]').value = val[2];
-                            document.querySelector('#edit>form [name="date"]').value = val[3];
-                            document.querySelector('table[changeValue]').setAttribute("changeValue", "2");
-                        } else {
-                            location.reload();
-                        }
-                    }   
-                }
-            } else {
-                document.querySelector('table[changeValue]').setAttribute("changeValue", "5");
-            }
-        }
-        function fun3(){
-            var inputElements = document.querySelectorAll('[name="selector"]');
-            for(var i=0; inputElements[i]; ++i){
-              if(inputElements[i].checked){
-                   var valu = inputElements[i].value;
-                   flagCheckedValue.push(valu);
-              }
-            } 
-            if(flagCheckedValue != ""){
-                document.querySelector('table[changeValue]').setAttribute("changeValue", "3");
-            } else {
-                location.reload();
-            }
-        }
-        function fun4(){
-            var inputElements = document.querySelectorAll('[name="selector"]');
-            for(var i=0; inputElements[i]; ++i){
-                  if(inputElements[i].checked){
-                       var valu = inputElements[i].value;
-                       flagCheckedValue.push(valu);
-                  }
-            }
-            if(flagCheckedValue != ""){
-                document.querySelector('table[changeValue]').setAttribute("changeValue", "4");
-            } else {
-                location.reload();
-            }
-        }
-        function fun5(){
-            location.reload();
-            document.querySelector('table[changeValue]').setAttribute("changeValue", "5");
-        }
-
-        function create(){
-            var name = document.querySelector('#add [name="name"]').value;
-            var ans = document.querySelector('#add [name="ans"]').value;
-            var date = document.querySelector('#add [name="date"]').value;
-            if((name != '') && (ans != '') && (date != '')){
-                var xhttp = new XMLHttpRequest();
-                xhttp.open('POST', '../services/insertFaq.php', true);
-                xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                xhttp.send('name='+name+'&ans='+ans+'&date='+date);
-                xhttp.onreadystatechange = function (){
-                    if(this.readyState == 4 && this.status == 200){
-                        var res = this.responseText;
-                        if(res == 'insert'){
-                            document.querySelector('#form').reset();
-                        } else {
-                        }
-                    }   
-                }
-            }
-        }
-
-        function Delete(){
-            if(flagCheckedValue != null){
-                for(var i = 0; i < flagCheckedValue.length; i++){
-                    var xhttp = new XMLHttpRequest();
-                    xhttp.open('POST', '../services/deleteFaq.php', true);
-                    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                    xhttp.send('f_id='+flagCheckedValue[i]);
-
-                    xhttp.onreadystatechange = function (){
-                        if(this.readyState == 4 && this.status == 200){
-
-                            if(this.responseText == "delete"){
-                            }
-                        }   
-                    }
-                } location.reload();
-            } else {
-                location.reload();
-            }
-        }
-
-        function update(){
-            var f_id = serviceId;
-            var name = document.querySelector('#edit>form [name="name"]').value;
-            var ans = document.querySelector('#edit>form [name="ans"]').value;
-            var date = document.querySelector('#edit>form [name="date"]').value;
-
-            if((name != '') && (ans != '') && (date != '') && (f_id != '')){
-                var xhttp = new XMLHttpRequest();
-                xhttp.open('POST', '../services/updateFaq.php', true);
-                xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                xhttp.send('f_id='+f_id+'&name='+name+'&ans='+ans+'&date='+date);
-                xhttp.onreadystatechange = function (){
-                    if(this.readyState == 4 && this.status == 200){
-                        var res = this.responseText;
-                        if(res == 'update'){
-                            document.querySelector('#edit>form').reset();
-                            location.reload();
-                        } else {
-                        }
-                    }   
-                }
-            }
-        }
-
-        function flaged(){
-            var flag = document.querySelector('#flag>form [name="flag"]').value;
-            for(var i = 0; i < flagCheckedValue.length; i++){
-                var f_id = flagCheckedValue[i];
-                if((flag != '') && (f_id != '')){
-                    var xhttp = new XMLHttpRequest();
-                    xhttp.open('POST', '../services/flagFaq.php', true);
-                    xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                    xhttp.send('f_id='+f_id+'&flag='+flag);
-                    xhttp.onreadystatechange = function (){
-                        if(this.readyState == 4 && this.status == 200){
-                            var res = this.responseText;
-                            if(res == 'flaged'){
-                                document.querySelector('#flag>form').reset();
-                            } else {
-                            }
-                        }   
-                    }
-                }
-            } location.reload();
-        }
-    </script>
+    <script type="text/javascript" src="../js/script.js"></script>
 </body>
 
 </html>

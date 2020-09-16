@@ -4,19 +4,17 @@
 	if(!$conn){
 		echo "DB connection error";
 	}
-	
+
 	$search = $_POST['search'];
 	$type = $_POST['type'];
-	if($type == 'Home'){
-		$type = '1';
-	} else if($type == 'Hotel'){
-		$type = '2';
-	} else if($type == 'Office'){
-		$type = '3';
-	}
 
 	if($search != ''){
-		$sql = "SELECT s_id, name from services where name like '%$search%' AND c_id = '$type' AND flag = '0'";
+		$sql = "SELECT s.s_id, s.name
+			FROM services s
+			INNER JOIN catagory c
+			ON s.c_id = c.c_id
+            AND c.c_id = '$type'
+			AND s.name Like '%$search%'";
 		if (($result = $conn->query($sql)) !== FALSE){
 			$data = array();
 	        while($row = $result->fetch_assoc()){
@@ -34,4 +32,4 @@
 		echo "not ok";
 	}
 
-?>
+?> 

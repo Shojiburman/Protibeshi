@@ -8,11 +8,7 @@
 
 <head>
     <title>Work</title>
-    <link rel="stylesheet" type="text/css" href="../css/work.css">
     <link rel="stylesheet" type="text/css" href="../css/body.css">
-    <link rel="stylesheet" type="text/css" href="../css/adminNav.css">
-    <link rel="stylesheet" type="text/css" href="../css/adminWork.css">
-    <script type="text/javascript" src="../js/script.js"></script>
 </head>
 
 <body>
@@ -36,7 +32,7 @@
     <table id="content" changeValue="5">
         <tr>
             <?php
-                include 'work.html';
+                include 'buyerWork.html';
             ?>
             <td id="add">
                 <h1 class="title">Add Sevice</h1>
@@ -289,6 +285,7 @@
             } location.reload();
         }
     </script>
+    <script type="text/javascript" src="../js/script.js"></script>
 </body>
 
 </html>
