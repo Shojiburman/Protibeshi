@@ -2,7 +2,7 @@
     session_start();
     require_once('../db/db.php');
     include '../php/session.php';
-?> //asdasd
+?>
 <!DOCTYPE html>
 <html>
 

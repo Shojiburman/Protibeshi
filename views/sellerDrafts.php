@@ -125,6 +125,7 @@
                         ?>
                     </select>
                     <input class="Submit" type="button" name="submit" value="Confirm" onclick="sellerManageupdate()">
+                    <input class="Submit" type="button" name="submit" value="Publish" onclick="sellerDraftPublish()">
                 </form>
                 <?php include 'sellerManage.html' ?>
             </td>

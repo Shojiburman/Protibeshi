@@ -221,3 +221,26 @@ function fundl(){
         location.reload();
     }
 }
+
+function sellerDraftPublish(){
+    var s_id = checkedValue;
+    console.log(s_id);
+    var details = document.querySelector('#edit [name="details"]').value;
+    var price = document.querySelector('#edit [name="price"]').value;
+    var c_id = document.querySelector('#edit [name="catagory"]').value;
+    if ((s_id != '') && (details != '') && (price != '') && (c_id != '')) {
+        var xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '../services/insertUserService.php', true);
+        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhttp.send('s_id=' + s_id + '&details=' + details + '&price=' + price + '&catagory=' + c_id);
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                var res = this.responseText;
+                console.log(res);
+                if (res == 'insert') {
+                    document.querySelector('#add form').reset();
+                } else {}
+            }
+        }
+    }
+}
