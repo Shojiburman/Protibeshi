@@ -239,6 +239,7 @@ function sellerDraftPublish(){
                 console.log(res);
                 if (res == 'insert') {
                     document.querySelector('#add form').reset();
+                    location.reload();
                 } else {}
             }
         }
