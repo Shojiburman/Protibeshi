@@ -85,7 +85,13 @@
                           die("Connection failed: " . $conn->connect_error);
                         }
                         $us_id = $_SESSION['id'];
-                        $sql = "SELECT us.us_id, s.name, us.details, us.price, c.name AS catagory from us_services us, services s, catagory c where us.s_id = s.s_id AND c.c_id = s.c_id AND us.u_id = '$us_id'";
+                        $sql = "SELECT us.us_id, s.name, us.price, us.details, c.name AS catagory
+                                FROM services s
+                                INNER JOIN us_services us
+                                ON s.s_id = us.s_id
+                                INNER JOIN catagory c
+                                ON s.c_id = c.c_id
+                                AND us.u_id = '$us_id'";
                         if (($result = $conn->query($sql)) !== FALSE){
                             while($row = $result->fetch_assoc()){
                                 $id = $row['us_id'];
