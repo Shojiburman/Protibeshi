@@ -29,3 +29,224 @@
     color: #333 ;
     background-color: white;
 }
+
+
+//Profile
+
+
+#profile-section input,
+textarea {
+    margin: 10px;
+    border-radius: 4px;
+}
+
+#profile-section {
+    display: flex;
+    width: 982px;
+    margin: 0 auto;
+}
+
+#profile-section div.section {
+    padding: 20px;
+    background-color: #f0f3f7;
+
+}
+
+#profile-section div.section:first-child {
+    display: flex;
+    text-align: center;
+    width: 300px;
+    height: 700px;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2px;
+}
+
+#profile-section div.section:first-child p {
+    text-align: center;
+    border-bottom: 1px solid #0aab8e;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    margin: 0px auto;
+}
+
+#name {
+    border-top: 1px solid #0aab8e !important;
+    margin-top: 20px !important;
+}
+
+#profile-section div.section:last-child {
+    display: flex;
+    text-align: center;
+    width: 600px;
+    height: 700px;
+    align-items: center;
+    justify-content: center;
+}
+
+#profilePic {
+    display: block;
+    width: 200px;
+    height: 200px;
+    margin: 60px auto 0 auto;
+}
+
+#profilePic img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    padding: 7px;
+}
+
+#editBtn {
+    display: block;
+    width: max-content;
+    padding: 4px 4px 2px 4px;
+    border: 1px solid #0aab8e;
+    border-radius: 5px;
+    margin: 20px auto;
+
+}
+
+#editBtn img {
+    width: 15px;
+    height: 15px;
+}
+
+#profile-section div.section:last-child h3 {
+    display: block;
+    width: max-content;
+    margin: 20px auto 10px auto;
+    color: #0aab8e;
+}
+
+#profile-section div.section:last-child input,
+#profile-section div.section:last-child textarea {
+    display: block;
+    margin: 20px auto;
+    padding: 20px;
+    width: 400px;
+}
+
+#profile-section div.section:last-child textarea {
+    max-width: 400px;
+    max-height: 70px;
+}
+
+#msg {
+    text-align: center;
+}
+
+.g {
+    color: #0aab8e;
+}
+
+.gb {
+    border: 2px solid #0aab8e;
+}
+
+.r {
+    color: red;
+}
+
+.rb {
+    border: 2px solid red;
+}
+
+#profile {
+    border: 2px solid #0aab8e !important;
+}
+
+#profile-section input[type="file"] {
+    display: block !important;
+    width: 175.7px !important;
+    margin: 20px auto !important;
+}
+
+//order list
+
+#orderListTable thead td, #leaderboardTable thead td {
+    font-weight: bold !important;
+    border: 1px solid #0aab8e;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+}
+
+#orderListTable tbody td, #leaderboardTable tbody td {
+    font-weight: normal !important;
+}
+
+#content #orderlistFilter, #leaderboardFilter {
+    display: block;
+    width: max-content;
+    margin: 10px auto;
+}
+
+#content #orderlistFilter p, #leaderboardFilter p {
+    display: inline;
+}
+
+#content #orderlistFilter select, #leaderboardFilter select {
+    padding: 5px;
+    border-radius: 5px;
+}
+
+#place-order {
+    display: flex;
+    width: 800px;
+    text-align: center;
+    justify-content: center;
+    margin: 100px auto;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: -1px 2px 20px 0px #bfbebe;
+}
+
+.place-order-section {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+.vertical-center {
+    display: block;
+}
+
+.place-order-section:first-child {
+    width: 600px;
+}
+
+.place-order-section:first-child .vertical-center:first-child h1 {
+    padding: 20px;
+}
+
+.place-order-section:first-child .vertical-center:first-child p {
+    padding: 20px;
+    text-align: justify;
+}
+
+.place-order-section:last-child {
+    text-align: center;
+    justify-content: center;
+}
+
+.highlight {
+    color: #0aab8e;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 4px;
+}
+
+.highlight span {
+    color: #333;
+    text-align: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.highlight:last-child span {
+    font-size: 16px;
+}
