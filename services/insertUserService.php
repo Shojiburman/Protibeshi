@@ -15,6 +15,11 @@
 
 		$sql = "INSERT INTO us_services (s_id, u_id, details, price) VALUES ('". $s_id ."', '". $id ."', '". $details ."', '". $price ."');";
 		if ($conn->query($sql) === TRUE) {
+			if(isset($_POST['draft'])){
+				$d_id = $_POST['d_id'];
+				$sql1 = "DELETE FROM draft WHERE d_id = '". $d_id ."';";
+				if ($conn->query($sql1) === TRUE) {}
+			}
 			echo "insert";
 		} else {
 			echo "not ok";

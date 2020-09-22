@@ -45,27 +45,6 @@ function filter()
 
 }
 
-function saveToDraft() {
-    var s_id = document.querySelector('#add [name="service"]').getAttribute("val");
-    var details = document.querySelector('#add [name="details"]').value;
-    var price = document.querySelector('#add [name="price"]').value;
-    var c_id = document.querySelector('#add [name="catagory"]').value;
-    if ((s_id != '') && (details != '') && (price != '') && (c_id != '')) {
-        var xhttp = new XMLHttpRequest();
-        xhttp.open('POST', '../services/insertDraft.php', true);
-        xhttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhttp.send('s_id=' + s_id + '&details=' + details + '&price=' + price + '&catagory=' + c_id);
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-                var res = this.responseText;
-                if (res == 'insert') {
-                    document.querySelector('#add form').reset();
-                } else {}
-            }
-        }
-    }
-}
-
 function sellerDraftupdate() {
     var us_id = serviceId;
     var details = document.querySelector('#edit>form [name="details"]').value;
@@ -127,6 +106,7 @@ function sellerEditServices(){
     for (var i = 0; inputElements[i]; ++i) {
         if (inputElements[i].checked) {
             checkedValue = inputElements[i].value;
+            var sid = inputElements[i].getAttribute('val');
             break;
         }
     }
@@ -139,12 +119,15 @@ function sellerEditServices(){
 
         xhttp.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
+                console.log('work2');
                 console.log(this.responseText);
                 if (this.responseText != "") {
                     var val = this.responseText.split("|");
                     console.log(val);
                     serviceId = val[0];
-                    document.querySelector('#edit>form [name="name"]').value = val[1];
+                    document.querySelector('#edit>form [name="service"]').value = val[1];
+                    document.querySelector('#edit>form [name="service"]').setAttribute("valu", serviceId);
+                    document.querySelector('#edit>form [name="service"]').setAttribute("val", sid);
                     document.querySelector('#edit>form [name="details"]').value = val[2];
                     document.querySelector('#edit>form [name="price"]').value = val[3];
                     document.querySelector('#edit>form [name="catagory"]').selectedIndex = val[4]-1;

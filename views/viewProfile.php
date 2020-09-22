@@ -12,7 +12,8 @@
 
 		$sqlName = "SELECT * FROM users where u_id = '$userid'";
 		if (($result = $conn->query($sqlName)) !== FALSE){	
-	        while($row = $result->fetch_assoc()){	
+	        while($row = $result->fetch_assoc()){
+	        	$u_pic = $row['picture'];
 				$name = $row['name'];
 				$bio = $row['bio'];
 				$email = $row['email'];
@@ -51,7 +52,7 @@
 			<div class="view-profile-content">
 				<div>
 		            <div id="profilePic">
-		                <img src="<?php echo $c_pic; ?>">
+		                <img src="<?php echo "../picture/".$u_pic; ?>">
 		            </div>
 		            <div id="addBtn" class="cursor" frndrg="<?php echo $userid?>" frndrs="<?php echo $_SESSION['id']?>" onclick="addFrnd()">
 	            		<img src="add.svg">

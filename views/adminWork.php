@@ -40,10 +40,20 @@
                 <input type="text" name="name" placeholder="Service Name">
                 <textarea type="text" name="details" value="" placeholder="Details"></textarea>
                 <select name="catagory">
-                    <option value="0">Select</option>
-                    <option value="1">Home</option>
-                    <option value="2">Hotel</option>
-                    <option value="3">Office</option>
+                    <?php 
+                        $conn = dbConnection();
+                        if ($conn->connect_error) {
+                          die("Connection failed: " . $conn->connect_error);
+                        }
+                        $sql = "SELECT c_id,name FROM catagory";
+                        if (($result = $conn->query($sql)) !== FALSE){
+                        while($row = $result->fetch_assoc()){
+                    ?>
+                        <option value="<?php echo $row['c_id'];?>"><?php echo $row['name'];?></option>
+                    <?php
+                            }
+                        }
+                    ?>
                 </select>
                 <input class="Submit" type="button" name="submit" value="Create" onclick="createService()">
                 </form>

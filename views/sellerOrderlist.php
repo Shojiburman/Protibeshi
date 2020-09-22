@@ -49,10 +49,8 @@
           
                 <table id="orderListTable">
                     <thead> 
-                        <td>ID</td>
-                        <td>Services</td>
-                        <td>Buyer</td>
-                        <td>Bill</td>  
+                        <td>Transaction ID</td>
+                        <td>Transaction Bill</td>  
                     </thead>
                     <tbody>
                         

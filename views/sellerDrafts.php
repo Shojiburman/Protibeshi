@@ -38,12 +38,22 @@
             <td id="add">
                 <h1 class="title">Add Service</h1>
                 <form onsubmit="return validateMyForm()">
-                <select name="catagory" onclick="sellerManagechange()">
-                    <option value="0">Select</option>
-                    <option value="Home">Home</option>
-                    <option value="Hotel">Hotel</option>
-                    <option value="Office">Office</option>
-                </select>
+                <select name="catagory">
+                        <?php 
+                            $conn = dbConnection();
+                            if ($conn->connect_error) {
+                              die("Connection failed: " . $conn->connect_error);
+                            }
+                            $sql = "SELECT c_id,name FROM catagory";
+                            if (($result = $conn->query($sql)) !== FALSE){
+                            while($row = $result->fetch_assoc()){
+                        ?>
+                            <option value="<?php echo $row['c_id'];?>"><?php echo $row['name'];?></option>
+                        <?php
+                                }
+                            }
+                        ?>
+                    </select>
                 <input type="text" name="service" val="0" placeholder="Service Name" oninput="sellerAddSearchService()">
                 <table id='seller-add-searched-service'>
                     <tbody>
@@ -51,7 +61,6 @@
                 </table>
                 <textarea type="text" name="details" value="" placeholder="Details"></textarea>
                 <input type="text" name="price" placeholder="Price">
-                <input class="Submit" type="button" name="submit" value="Create" onclick="sellerManagecreate()">
                 <input class="Submit" type="button" name="submit" value="Save" onclick="saveToDraft()">
                 </form>
                 <?php include 'sellerManage.html' ?>
@@ -72,9 +81,10 @@
                           die("Connection failed: " . $conn->connect_error);
                         }
                         $us_id = $_SESSION['id'];
-                        $sql = "SELECT us.d_id, s.name, us.details, us.price, c.name AS catagory from draft us, services s, catagory c where us.s_id = s.s_id AND c.c_id = s.c_id AND us.u_id = '$us_id'";
+                        $sql = "SELECT us.d_id, s.s_id, s.name, us.details, us.price, c.name AS catagory from draft us, services s, catagory c where us.s_id = s.s_id AND c.c_id = s.c_id AND us.u_id = '$us_id'";
                         if (($result = $conn->query($sql)) !== FALSE){
                             while($row = $result->fetch_assoc()){
+                                $s_id = $row['s_id'];
                                 $id = $row['d_id'];
                                 $name =  $row['name'];
                                 $details = $row['details'];
@@ -85,7 +95,7 @@
                                         <td>{$details}</td>
                                         <td>{$price}</td>
                                         <td>{$c_id}</td>
-                                        <td><input type='checkbox' name='selector' value = '{$id}'></td>
+                                        <td><input type='checkbox' name='selector' value = '{$id}' val = '{$s_id}'></td>
                                     </tr>";
                             }
                         }
@@ -95,17 +105,37 @@
                 <?php include 'sellerManage.html' ?>
             </td>
             <td id="edit">
-                <h1 class="title">Edit Sevice</h1>
-                <form onsubmit="return validateMyForm()">
+                <h1 class="title" usType = 'draft'>Edit Sevice</h1>
+                <form >
+                    <input type="text" name="service" placeholder="Service Name">
                     <textarea type="text" name="details" value="" placeholder="Details"></textarea>
                     <input type="text" name="price" placeholder="Price">
-                    <input class="Submit" type="button" name="submit" value="Confirm" onclick="sellerDraftupdate()">
+                    <select name="catagory">
+                        <?php 
+                            $conn = dbConnection();
+                            if ($conn->connect_error) {
+                              die("Connection failed: " . $conn->connect_error);
+                            }
+                            $sql = "SELECT c_id,name FROM catagory";
+                            if (($result = $conn->query($sql)) !== FALSE){
+                            while($row = $result->fetch_assoc()){
+                        ?>
+                            <option value="<?php echo $row['c_id'];?>"><?php echo $row['name'];?></option>
+                        <?php
+                                }
+                            }
+                        ?>
+                    </select>
+                    <div class="btn-inline">
+                        <button class="Submit" onclick="sellerManageupdate()">Save</button>
+                        <button class="Submit" onclick="dealerDraftServicesCreate()">Publish</button>
+                    </div>
                 </form>
                 <?php include 'sellerManage.html' ?>
             </td>
             <td id="delete">
                 <h1 class="title">Delete Sevice</h1>
-                <input class="Submit" type="button" name="submit" value="Confirm" onclick="sellerManageDelete()">
+                <input class="Submit" type="button" name="submit" value="Confirm" onclick="dealerDraftDServicesDelete()">
                 <?php include 'sellerManage.html' ?>
             </td>
         </tr>

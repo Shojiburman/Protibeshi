@@ -84,10 +84,11 @@
                           die("Connection failed: " . $conn->connect_error);
                         }
                         $us_id = $_SESSION['id'];
-                        $sql = "SELECT us.d_id, s.name, us.details, us.price, c.name AS catagory from draft us, services s, catagory c where us.s_id = s.s_id AND c.c_id = s.c_id AND us.u_id = '$us_id'";
+                        $sql = "SELECT us.d_id, s.s_id, s.name, us.details, us.price, c.name AS catagory from draft us, services s, catagory c where us.s_id = s.s_id AND c.c_id = s.c_id AND us.u_id = '$us_id'";
                         if (($result = $conn->query($sql)) !== FALSE){
                             while($row = $result->fetch_assoc()){
                                 $id = $row['d_id'];
+                                $s_id = $row['s_id'];
                                 $name =  $row['name'];
                                 $details = $row['details'];
                                 $price = $row['price'];
@@ -97,7 +98,7 @@
                                         <td>{$details}</td>
                                         <td>{$price}</td>
                                         <td>{$c_id}</td>
-                                        <td><input type='checkbox' name='selector' value = '{$id}'></td>
+                                        <td><input type='checkbox' name='selector' value = '{$id}' val = '{$s_id}'></td>
                                     </tr>";
                             }
                         }
@@ -109,7 +110,7 @@
             <td id="edit">
                 <h1 class="title" usType = 'draft'>Edit Draft Sevice</h1>
                 <form >
-                    <input type="text" name="name" placeholder="Service Name">
+                    <input type="text" name="service" placeholder="Service Name">
                     <textarea type="text" name="details" value="" placeholder="Details"></textarea>
                     <input type="text" name="price" placeholder="Price">
                     <select name="catagory">
@@ -130,7 +131,7 @@
                     </select>
                     <div class="btn-inline">
                         <button class="Submit" onclick="sellerManageupdate()">Save</button>
-                        <button class="Submit" onclick="sellerManagecreate()">Publish</button>
+                        <button class="Submit" onclick="dealerDraftServicesCreate()">Publish</button>
                     </div>
                 </form>
                 <?php include 'dealerManage.html' ?>
